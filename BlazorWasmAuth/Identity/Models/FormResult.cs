@@ -1,4 +1,4 @@
-﻿namespace BlazorWasmAuth.Identity.Models
+﻿namespace Frontend.Identity.Models
 {
     /// <summary>
     /// Response for login and registration.

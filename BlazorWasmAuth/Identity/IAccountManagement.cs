@@ -1,6 +1,6 @@
-﻿using BlazorWasmAuth.Identity.Models;
+﻿using Frontend.Identity.Models;
 
-namespace BlazorWasmAuth.Identity
+namespace Frontend.Identity
 {
     /// <summary>
     /// Account management services.

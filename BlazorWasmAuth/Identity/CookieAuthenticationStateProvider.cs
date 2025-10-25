@@ -3,10 +3,10 @@ using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
+using Frontend.Identity.Models;
 using Microsoft.AspNetCore.Components.Authorization;
-using BlazorWasmAuth.Identity.Models;
 
-namespace BlazorWasmAuth.Identity
+namespace Frontend.Identity
 {
     /// <summary>
     /// Handles state for cookie-based auth.

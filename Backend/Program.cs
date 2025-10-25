@@ -14,7 +14,7 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdent
 // Configure app cookie
 //
 // The default values, which are appropriate for hosting the Backend and
-// BlazorWasmAuth apps on the same domain, are Lax and SameAsRequest. 
+// Frontend apps on the same domain, are Lax and SameAsRequest. 
 // For more information on these settings, see:
 // https://learn.microsoft.com/aspnet/core/blazor/security/webassembly/standalone-with-identity#cross-domain-hosting-same-site-configuration
 /*
