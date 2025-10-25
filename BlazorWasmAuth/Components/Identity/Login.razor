@@ -4,71 +4,73 @@
 @using Frontend.Identity.Models
 @inject IAccountManagement Acct
 @inject NavigationManager Navigation
+@inject ISnackbar Snackbar
 
 <PageTitle>Login</PageTitle>
 
-<h1>Login</h1>
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+    <MudPaper Elevation="3" Class="pa-4 rounded-lg">
+        <MudText Typo="Typo.h4" GutterBottom>Login</MudText>
 
-<AuthorizeView>
-    <Authorized>
-        <div class="alert alert-success">You're logged in as @context.User.Identity?.Name.</div>
-    </Authorized>
-    <NotAuthorized>
-        @foreach (var error in formResult.ErrorList)
-        {
-            <div class="alert alert-danger">@error</div>
-        }
-        <div class="row">
-            <div class="col">
-                <section>
-                    <EditForm Model="Input" method="post" OnValidSubmit="LoginUser"
-                              FormName="login" Context="editform_context">
-                        <DataAnnotationsValidator />
-                        <h2>Use a local account to log in.</h2>
-                        <hr />
-                        <div class="form-floating mb-3">
-                            <InputText @bind-Value="Input.Email"
-                                       id="Input.Email"
-                                       class="form-control"
-                                       autocomplete="username"
-                                       aria-required="true"
-                                       placeholder="name@example.com" />
-                            <label for="Input.Email" class="form-label">
-                                Email
-                            </label>
-                            <ValidationMessage For="() => Input.Email"
-                                               class="text-danger" />
-                        </div>
-                        <div class="form-floating mb-3">
-                            <InputText type="password"
-                                       @bind-Value="Input.Password"
-                                       id="Input.Password"
-                                       class="form-control"
-                                       autocomplete="current-password"
-                                       aria-required="true"
-                                       placeholder="password" />
-                            <label for="Input.Password" class="form-label">
-                                Password
-                            </label>
-                            <ValidationMessage For="() => Input.Password"
-                                               class="text-danger" />
-                        </div>
-                        <div>
-                            <button type="submit" class="w-100 btn btn-lg btn-primary">
-                                Log in
-                            </button>
-                        </div>
-                        <div class="mt-3">
-                            <p>
-                                <a href="register">Register as a new user</a>
-                            </p>
-                        </div>
-                    </EditForm>
-                </section>
-            </div>
-        </div>
-    </NotAuthorized>
-</AuthorizeView>
+        <AuthorizeView>
+            <Authorized Context="authContext">
+                <MudAlert Severity="Severity.Success" Class="mb-4">
+                    You're logged in as @authContext.User.Identity?.Name.
+                </MudAlert>
+            </Authorized>
+
+            <NotAuthorized Context="notAuthContext">
+                @if (formResult.ErrorList.Any())
+                {
+                    @foreach (var error in formResult.ErrorList)
+                    {
+                        <MudAlert Severity="Severity.Error" Dense="true" Class="mb-2">@error</MudAlert>
+                    }
+                }
+
+                <EditForm Model="Input" OnValidSubmit="LoginUser" Context="formContext">
+                    <DataAnnotationsValidator />
+
+                    <MudText Typo="Typo.subtitle1" Class="mb-2">Use a local account to log in</MudText>
+                    <MudDivider Class="mb-4" />
+
+                    <MudTextField @bind-Value="Input.Email"
+                                  Label="Email"
+                                  For="() => Input.Email"
+                                  Required="true"
+                                  Variant="Variant.Outlined"
+                                  FullWidth="true"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Email"
+                                  Margin="Margin.Dense" />
+
+                    <MudTextField @bind-Value="Input.Password"
+                                  Label="Password"
+                                  For="() => Input.Password"
+                                  Required="true"
+                                  Variant="Variant.Outlined"
+                                  FullWidth="true"
+                                  InputType="InputType.Password"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Lock"
+                                  Margin="Margin.Dense" />
+
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               FullWidth="true"
+                               Class="mt-4">
+                        Log in
+                    </MudButton>
+
+                    <MudText Class="mt-4" Align="Align.Center">
+                        <MudLink Href="register">Register as a new user</MudLink>
+                    </MudText>
+                </EditForm>
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudPaper>
+</MudContainer>
 
 @code {
     private FormResult formResult = new();
@@ -83,9 +85,18 @@
     {
         formResult = await Acct.LoginAsync(Input.Email, Input.Password);
 
-        if (formResult.Succeeded && !string.IsNullOrEmpty(ReturnUrl))
+        if (formResult.Succeeded)
         {
-            Navigation.NavigateTo(ReturnUrl);
+            Snackbar.Add("Login successful", Severity.Success);
+
+            if (!string.IsNullOrEmpty(ReturnUrl))
+                Navigation.NavigateTo(ReturnUrl);
+            else
+                Navigation.NavigateTo("/");
+        }
+        else
+        {
+            Snackbar.Add("Login failed", Severity.Error);
         }
     }
 

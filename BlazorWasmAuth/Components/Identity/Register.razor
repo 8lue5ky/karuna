@@ -3,89 +3,95 @@
 @using Frontend.Identity
 @using Frontend.Identity.Models
 @inject IAccountManagement Acct
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
 
 <PageTitle>Register</PageTitle>
 
-<h1>Register</h1>
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+    <MudPaper Elevation="3" Class="rounded-lg pa-4">
+        <MudText Typo="Typo.h4" GutterBottom>Register</MudText>
 
-<AuthorizeView>
-    <Authorized>
-        <div class="alert alert-success">You're already logged in as @context.User.Identity?.Name.</div>
-    </Authorized>
-    <NotAuthorized>
-        @if (formResult.Succeeded)
-        {
-            <div class="alert alert-success">
-                You successfully registered. Now you can <a href="login">login</a>.
-            </div>
-        }
-        else
-        {
-            @foreach (var error in formResult.ErrorList)
-            {
-                <div class="alert alert-danger">@error</div>
-            }
-            <div class="row">
-                <div class="col">
-                    <section>
-                        <EditForm Model="Input" method="post" OnValidSubmit="RegisterUserAsync"
-                                  FormName="register" Context="editform_context">
-                            <DataAnnotationsValidator />
-                            <h2>Register as a new user.</h2>
-                            <hr />
-                            <div class="form-floating mb-3">
-                                <InputText @bind-Value="Input.Email"
-                                           id="Input.Email"
-                                           class="form-control"
-                                           autocomplete="username"
-                                           aria-required="true"
-                                           placeholder="name@example.com" />
-                                <label for="Input.Email" class="form-label">
-                                    Email
-                                </label>
-                                <ValidationMessage For="() => Input.Email"
-                                                   class="text-danger" />
-                            </div>
-                            <div class="form-floating mb-3">
-                                <InputText type="password"
-                                           @bind-Value="Input.Password"
-                                           id="Input.Password"
-                                           class="form-control"
-                                           autocomplete="new-password"
-                                           aria-required="true"
-                                           placeholder="password" />
-                                <label for="Input.Password" class="form-label">
-                                    Password
-                                </label>
-                                <ValidationMessage For="() => Input.Password"
-                                                   class="text-danger" />
-                            </div>
-                            <div class="form-floating mb-3">
-                                <InputText type="password"
-                                           @bind-Value="Input.ConfirmPassword"
-                                           id="Input.ConfirmPassword"
-                                           class="form-control"
-                                           autocomplete="new-password"
-                                           aria-required="true"
-                                           placeholder="confirm password" />
-                                <label for="Input.ConfirmPassword" class="form-label">
-                                    Confirm Password
-                                </label>
-                                <ValidationMessage For="() => Input.ConfirmPassword"
-                                                   class="text-danger" />
-                            </div>
-                            <div>
-                                <button type="submit" class="w-100 btn btn-lg btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </EditForm>
-                    </section>
-                </div>
-            </div>
-        }
-    </NotAuthorized>
-</AuthorizeView>
+        <AuthorizeView>
+            <Authorized Context="authContext">
+                <MudAlert Severity="Severity.Info" Class="mb-4">
+                    You're already logged in as @authContext.User.Identity?.Name.
+                </MudAlert>
+            </Authorized>
+
+            <NotAuthorized Context="notAuthContext">
+                @if (formResult.Succeeded)
+                {
+                    <MudAlert Severity="Severity.Success" Class="mb-4">
+                        You successfully registered. You can now
+                        <MudLink Href="login">login</MudLink>.
+                    </MudAlert>
+                }
+                else
+                {
+                    @if (formResult.ErrorList.Any())
+                    {
+                        @foreach (var error in formResult.ErrorList)
+                        {
+                            <MudAlert Severity="Severity.Error" Dense="true" Class="mb-2">@error</MudAlert>
+                        }
+                    }
+
+                    <EditForm Model="Input" OnValidSubmit="RegisterUserAsync" Context="formContext">
+                        <DataAnnotationsValidator />
+
+                        <MudText Typo="Typo.subtitle1" Class="mb-2">Register a new account</MudText>
+                        <MudDivider Class="mb-4" />
+
+                        <MudTextField @bind-Value="Input.Email"
+                                      Label="Email"
+                                      For="() => Input.Email"
+                                      Required="true"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Email"
+                                      Margin="Margin.Dense" />
+
+                        <MudTextField @bind-Value="Input.Password"
+                                      Label="Password"
+                                      For="() => Input.Password"
+                                      Required="true"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true"
+                                      InputType="InputType.Password"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Lock"
+                                      Margin="Margin.Dense" />
+
+                        <MudTextField @bind-Value="Input.ConfirmPassword"
+                                      Label="Confirm Password"
+                                      For="() => Input.ConfirmPassword"
+                                      Required="true"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true"
+                                      InputType="InputType.Password"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Lock"
+                                      Margin="Margin.Dense" />
+
+                        <MudButton ButtonType="ButtonType.Submit"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   FullWidth="true"
+                                   Class="mt-4">
+                            Register
+                        </MudButton>
+
+                        <MudText Class="mt-4" Align="Align.Center">
+                            <MudLink Href="login">Already have an account? Log in</MudLink>
+                        </MudText>
+                    </EditForm>
+                }
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudPaper>
+</MudContainer>
 
 @code {
     private FormResult formResult = new();
@@ -96,6 +102,15 @@
     public async Task RegisterUserAsync()
     {
         formResult = await Acct.RegisterAsync(Input.Email, Input.Password);
+
+        if (formResult.Succeeded)
+        {
+            Snackbar.Add("Registration successful!", Severity.Success);
+        }
+        else
+        {
+            Snackbar.Add("Registration failed.", Severity.Error);
+        }
     }
 
     private sealed class InputModel
@@ -112,7 +127,7 @@
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
