@@ -1,8 +1,9 @@
+using BlazorWasmAuth.Components;
+using BlazorWasmAuth.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using BlazorWasmAuth.Components;
-using BlazorWasmAuth.Identity;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddTransient<CookieHandler>();
 
 // set up authorization
 builder.Services.AddAuthorizationCore();
+
+builder.Services.AddMudServices();
 
 // register the custom state provider
 builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStateProvider>();
