@@ -17,7 +17,7 @@
 	        </Authorized>
 	        <NotAuthorized>
 		        <MudButton StartIcon="@Icons.Material.Filled.Login" Href="login">Login</MudButton>
-                <MudButton StartIcon="@Icons.Material.Filled.AppRegistration" Href="register">Register</MudButton>
+                <MudButton StartIcon="@Icons.Material.Filled.AccountBox" Href="register">Register</MudButton>
 	        </NotAuthorized>
         </AuthorizeView>
 		
@@ -42,7 +42,7 @@
 
 @code {
     private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
     protected override void OnInitialized()

@@ -3,6 +3,31 @@
 <PageTitle>Home</PageTitle>
 
 <MudTabs  Border="true">
-	<MudTabPanel Text="Top" Icon="@Icons.Material.Filled.TrendingUp"/>
+	<MudTabPanel Text="Top" Icon="@Icons.Material.Filled.TrendingUp">
+		<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
+			<MudText Typo="Typo.h5" Class="mb-3 font-bold">💖 Gute Taten aus der Community</MudText>
+
+			<GoodDeedPost 
+				Username="AnnaLiebtHelfen" 
+				TimeAgo="vor 10 Minuten" 
+				Title="🌳 Park sauber gemacht!"
+				Content="Ich habe heute Morgen den Stadtpark von Müll befreit und dabei nette Menschen kennengelernt!"
+				Likes="12" Comments="3" />
+
+			<GoodDeedPost 
+				Username="HelpingHans" 
+				TimeAgo="vor 2 Stunden" 
+				Title="🐶 Hund gerettet!"
+				Content="Ein streunender Hund war in der Nähe der Straße – ich konnte ihn sichern und ins Tierheim bringen."
+				Likes="45" Comments="8" />
+
+			<GoodDeedPost 
+				Username="KindHeartKlara" 
+				TimeAgo="gestern"
+				Title="☕ Kaffee für den Busfahrer"
+				Content="Heute habe ich dem Busfahrer einen Kaffee spendiert, weil er bei Regen die ganze Schicht draußen war."
+				Likes="19" Comments="2" />
+		</MudContainer>
+	</MudTabPanel>
 	<MudTabPanel Text="Latest" Icon="@Icons.Material.Filled.NewLabel" />
 </MudTabs>

@@ -1,0 +1,52 @@
+﻿@using MudBlazor
+
+<MudPaper Class="pa-4 my-3 rounded-lg" Outlined="true" Elevation="1">
+	<MudStack Spacing="2">
+		<!-- Header -->
+		<MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+				<MudAvatar Color="Color.Primary" Variant="Variant.Outlined">
+					<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Size="Size.Medium"></MudIcon>
+				</MudAvatar>
+				<MudStack Spacing="1" >
+					<MudText Typo="Typo.subtitle2" Class="font-semibold">@Username</MudText>
+					<MudText Typo="Typo.caption" Class="text-muted">@TimeAgo</MudText>
+				</MudStack>
+			</MudStack>
+
+			<MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
+				<MudMenuItem>Bearbeiten</MudMenuItem>
+				<MudMenuItem>Melden</MudMenuItem>
+			</MudMenu>
+		</MudStack>
+
+		<!-- Inhalt -->
+		<MudStack>
+			<MudText Typo="Typo.h6" >@Title</MudText>
+			<MudText Typo="Typo.body1" >@Content</MudText>
+		</MudStack>
+
+		<!-- Footer -->
+		<MudDivider Class="my-2" />
+		<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+				<MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Error" Size="Size.Small" />
+				<MudText Typo="Typo.body2">@Likes</MudText>
+			</MudStack>
+
+			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+				<MudIconButton Icon="@Icons.Material.Filled.Comment" Size="Size.Small" />
+				<MudText Typo="Typo.body2">@Comments</MudText>
+			</MudStack>
+		</MudStack>
+	</MudStack>
+</MudPaper>
+
+@code {
+    [Parameter] public string Username { get; set; } = "GoodDeedHero";
+    [Parameter] public string TimeAgo { get; set; } = "vor 5 Minuten";
+    [Parameter] public string Title { get; set; } = "🌟 Eine gute Tat!";
+    [Parameter] public string Content { get; set; } = "Heute habe ich einer älteren Dame geholfen, ihre Einkäufe nach Hause zu tragen.";
+    [Parameter] public int Likes { get; set; } = 23;
+    [Parameter] public int Comments { get; set; } = 4;
+}
