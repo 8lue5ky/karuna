@@ -1,0 +1,225 @@
+﻿@page "/edit"
+
+@using Microsoft.AspNetCore.Components.Forms
+@using MudBlazor
+@inject ISnackbar Snackbar
+@inject HttpClient Http
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
+
+
+
+<MudPaper Class="pa-6 max-w-lg mx-auto my-6 rounded-lg" Outlined="true">
+    <MudStack Spacing="3">
+
+        <MudText Typo="Typo.h5" Class="font-semibold mb-2">👤 Profil bearbeiten</MudText>
+
+        <!-- MudForm: Referenz, Validierung mit Validate() und ResetAsync() -->
+        <MudForm @ref="_form" Model="_profile">
+            <MudStack Spacing="2">
+
+                <!-- Profilbild: Vorschau + MudFileUpload (einzelne Datei) -->
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+	                <MudAvatar Size="Size.Large" Class="shadow-md">
+                        <MudImage Src="@_profilePicturePreview"></MudImage>
+	                </MudAvatar>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex gap-2">
+                            <!-- eigene Buttons -> kontrollieren MudFileUpload über Ref -->
+                            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Upload" OnClick="@OpenFilePicker">
+                                Profilbild ändern
+                            </MudButton>
+                            <MudButton Variant="Variant.Text" OnClick="@ClearSelectedImage">Entfernen</MudButton>
+                        </div>
+                        <MudText Typo="Typo.caption" Class="mt-1">PNG/JPG, max. 2 MB</MudText>
+
+                        <!-- Hidden: MudFileUpload steuert den Picker / liefert IBrowserFile -->
+                        <MudFileUpload @ref="_fileUpload"
+                                       T="IBrowserFile"
+                                       Accept=".png,.jpg,.jpeg"
+                                       MaxFileSize="2097152"
+                                       FilesChanged="OnFileChanged"
+                                       Class="d-none" />
+                    </div>
+                </MudStack>
+
+                <!-- Eingabefelder -->
+                <MudTextField Label="Benutzername"
+                              For="@(() => _profile.Username)"
+                              @bind-Value="_profile.Username"
+                              Required="true"
+                              RequiredError="Benutzername erforderlich" />
+
+                <MudTextField Label="E-Mail-Adresse"
+                              For="@(() => _profile.Email)"
+                              @bind-Value="_profile.Email"
+                              InputType="InputType.Email"
+                              Required="true"
+                              RequiredError="E-Mail erforderlich" />
+
+                <MudTextField Label="Über mich"
+                              For="@(() => _profile.Bio)"
+                              @bind-Value="_profile.Bio"
+                              Lines="3"
+                              MaxLength="300"
+                              HelperText="Max. 300 Zeichen" />
+
+                <MudTextField Label="Ort"
+                              For="@(() => _profile.Location)"
+                              @bind-Value="_profile.Location" />
+
+                <!-- MudSelect: T="string". Value als Ausdruck, damit Razor keine Warnung zeigt -->
+                <MudSelect T="string" Label="Geschlecht" For="@(() => _profile.Gender)" @bind-Value="_profile.Gender">
+                    <MudSelectItem T="string" Value="@("Weiblich")">Weiblich</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("Männlich")">Männlich</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("Divers")">Divers</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("Keine Angabe")">Keine Angabe</MudSelectItem>
+                </MudSelect>
+
+                <!-- Sichtbarkeit -->
+                <MudSwitch T="bool" @bind-Value="_profile.IsPublic" Color="Color.Primary" Label="Profil öffentlich sichtbar" />
+
+                <!-- Aktionen -->
+                <MudStack Row="true" Justify="Justify.FlexEnd" Spacing="2" Class="mt-3">
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="OnCancelClicked">Abbrechen</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSaveClicked">Speichern</MudButton>
+                </MudStack>
+            </MudStack>
+        </MudForm>
+    </MudStack>
+</MudPaper>
+
+</MudContainer>
+
+@code {
+    // Refs
+    private MudForm? _form;
+    private MudFileUpload<IBrowserFile>? _fileUpload;
+
+    // Form state
+    private IBrowserFile? _selectedImage;
+    private string? _profilePicturePreview = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+
+    private UserProfile _profile = new()
+    {
+        Username = "GoodDeedHero",
+        Email = "hero@example.com",
+        Bio = "Ich liebe es, anderen zu helfen.",
+        Location = "Berlin, Deutschland",
+        Gender = "Keine Angabe",
+        IsPublic = true
+    };
+
+    // Öffnet den nativen Dateipicker via MudFileUpload-API
+    private async Task OpenFilePicker()
+    {
+        if (_fileUpload == null)
+        {
+            Snackbar.Add("Datei-Upload nicht initialisiert.", Severity.Warning);
+            return;
+        }
+
+        await _fileUpload.OpenFilePickerAsync();
+    }
+
+    // Entfernt die Auswahl (lokal)
+    private async Task ClearSelectedImage()
+    {
+        _selectedImage = null;
+        _profilePicturePreview = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+        if (_fileUpload != null)
+            await _fileUpload.ClearAsync();
+        StateHasChanged();
+    }
+
+    // FilesChanged handler: bei T="IBrowserFile" liefert MudFileUpload ein IBrowserFile
+    private async Task OnFileChanged(IBrowserFile file)
+    {
+        if (file == null)
+            return;
+
+        _selectedImage = file;
+
+        // Vorschau (Data URL)
+        using var ms = new MemoryStream();
+        await file.OpenReadStream(2_097_152).CopyToAsync(ms);
+        var bytes = ms.ToArray();
+        _profilePicturePreview = $"data:{file.ContentType};base64,{Convert.ToBase64String(bytes)}";
+
+        StateHasChanged();
+    }
+
+    // Speichern – Validierung mit Validate(), dann Multipart POST
+    private async Task OnSaveClicked()
+    {
+        if (_form == null)
+        {
+            Snackbar.Add("Formular nicht initialisiert.", Severity.Error);
+            return;
+        }
+
+        // Validate() ist das API-Call (nicht ValidateAsync in allen Setups)
+        await _form.Validate(); // Validate() returns Task in many versions; if your local build exposes synchronous Validate(), remove await.
+
+        if (!_form.IsValid)
+        {
+            Snackbar.Add("Bitte überprüfe deine Eingaben.", Severity.Warning);
+            return;
+        }
+
+        try
+        {
+            using var content = new MultipartFormDataContent();
+            content.Add(new StringContent(_profile.Username ?? string.Empty), "Username");
+            content.Add(new StringContent(_profile.Email ?? string.Empty), "Email");
+            content.Add(new StringContent(_profile.Bio ?? string.Empty), "Bio");
+            content.Add(new StringContent(_profile.Location ?? string.Empty), "Location");
+            content.Add(new StringContent(_profile.Gender ?? string.Empty), "Gender");
+            content.Add(new StringContent(_profile.IsPublic.ToString()), "IsPublic");
+
+            if (_selectedImage != null)
+            {
+                var stream = _selectedImage.OpenReadStream(2_097_152);
+                var streamContent = new StreamContent(stream);
+                streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(_selectedImage.ContentType);
+                content.Add(streamContent, "ProfileImage", _selectedImage.Name);
+            }
+
+            var resp = await Http.PostAsync("api/profile/update", content);
+            if (resp.IsSuccessStatusCode)
+            {
+                Snackbar.Add("Profil erfolgreich gespeichert!", Severity.Success);
+                // Reset validation state (falls du die Formfehler zurücksetzen willst)
+                if (_form != null)
+                    await _form.ResetAsync();
+            }
+            else
+            {
+                var txt = await resp.Content.ReadAsStringAsync();
+                Snackbar.Add($"Fehler beim Speichern: {resp.StatusCode} — {txt}", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Unerwarteter Fehler: {ex.Message}", Severity.Error);
+        }
+    }
+
+    // Abbrechen -> ResetForm (ResetAsync stellt Validierung/Zustand wieder her)
+    private async Task OnCancelClicked()
+    {
+        if (_form != null)
+            await _form.ResetAsync();
+        Snackbar.Add("Änderungen verworfen.", Severity.Info);
+    }
+
+    public class UserProfile
+    {
+        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Bio { get; set; } = string.Empty;
+        public string Location { get; set; } = string.Empty;
+        public string Gender { get; set; } = string.Empty;
+        public bool IsPublic { get; set; }
+    }
+}

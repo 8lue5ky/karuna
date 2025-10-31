@@ -1,5 +1,6 @@
 @page "/weather"
-@inject HttpClient Http
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IHttpClientFactory Factory
 
 <PageTitle>Weather</PageTitle>
 
@@ -34,8 +35,10 @@ else
 @code {
     private WeatherForecast[]? forecasts;
 
-    protected override async Task OnInitializedAsync() => 
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    protected override async Task OnInitializedAsync()
+    {
+		forecasts = await Factory.CreateClient("Weather").GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    }
 
     public class WeatherForecast
     {

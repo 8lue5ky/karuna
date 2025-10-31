@@ -54,6 +54,7 @@ builder.Services.AddCors(
             .AllowCredentials()));
 
 // add services to the container
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -79,6 +80,8 @@ app.MapIdentityApi<AppUser>();
 
 // activate the CORS policy
 app.UseCors("wasm");
+app.UseStaticFiles();
+app.UseRouting();
 
 // Enable authentication and authorization after CORS Middleware
 // processing (UseCors) in case the Authorization Middleware tries
@@ -87,6 +90,8 @@ app.UseCors("wasm");
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.MapControllers();
 // provide an endpoint to clear the cookie for logout
 //
 // For more information on the logout endpoint and antiforgery, see:
