@@ -17,19 +17,26 @@
 	        </Authorized>
 	        <NotAuthorized>
 		        <MudButton StartIcon="@Icons.Material.Filled.Login" Href="login">Login</MudButton>
-                <MudButton StartIcon="@Icons.Material.Filled.AccountBox" Href="register">Register</MudButton>
 	        </NotAuthorized>
         </AuthorizeView>
-		
+
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle" />
 
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
 	    <NavMenu />
     </MudDrawer>
+
+    <MudDrawer @bind-Open="@_settingsOpen" Anchor="Anchor.Right" Elevation="2" ClipMode="DrawerClipMode.Always">
+	    <MudDrawerHeader>
+		    <MudText Typo="Typo.h6">Settings</MudText>
+	    </MudDrawerHeader>
+	    <SettingsMenu></SettingsMenu>
+    </MudDrawer>
+
     <MudMainContent Class="pt-16 pa-4">
-        @Body
+	    @Body
     </MudMainContent>
 </MudLayout>
 
@@ -42,6 +49,8 @@
 
 @code {
     private bool _drawerOpen = true;
+    private bool _settingsOpen = false;
+
     private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
@@ -60,6 +69,11 @@
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private void OpenSettingsToggle()
+    {
+        _settingsOpen = !_settingsOpen;
     }
 
     private void DarkModeToggle()

@@ -10,7 +10,11 @@ namespace Backend.Controller
         private readonly ILogger<GoodDeedsController> _logger;
 
         // Simulierte In-Memory-Liste (kann später durch DB ersetzt werden)
-        private static readonly List<GoodDeedDto> _goodDeeds = new();
+        private static readonly List<GoodDeedDto> _goodDeeds = Enumerable.Repeat(new GoodDeedDto()
+        {
+            Title = "Gute Tag",
+            Description = "LoremIpsum"
+        }, 500).ToList();
 
         public GoodDeedsController(ILogger<GoodDeedsController> logger)
         {
@@ -55,6 +59,28 @@ namespace Backend.Controller
         {
             return Ok(_goodDeeds.OrderByDescending(x => x.CreatedAt));
         }
+
+        [HttpGet("paged")]
+        public ActionResult<PagedResponse> GetPaged([FromQuery] int startIndex = 0, [FromQuery] int count = 6)
+        {
+            Thread.Sleep(1000);
+
+            if (startIndex < 0) startIndex = 0;
+            if (count <= 0) count = 6;
+
+            var items = _goodDeeds
+                .Skip(startIndex)
+                .Take(count)
+                .ToList();
+
+            bool hasMore = startIndex + count < _goodDeeds.Count;
+
+            return Ok(new PagedResponse
+            {
+                Items = items,
+                HasMore = hasMore
+            });
+        }
     }
 
     // ------------------- DTOs -------------------
@@ -68,6 +94,12 @@ namespace Backend.Controller
         public string? Description { get; set; }
 
         public string? Category { get; set; }
+    }
+
+    public class PagedResponse
+    {
+        public List<GoodDeedDto> Items { get; set; } = new();
+        public bool HasMore { get; set; }
     }
 
     public class GoodDeedDto
