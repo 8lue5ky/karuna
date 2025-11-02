@@ -1,55 +1,90 @@
 ﻿@page "/gooddeeds"
-@using System.Net.Http.Json
-@using Microsoft.AspNetCore.Components.Web.Virtualization
 @inject HttpClient Http
 @inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
     <MudText Typo="Typo.h5" Class="mb-4 font-semibold">🌟 Gute Taten</MudText>
 
-    <!-- Fester Scrollbereich -->
-    <div style="height:75vh; overflow-y:auto;">
-        <Virtualize ItemsProvider="LoadGoodDeedsAsync" Context="deed" OverscanCount="3" ItemSize="230">
-            <ItemContent>
-	            <GoodDeedPost Title="@deed.Title" Content="@deed.Description" />
-            </ItemContent>
+    <div @onscroll="OnScroll"
+         style="height:75vh; overflow-y:auto;"
+         class="no-scrollbar"
+         @ref="_scrollDiv">
 
-            <Placeholder>
-                <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
-            </Placeholder>
-        </Virtualize>
+        @foreach (var deed in GoodDeedPosts)
+        {
+            <GoodDeedPost Title="@deed.Title"  Content="@deed.Description"/>
+        }
+
+        @if (IsLoading)
+        {
+            <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="my-2" />
+        }
+
+        @if (AllLoaded)
+        {
+            <MudText Typo="Typo.caption" Align="Align.Center" Class="text-gray-500 my-2">
+                🎉 Keine weiteren Einträge
+            </MudText>
+        }
     </div>
 </MudContainer>
 
 @code {
-    private async ValueTask<ItemsProviderResult<GoodDeedDto>> LoadGoodDeedsAsync(ItemsProviderRequest request)
+    private List<GoodDeedDto> GoodDeedPosts = new();
+    private bool IsLoading = false;
+    private bool AllLoaded = false;
+    private ElementReference _scrollDiv;
+    private int _page = 0;
+    private const int PageSize = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMoreAsync();
+    }
+
+    private async Task OnScroll(EventArgs e)
+    {
+        var scrollPos = await JS.InvokeAsync<double>("getScrollPosition", _scrollDiv);
+        var scrollHeight = await JS.InvokeAsync<double>("getScrollHeight", _scrollDiv);
+        var clientHeight = await JS.InvokeAsync<double>("getClientHeight", _scrollDiv);
+
+        if (!IsLoading && !AllLoaded && scrollPos + clientHeight >= scrollHeight - 200)
+        {
+            await LoadMoreAsync();
+        }
+    }
+
+    private async Task LoadMoreAsync()
     {
         try
         {
-            // Wichtig: verwende startIndex und count
-            int startIndex = request.StartIndex;
-            int count = request.Count > 0 ? request.Count : 6;
-
-            Console.WriteLine($"→ Lade gute Taten ab Index {startIndex} (Count: {count})");
+            IsLoading = true;
+            StateHasChanged();
 
             var response = await Http.GetFromJsonAsync<PagedResponse>(
-                $"api/gooddeeds/paged?startIndex={startIndex}&count={count}");
+                $"api/gooddeeds/paged?page={_page}&pageSize={PageSize}");
 
-            if (response is null)
-                return new ItemsProviderResult<GoodDeedDto>(Array.Empty<GoodDeedDto>(), 0);
+            if (response?.Items?.Count > 0)
+            {
+                GoodDeedPosts.AddRange(response.Items);
+                _page++;
+            }
 
-            int totalCount = response.HasMore
-                ? startIndex + response.Items.Count + 1
-                : startIndex + response.Items.Count;
-
-            return new ItemsProviderResult<GoodDeedDto>(response.Items, totalCount);
+            if (response == null || !response.HasMore)
+                AllLoaded = true;
         }
         catch (Exception ex)
         {
             Snackbar.Add($"Fehler beim Laden: {ex.Message}", Severity.Error);
-            return new ItemsProviderResult<GoodDeedDto>(Array.Empty<GoodDeedDto>(), 0);
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
         }
     }
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
 
     private class PagedResponse
     {
@@ -67,6 +102,5 @@
         public DateTime CreatedAt { get; set; }
     }
 }
-
 
 

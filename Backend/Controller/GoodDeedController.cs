@@ -61,21 +61,20 @@ namespace Backend.Controller
         }
 
         [HttpGet("paged")]
-        public ActionResult<PagedResponse> GetPaged([FromQuery] int startIndex = 0, [FromQuery] int count = 6)
+        public ActionResult<PagedResponse<GoodDeedDto>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
         {
-            Thread.Sleep(1000);
+            if (page < 0 || pageSize <= 0)
+                return BadRequest("Ungültige Paging-Parameter.");
 
-            if (startIndex < 0) startIndex = 0;
-            if (count <= 0) count = 6;
-
+            var skip = page * pageSize;
             var items = _goodDeeds
-                .Skip(startIndex)
-                .Take(count)
+                .Skip(skip)
+                .Take(pageSize)
                 .ToList();
 
-            bool hasMore = startIndex + count < _goodDeeds.Count;
+            var hasMore = skip + pageSize < _goodDeeds.Count;
 
-            return Ok(new PagedResponse
+            return Ok(new PagedResponse<GoodDeedDto>
             {
                 Items = items,
                 HasMore = hasMore
@@ -96,9 +95,9 @@ namespace Backend.Controller
         public string? Category { get; set; }
     }
 
-    public class PagedResponse
+    public class PagedResponse<T>
     {
-        public List<GoodDeedDto> Items { get; set; } = new();
+        public List<T> Items { get; set; } = new();
         public bool HasMore { get; set; }
     }
 
