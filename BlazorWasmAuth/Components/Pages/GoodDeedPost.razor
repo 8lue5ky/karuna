@@ -20,7 +20,7 @@
 			</MudMenu>
 		</MudStack>
 
-		<!-- Inhalt -->
+		<!-- Content -->
 		<MudStack>
 			<MudText Typo="Typo.h6" >@Title</MudText>
 			<MudText Typo="Typo.body1" >@Content</MudText>
@@ -41,12 +41,3 @@
 		</MudStack>
 	</MudStack>
 </MudPaper>
-
-@code {
-    [Parameter] public string Username { get; set; } = "GoodDeedHero";
-    [Parameter] public string TimeAgo { get; set; } = "vor 5 Minuten";
-    [Parameter] public string Title { get; set; } = "🌟 Eine gute Tat!";
-    [Parameter] public string Content { get; set; } = "Heute habe ich einer älteren Dame geholfen, ihre Einkäufe nach Hause zu tragen.";
-    [Parameter] public int Likes { get; set; } = 23;
-    [Parameter] public int Comments { get; set; } = 4;
-}

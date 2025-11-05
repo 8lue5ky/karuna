@@ -3,104 +3,28 @@
 @inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
-    <MudText Typo="Typo.h5" Class="mb-4 font-semibold">🌟 Gute Taten</MudText>
+    <MudText Typo="Typo.h5" Class="mb-4 font-semibold">Good deeds from the community</MudText>
 
     <div @onscroll="OnScroll"
          style="height:75vh; overflow-y:auto;"
          class="no-scrollbar"
          @ref="_scrollDiv">
 
-        @foreach (var deed in GoodDeedPosts)
+        @foreach (var deed in _goodDeedPosts)
         {
             <GoodDeedPost Title="@deed.Title"  Content="@deed.Description"/>
         }
 
-        @if (IsLoading)
+        @if (_isLoading)
         {
             <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="my-2" />
         }
 
-        @if (AllLoaded)
+        @if (_allLoaded)
         {
             <MudText Typo="Typo.caption" Align="Align.Center" Class="text-gray-500 my-2">
-                🎉 Keine weiteren Einträge
+                🎉 No more entries
             </MudText>
         }
     </div>
 </MudContainer>
-
-@code {
-    private List<GoodDeedDto> GoodDeedPosts = new();
-    private bool IsLoading = false;
-    private bool AllLoaded = false;
-    private ElementReference _scrollDiv;
-    private int _page = 0;
-    private const int PageSize = 10;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadMoreAsync();
-    }
-
-    private async Task OnScroll(EventArgs e)
-    {
-        var scrollPos = await JS.InvokeAsync<double>("getScrollPosition", _scrollDiv);
-        var scrollHeight = await JS.InvokeAsync<double>("getScrollHeight", _scrollDiv);
-        var clientHeight = await JS.InvokeAsync<double>("getClientHeight", _scrollDiv);
-
-        if (!IsLoading && !AllLoaded && scrollPos + clientHeight >= scrollHeight - 200)
-        {
-            await LoadMoreAsync();
-        }
-    }
-
-    private async Task LoadMoreAsync()
-    {
-        try
-        {
-            IsLoading = true;
-            StateHasChanged();
-
-            var response = await Http.GetFromJsonAsync<PagedResponse>(
-                $"api/gooddeeds/paged?page={_page}&pageSize={PageSize}");
-
-            if (response?.Items?.Count > 0)
-            {
-                GoodDeedPosts.AddRange(response.Items);
-                _page++;
-            }
-
-            if (response == null || !response.HasMore)
-                AllLoaded = true;
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add($"Fehler beim Laden: {ex.Message}", Severity.Error);
-        }
-        finally
-        {
-            IsLoading = false;
-            StateHasChanged();
-        }
-    }
-
-    [Inject] private IJSRuntime JS { get; set; } = default!;
-
-    private class PagedResponse
-    {
-        public List<GoodDeedDto> Items { get; set; } = new();
-        public bool HasMore { get; set; }
-    }
-
-    public class GoodDeedDto
-    {
-        public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? Category { get; set; }
-        public string? Username { get; set; }
-        public DateTime CreatedAt { get; set; }
-    }
-}
-
-

@@ -20,7 +20,7 @@
             </Authorized>
 
             <NotAuthorized Context="notAuthContext">
-                @if (formResult.Succeeded)
+                @if (_formResult.Succeeded)
                 {
                     <MudAlert Severity="Severity.Success" Class="mb-4">
                         You successfully registered. You can now
@@ -29,9 +29,9 @@
                 }
                 else
                 {
-                    @if (formResult.ErrorList.Any())
+                    @if (_formResult.ErrorList.Any())
                     {
-                        @foreach (var error in formResult.ErrorList)
+                        @foreach (var error in _formResult.ErrorList)
                         {
                             <MudAlert Severity="Severity.Error" Dense="true" Class="mb-2">@error</MudAlert>
                         }
@@ -92,43 +92,3 @@
         </AuthorizeView>
     </MudPaper>
 </MudContainer>
-
-@code {
-    private FormResult formResult = new();
-
-    [SupplyParameterFromForm]
-    private InputModel Input { get; set; } = new();
-
-    public async Task RegisterUserAsync()
-    {
-        formResult = await Acct.RegisterAsync(Input.Email, Input.Password);
-
-        if (formResult.Succeeded)
-        {
-            Snackbar.Add("Registration successful!", Severity.Success);
-        }
-        else
-        {
-            Snackbar.Add("Registration failed.", Severity.Error);
-        }
-    }
-
-    private sealed class InputModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; } = string.Empty;
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Passwords do not match.")]
-        [Display(Name = "Confirm Password")]
-        public string ConfirmPassword { get; set; } = string.Empty;
-    }
-}

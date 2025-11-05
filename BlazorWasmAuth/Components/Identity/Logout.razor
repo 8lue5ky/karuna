@@ -4,25 +4,20 @@
 
 <PageTitle>Logout</PageTitle>
 
-<h1>Logout</h1>
 
-<AuthorizeView @ref="authView">
-    <Authorized>
-        <div class="alert alert-info">Logging you out...</div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="alert alert-success">You're logged out. <a href="/login">Log in.</a></div>
-    </NotAuthorized>
+<MudText Typo="Typo.h4" GutterBottom="true" Class="ma-4">Logout</MudText>
+
+<AuthorizeView @ref="_authView">
+	<Authorized>
+		<MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Elevation="0" Dense="true" Class="d-flex align-items-center gap-2">
+			Logging you out...
+		</MudAlert>
+	</Authorized>
+
+	<NotAuthorized>
+		<MudAlert Severity="Severity.Success" Variant="Variant.Outlined" Elevation="0" Dense="true">
+			You're logged out.
+			<MudLink Href="/login" Class="ml-1">Log in.</MudLink>
+		</MudAlert>
+	</NotAuthorized>
 </AuthorizeView>
-
-@code {
-    private AuthorizeView? authView;
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (await Acct.CheckAuthenticatedAsync())
-        {
-            await Acct.LogoutAsync();
-        }
-    }
-}

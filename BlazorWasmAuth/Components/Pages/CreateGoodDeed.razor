@@ -2,12 +2,12 @@
 @inject HttpClient Http
 @inject ISnackbar Snackbar
 
-<PageTitle>Neue gute Tat</PageTitle>
+<PageTitle>Post a good deed</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="my-8">
     <MudPaper Class="pa-6 rounded-lg" Outlined="true">
         <MudStack Spacing="3">
-            <MudText Typo="Typo.h5" GutterBottom="true">✨ Neue gute Tat posten</MudText>
+            <MudText Typo="Typo.h5" GutterBottom="true">✨ Post a good deed</MudText>
 
             <MudForm @ref="_form">
                 <MudTextField @bind-Value="_model.Title"
@@ -17,94 +17,28 @@
                               For="@(() => _model.Title)" />
 
                 <MudTextField @bind-Value="_model.Description"
-                              Label="Beschreibung"
+                              Label="Description"
                               Variant="Variant.Outlined"
                               Lines="5"
                               For="@(() => _model.Description)"
-                              HelperText="Beschreibe, was du Gutes getan hast."
+                              HelperText="Describe what good deeds you have done."
                               Required="true" />
-
-                <MudSelect T="string" Label="Kategorie" @bind-Value="_model.Category" Variant="Variant.Outlined">
-                    <MudSelectItem T="string" Value="@("Nachbarschaft")">Nachbarschaft</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("Umwelt")">Umwelt</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("Tiere")">Tiere</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("Sonstiges")">Sonstiges</MudSelectItem>
-                </MudSelect>
-
                 <MudStack Row="true" Spacing="2" Class="pt-4">
                     <MudButton OnClick="SubmitAsync"
                                Color="Color.Primary"
                                Variant="Variant.Filled"
                                Disabled="@_isSubmitting">
                         <MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Class="me-2" />
-                        Posten
+                        Post
                     </MudButton>
 
                     <MudButton OnClick="ResetForm"
                                Color="Color.Secondary"
                                Variant="Variant.Outlined">
-                        Zurücksetzen
+                        Reset
                     </MudButton>
                 </MudStack>
             </MudForm>
         </MudStack>
     </MudPaper>
 </MudContainer>
-
-@code {
-    private MudForm? _form;
-    private bool _isSubmitting = false;
-
-    private GoodDeedModel _model = new();
-
-    private async Task SubmitAsync()
-    {
-        if (_form is null)
-            return;
-
-        await _form.Validate();
-        if (!_form.IsValid)
-        {
-            Snackbar.Add("Bitte alle erforderlichen Felder ausfüllen.", Severity.Warning);
-            return;
-        }
-
-        try
-        {
-            _isSubmitting = true;
-
-            var response = await Http.PostAsJsonAsync("api/gooddeeds", _model);
-
-            if (response.IsSuccessStatusCode)
-            {
-                Snackbar.Add("Danke für deine gute Tat 💖", Severity.Success);
-                ResetForm();
-            }
-            else
-            {
-                Snackbar.Add("Fehler beim Posten deiner guten Tat.", Severity.Error);
-            }
-        }
-        catch (Exception ex)
-        {
-            Snackbar.Add($"Fehler: {ex.Message}", Severity.Error);
-        }
-        finally
-        {
-            _isSubmitting = false;
-        }
-    }
-
-    private void ResetForm()
-    {
-        _model = new GoodDeedModel();
-        _form?.ResetValidation();
-    }
-
-    public class GoodDeedModel
-    {
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? Category { get; set; }
-    }
-}

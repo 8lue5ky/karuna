@@ -5,9 +5,9 @@
 				<MudNavLink Href="login" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
 				<MudNavLink Href="register" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountBox">Register</MudNavLink>
 			</NotAuthorized>
+			<Authorized>
+				<MudNavLink Href="edit" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudNavLink>
+			</Authorized>
 		</AuthorizeView>
-		
-		<MudNavLink Href="edit" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudNavLink>
 	</MudNavMenu>
-
 </MudNavMenu>

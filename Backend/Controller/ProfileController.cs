@@ -15,15 +15,14 @@ namespace Backend.Controller
             _logger = logger;
         }
 
-        /// <summary>
-        /// Empfängt MultipartFormData (Text + Bild) vom Frontend
-        /// </summary>
         [HttpPost("update")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateProfile([FromForm] ProfileUpdateDto dto)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
+            }
 
             string? savedFilePath = null;
 
@@ -45,48 +44,18 @@ namespace Backend.Controller
                     savedFilePath = $"/uploads/{fileName}";
                 }
 
-                _logger.LogInformation("Profil-Update von {User}: {@Profile}", dto.Username, dto);
-                _logger.LogInformation("Gespeichertes Bild: {File}", savedFilePath ?? "Kein Bild");
-
                 return Ok(new
                 {
-                    message = "Profil erfolgreich gespeichert",
+                    message = "Profile updated successfully!",
                     profile = dto,
                     imageUrl = savedFilePath
                 });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Fehler beim Profil-Update");
-                return StatusCode(500, new { message = "Interner Serverfehler", error = ex.Message });
+                _logger.LogError(ex, "Error during updating user profile.");
+                return StatusCode(500, new { message = "Internal error.", error = ex.Message });
             }
         }
-    }
-
-    /// <summary>
-    /// Dient als DTO für Formulardaten aus MudBlazor
-    /// </summary>
-    public class ProfileUpdateDto
-    {
-        [FromForm(Name = "Username")]
-        public string? Username { get; set; }
-
-        [FromForm(Name = "Email")]
-        public string? Email { get; set; }
-
-        [FromForm(Name = "Bio")]
-        public string? Bio { get; set; }
-
-        [FromForm(Name = "Location")]
-        public string? Location { get; set; }
-
-        [FromForm(Name = "Gender")]
-        public string? Gender { get; set; }
-
-        [FromForm(Name = "IsPublic")]
-        public bool IsPublic { get; set; }
-
-        [FromForm(Name = "ProfileImage")]
-        public IFormFile? ProfileImage { get; set; }
     }
 }
