@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using System.Net.Http;
+using System.Net.Http.Json;
+using Microsoft.AspNetCore.Components;
+using Shared.DTOs.User;
 
 namespace Frontend.Components.Pages;
 
@@ -11,13 +13,26 @@ public partial class EditProfile
     private IBrowserFile? _selectedImage;
     private string? _profilePicturePreview = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 
-    private UserProfile _profile = new()
+    [Inject]
+    private IHttpClientFactory _httpClientFactory { get; set; }
+
+    private HttpClient _httpClient;
+
+    private UserProfileDto _profile = new UserProfileDto();
+
+    protected override async Task OnInitializedAsync()
     {
-        Username = "GoodDeedHero",
-        Email = "hero@example.com",
-        Bio = "I love to help others.",
-        Location = "Berlin, Germany",
-    };
+        _httpClient = _httpClientFactory.CreateClient("Auth");
+
+        _profile = await GetUserProfile() ?? new UserProfileDto();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<UserProfileDto?> GetUserProfile()
+    {
+        return await _httpClient.GetFromJsonAsync<UserProfileDto>($"api/profile");
+    }
 
     private async Task OpenFilePicker()
     {
@@ -79,10 +94,10 @@ public partial class EditProfile
         try
         {
             using var content = new MultipartFormDataContent();
-            content.Add(new StringContent(_profile.Username ?? string.Empty), "Username");
-            content.Add(new StringContent(_profile.Email ?? string.Empty), "Email");
-            content.Add(new StringContent(_profile.Bio ?? string.Empty), "Bio");
-            content.Add(new StringContent(_profile.Location ?? string.Empty), "Location");
+            content.Add(new StringContent(_profile?.DisplayName ?? string.Empty), "Username");
+            content.Add(new StringContent(_profile?.Email ?? string.Empty), "Email");
+            content.Add(new StringContent(_profile?.Bio ?? string.Empty), "Bio");
+            content.Add(new StringContent(_profile?.Location ?? string.Empty), "Location");
 
             if (_selectedImage != null)
             {
@@ -93,8 +108,7 @@ public partial class EditProfile
                 content.Add(streamContent, "ProfileImage", _selectedImage.Name);
             }
 
-            HttpClient client = HttpClientFactory.CreateClient("Auth");
-            var resp = await client.PostAsync("api/profile/update", content);
+            var resp = await _httpClient.PostAsync("api/profile/update", content);
             if (resp.IsSuccessStatusCode)
             {
                 Snackbar.Add("Profile successfully updated!", Severity.Success);
@@ -124,13 +138,5 @@ public partial class EditProfile
         }
 
         Snackbar.Add("Changes discarded.", Severity.Info);
-    }
-
-    public class UserProfile
-    {
-        public string Username { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Bio { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;
     }
 }

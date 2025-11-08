@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @inject ISnackbar Snackbar
-@inject IHttpClientFactory HttpClientFactory
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
 <MudPaper Class="pa-6 max-w-lg mx-auto my-6 rounded-lg" Outlined="true">
@@ -36,8 +35,8 @@
                 </MudStack>
 
                 <MudTextField Label="Username"
-                              For="@(() => _profile.Username)"
-                              @bind-Value="_profile.Username"
+                              For="@(() => _profile.DisplayName)"
+                              @bind-Value="_profile.DisplayName"
                               Required="true"
                               RequiredError="Username is required" />
 

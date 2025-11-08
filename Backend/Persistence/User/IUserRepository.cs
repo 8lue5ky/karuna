@@ -4,6 +4,6 @@ namespace Backend.Persistence.User
 {
     public interface IUserRepository
     {
-        Task<UserProfile?> GetUserProfileAsync(Guid id);
+        Task<UserProfile?> GetUserProfileAsync(string userId);
     }
 }

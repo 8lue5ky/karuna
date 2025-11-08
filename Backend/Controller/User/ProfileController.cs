@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs.User;
 using System.Security.Claims;
+using Backend.Models.User;
+using Backend.Persistence.User;
 
-namespace Backend.Controller
+namespace Backend.Controller.User
 {
     [Authorize]
     [ApiController]
@@ -11,11 +15,40 @@ namespace Backend.Controller
     {
         private readonly IWebHostEnvironment _env;
         private readonly ILogger<ProfileController> _logger;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserRepository _userRepository;
 
-        public ProfileController(IWebHostEnvironment env, ILogger<ProfileController> logger)
+        public ProfileController(IWebHostEnvironment env, ILogger<ProfileController> logger, UserManager<AppUser> userManager, IUserRepository userRepository)
         {
             _env = env;
             _logger = logger;
+            _userManager = userManager;
+            _userRepository = userRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UserProfileDto>> GetUserProfile()
+        {
+            string? userId = _userManager.GetUserId(User);
+
+            if (userId != null)
+            {
+                var userProfile = await _userRepository.GetUserProfileAsync(userId);
+
+                if (userProfile != null)
+                {
+                    return Ok(new UserProfileDto()
+                    {
+                        DisplayName = userProfile.User.DisplayName,
+                        Bio = userProfile.Bio,
+                        Email = userProfile.User.Email,
+                        Id = userProfile.Id,
+                        Location = userProfile.Location
+                    });
+                }
+            }
+
+            return NotFound();
         }
 
 

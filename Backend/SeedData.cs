@@ -15,7 +15,8 @@ public class SeedData
             NormalizedEmail = "LEELA@CONTOSO.COM", 
             NormalizedUserName = "LEELA@CONTOSO.COM", 
             RoleList = [ "Administrator", "Manager" ], 
-            UserName = "leela@contoso.com"
+            UserName = "leela@contoso.com",
+            DisplayName = "Leela"
         },
         new SeedUser()
         {
@@ -23,7 +24,8 @@ public class SeedData
             NormalizedEmail = "HARRY@CONTOSO.COM",
             NormalizedUserName = "HARRY@CONTOSO.COM",
             RoleList = [ "User" ],
-            UserName = "harry@contoso.com"
+            UserName = "harry@contoso.com",
+            DisplayName = "Harry"
         },
     ];
 
@@ -66,6 +68,15 @@ public class SeedData
                 if (appUser is not null && user.RoleList is not null)
                 {
                     await userManager.AddToRolesAsync(appUser, user.RoleList);
+
+                    UserProfile userProfile = new UserProfile()
+                    {
+                        Bio = "sdgsdg",
+                        Id = Guid.NewGuid(),
+                        UserId = user.Id
+                    };
+
+                    context.UserProfiles.Add(userProfile);
                 }
             }
         }

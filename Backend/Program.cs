@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend;
 using Backend.Models.User;
+using Backend.Persistence.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,8 @@ builder.Services.AddSwaggerGen();
 
 // add OpenAPI services
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

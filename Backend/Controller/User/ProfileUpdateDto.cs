@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.Controller;
+namespace Backend.Controller.User;
 
 public class ProfileUpdateDto
 {

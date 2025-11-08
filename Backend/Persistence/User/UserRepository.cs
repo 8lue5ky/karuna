@@ -1,4 +1,5 @@
 ﻿using Backend.Models.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Persistence.User;
 
@@ -11,8 +12,10 @@ internal class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserProfile?> GetUserProfileAsync(Guid id)
+    public async Task<UserProfile?> GetUserProfileAsync(string userId)
     {
-        return await _context.UserProfiles.FindAsync(id);
+        return await _context.UserProfiles
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.UserId == userId);
     }
 }
