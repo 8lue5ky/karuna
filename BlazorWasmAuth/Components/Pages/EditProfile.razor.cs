@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Net.Http;
 
 namespace Frontend.Components.Pages;
 
@@ -16,7 +17,6 @@ public partial class EditProfile
         Email = "hero@example.com",
         Bio = "I love to help others.",
         Location = "Berlin, Germany",
-        Gender = "Diverse"
     };
 
     private async Task OpenFilePicker()
@@ -83,7 +83,6 @@ public partial class EditProfile
             content.Add(new StringContent(_profile.Email ?? string.Empty), "Email");
             content.Add(new StringContent(_profile.Bio ?? string.Empty), "Bio");
             content.Add(new StringContent(_profile.Location ?? string.Empty), "Location");
-            content.Add(new StringContent(_profile.Gender ?? string.Empty), "Gender");
 
             if (_selectedImage != null)
             {
@@ -94,7 +93,8 @@ public partial class EditProfile
                 content.Add(streamContent, "ProfileImage", _selectedImage.Name);
             }
 
-            var resp = await Http.PostAsync("api/profile/update", content);
+            HttpClient client = HttpClientFactory.CreateClient("Auth");
+            var resp = await client.PostAsync("api/profile/update", content);
             if (resp.IsSuccessStatusCode)
             {
                 Snackbar.Add("Profile successfully updated!", Severity.Success);
@@ -132,6 +132,5 @@ public partial class EditProfile
         public string Email { get; set; } = string.Empty;
         public string Bio { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
-        public string Gender { get; set; } = string.Empty;
     }
 }

@@ -1,10 +1,10 @@
 using System.Data;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend;
+using Backend.Models.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -92,6 +92,7 @@ app.UseAuthorization();
 
 
 app.MapControllers();
+
 // provide an endpoint to clear the cookie for logout
 //
 // For more information on the logout endpoint and antiforgery, see:
@@ -117,13 +118,13 @@ app.MapGet("/roles", (ClaimsPrincipal user) =>
     {
         var identity = (ClaimsIdentity)user.Identity;
         var roles = identity.FindAll(identity.RoleClaimType)
-            .Select(c => 
+            .Select(c =>
                 new
                 {
-                    c.Issuer, 
-                    c.OriginalIssuer, 
-                    c.Type, 
-                    c.Value, 
+                    c.Issuer,
+                    c.OriginalIssuer,
+                    c.Type,
+                    c.Value,
                     c.ValueType
                 });
 
@@ -133,25 +134,4 @@ app.MapGet("/roles", (ClaimsPrincipal user) =>
     return Results.Unauthorized();
 }).RequireAuthorization();
 
-// provide an endpoint example that requires authorization
-app.MapPost("/data-processing-1", ([FromBody] FormModel model) =>
-    Results.Text($"{model.Message.Length} characters"))
-        .RequireAuthorization();
-
-// provide an endpoint example that requires authorization with a policy
-app.MapPost("/data-processing-2", ([FromBody] FormModel model) =>
-    Results.Text($"{model.Message.Length} characters"))
-        .RequireAuthorization(policy => policy.RequireRole("Manager"));
-
 app.Run();
-
-// Identity database
-class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser>(options)
-{
-}
-
-// example form model
-class FormModel
-{
-    public string Message { get; set; } = string.Empty;
-}

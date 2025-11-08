@@ -16,9 +16,6 @@ public class ProfileUpdateDto
     [FromForm(Name = "Location")]
     public string? Location { get; set; }
 
-    [FromForm(Name = "Gender")]
-    public string? Gender { get; set; }
-
     [FromForm(Name = "ProfileImage")]
     public IFormFile? ProfileImage { get; set; }
 }

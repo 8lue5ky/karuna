@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Backend.Controller
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProfileController : ControllerBase
@@ -15,10 +18,16 @@ namespace Backend.Controller
             _logger = logger;
         }
 
+
         [HttpPost("update")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateProfile([FromForm] ProfileUpdateDto dto)
         {
+            //var user = User; // ClaimsPrincipal
+            //var username = user.Identity.Name; // z. B. der Benutzername
+            //var userId = user.FindFirst("sub")?.Value ?? user.FindFirst("id")?.Value; // je nach Claim
+            //var email = user.FindFirst(ClaimTypes.Email)?.Value;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

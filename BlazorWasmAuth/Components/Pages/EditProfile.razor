@@ -3,12 +3,9 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @inject ISnackbar Snackbar
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
-
-
-
 <MudPaper Class="pa-6 max-w-lg mx-auto my-6 rounded-lg" Outlined="true">
     <MudStack Spacing="3">
 
@@ -61,13 +58,6 @@
                 <MudTextField Label="Location"
                               For="@(() => _profile.Location)"
                               @bind-Value="_profile.Location" />
-
-                <MudSelect T="string" Label="Gender" For="@(() => _profile.Gender)" @bind-Value="_profile.Gender">
-	                <MudSelectItem T="string" Value="@("Female")">Female</MudSelectItem>
-	                <MudSelectItem T="string" Value="@("Male")">Male</MudSelectItem>
-	                <MudSelectItem T="string" Value="@("Diverse")">Diverse</MudSelectItem>
-	                <MudSelectItem T="string" Value="@("Prefer not to say")">Prefer not to say</MudSelectItem>
-                </MudSelect>
 
                 <MudStack Row="true" Justify="Justify.FlexEnd" Spacing="2" Class="mt-3">
                     <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="OnCancelClicked">Cancel</MudButton>
