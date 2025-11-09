@@ -73,7 +73,8 @@ public class SeedData
                     {
                         Bio = "sdgsdg",
                         Id = Guid.NewGuid(),
-                        UserId = user.Id
+                        UserId = user.Id,
+                        Location = "Tenesee"
                     };
 
                     context.UserProfiles.Add(userProfile);

@@ -26,7 +26,15 @@ public partial class EditProfile
 
         _profile = await GetUserProfile() ?? new UserProfileDto();
 
+        _profilePicturePreview = GetThumbnailUrl();
+
         await base.OnInitializedAsync();
+    }
+
+    private string GetThumbnailUrl()
+    {
+        var backendUrl = Configuration["BackendUrl"];
+        return $"{backendUrl}/api/profile/thumbnail";
     }
 
     private async Task<UserProfileDto?> GetUserProfile()
@@ -112,16 +120,6 @@ public partial class EditProfile
             if (resp.IsSuccessStatusCode)
             {
                 Snackbar.Add("Profile successfully updated!", Severity.Success);
-
-                if (_form != null)
-                {
-                    await _form.ResetAsync();
-                }
-            }
-            else
-            {
-                var txt = await resp.Content.ReadAsStringAsync();
-                Snackbar.Add($"Error during save: {resp.StatusCode} — {txt}", Severity.Error);
             }
         }
         catch (Exception ex)

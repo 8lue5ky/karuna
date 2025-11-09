@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Backend.Models.User;
+using Backend.Persistence.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shared.DTOs.User;
+using System;
 using System.Security.Claims;
-using Backend.Models.User;
-using Backend.Persistence.User;
 
 namespace Backend.Controller.User
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProfileController : ControllerBase
@@ -26,6 +27,7 @@ namespace Backend.Controller.User
             _userRepository = userRepository;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserProfileDto>> GetUserProfile()
         {
@@ -51,53 +53,89 @@ namespace Backend.Controller.User
             return NotFound();
         }
 
-
+        [Authorize]
         [HttpPost("update")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpdateProfile([FromForm] ProfileUpdateDto dto)
         {
-            //var user = User; // ClaimsPrincipal
-            //var username = user.Identity.Name; // z. B. der Benutzername
-            //var userId = user.FindFirst("sub")?.Value ?? user.FindFirst("id")?.Value; // je nach Claim
-            //var email = user.FindFirst(ClaimTypes.Email)?.Value;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            string? savedFilePath = null;
-
             try
             {
+                string? userId = _userManager.GetUserId(User);
+
+                byte[]? imageData = null;
+
                 if (dto.ProfileImage is not null && dto.ProfileImage.Length > 0)
                 {
-                    var uploadDir = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
-                    Directory.CreateDirectory(uploadDir);
-
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(dto.ProfileImage.FileName)}";
-                    var filePath = Path.Combine(uploadDir, fileName);
-
-                    await using (var stream = System.IO.File.Create(filePath))
-                    {
-                        await dto.ProfileImage.CopyToAsync(stream);
-                    }
-
-                    savedFilePath = $"/uploads/{fileName}";
+                    using var ms = new MemoryStream();
+                    await dto.ProfileImage.CopyToAsync(ms);
+                    imageData = ms.ToArray();
                 }
 
-                return Ok(new
+                var action = new UpdateProfileAction()
                 {
-                    message = "Profile updated successfully!",
-                    profile = dto,
-                    imageUrl = savedFilePath
-                });
+                    ProfilePicture = imageData,
+                    DisplayName = dto.Username,
+                    Email = dto.Email,
+                    Bio = dto.Bio,
+                    Location = dto.Location
+                };
+
+                await _userRepository.UpdateProfileAsync(userId, action);
+
+                return Ok();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error during updating user profile.");
-                return StatusCode(500, new { message = "Internal error.", error = ex.Message });
+                return StatusCode(500);
             }
         }
+
+        [HttpGet("{userId}/thumbnail")]
+        public async Task<IActionResult> GetThumbnail(string userId)
+        {
+            byte[]? thumbnail = await _userRepository.GetProfileImageThumbnailAsync(userId);
+
+            if (thumbnail == null)
+            {
+                var redirectUrl = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+                return Redirect(redirectUrl);
+            }
+
+            return File(thumbnail, "image/jpeg");
+        }
+
+        [Authorize]
+        [HttpGet("thumbnail")]
+        public async Task<IActionResult> GetThumbnail()
+        {
+            string? userId = _userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                var redirectUrl = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+                return Redirect(redirectUrl);
+            }
+
+            return await GetThumbnail(userId);
+        }
+
+
+
+        //private byte[] GenerateThumbnail(byte[] imageBytes, int width, int height)
+        //{
+        //    using var inputStream = new MemoryStream(imageBytes);
+        //    using var image = System.Drawing.Image.FromStream(inputStream);
+
+        //    using var thumbnail = image.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
+        //    using var ms = new MemoryStream();
+        //    thumbnail.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    return ms.ToArray();
+        //}
     }
 }

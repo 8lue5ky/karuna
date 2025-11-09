@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @inject ISnackbar Snackbar
+@inject IConfiguration Configuration
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
 <MudPaper Class="pa-6 max-w-lg mx-auto my-6 rounded-lg" Outlined="true">
@@ -15,7 +16,7 @@
 
                 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
 	                <MudAvatar Size="Size.Large" Class="shadow-md">
-                        <MudImage Src="@_profilePicturePreview"></MudImage>
+                            <MudImage Src="@_profilePicturePreview"></MudImage>
 	                </MudAvatar>
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-2">

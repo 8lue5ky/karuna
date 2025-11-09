@@ -1,4 +1,5 @@
 ﻿@using MudBlazor
+@inject IConfiguration Configuration
 
 <MudPaper Class="pa-4 my-3 rounded-lg" Outlined="true" Elevation="1">
 	<MudStack Spacing="2">
@@ -7,6 +8,7 @@
 			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
 				<MudAvatar Color="Color.Primary" Variant="Variant.Outlined">
 					<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Size="Size.Medium"></MudIcon>
+					@* <img src="@GetThumbnailUrl(user.Id)" alt="ProfilePicture" width="64" height="64" /> *@
 				</MudAvatar>
 				<MudStack Spacing="1" >
 					<MudText Typo="Typo.subtitle2" Class="font-semibold">@Username</MudText>
