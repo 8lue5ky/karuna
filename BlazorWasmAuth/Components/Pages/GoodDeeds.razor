@@ -12,7 +12,7 @@
 
         @foreach (var deed in _goodDeedPosts)
         {
-            <GoodDeedPost Title="@deed.Title"  Content="@deed.Description"/>
+            <GoodDeedPost Title="@deed.Title"  Content="@deed.Description" Username="@deed.Username" UserId="@deed.UserId"/>
         }
 
         @if (_isLoading)

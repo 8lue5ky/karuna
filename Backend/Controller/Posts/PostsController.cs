@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Models;
+using Backend.Models.User;
+using Backend.Persistence.Posts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs.Posts;
 
 namespace Backend.Controller.Posts
@@ -8,44 +13,46 @@ namespace Backend.Controller.Posts
     public class PostsController : ControllerBase
     {
         private readonly ILogger<PostsController> _logger;
+        private readonly IPostsRepository _postsRepository;
+        private readonly UserManager<AppUser> _userManager;
 
-        private static readonly List<PostDto> _posts = Enumerable.Repeat(new PostDto()
-        {
-            Title = "Good deed",
-            Description = "LoremIpsum"
-        }, 20).ToList();
-
-        public PostsController(ILogger<PostsController> logger)
+        public PostsController(ILogger<PostsController> logger, IPostsRepository postsRepository, UserManager<AppUser> userManager)
         {
             _logger = logger;
+            _postsRepository = postsRepository;
+            _userManager = userManager;
         }
 
         /// <summary>
         /// POST /api/posts
         /// </summary>
+        [Authorize]
         [HttpPost]
         public IActionResult CreatePost([FromBody] PostCreateRequest request)
         {
-            if (!ModelState.IsValid)
+            string? userId = _userManager.GetUserId(User);
+
+            if (!ModelState.IsValid || userId == null)
             {
                 return BadRequest(ModelState);
             }
 
-            var deed = new PostDto
+            Post post = new Post()
             {
+                UserId = userId,
+                CreatedAt = DateTime.Now,
                 Id = Guid.NewGuid(),
                 Title = request.Title,
-                Description = request.Description,
-                CreatedAt = DateTime.UtcNow
+                Description = request.Description
             };
 
-            _posts.Add(deed);
+            _postsRepository.CreatePostAsync(post);
 
             return Ok();
         }
 
         [HttpGet("paged")]
-        public ActionResult<PagedResponse<PostDto>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<PagedResponse<PostDto>>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
         {
             if (page < 0 || pageSize <= 0)
             {
@@ -54,18 +61,22 @@ namespace Backend.Controller.Posts
 
             var skip = page * pageSize;
 
-            var items = _posts
-                .OrderByDescending(x => x.CreatedAt)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip);
 
-            var hasMore = skip + pageSize < _posts.Count;
+            List<PostDto> postDtos = posts.Posts.Select(x => new PostDto()
+            {
+                CreatedAt = x.CreatedAt,
+                Description = x.Description,
+                Id = x.Id,
+                Title = x.Title,
+                UserId = x.UserId,
+                Username = x.User.DisplayName
+            }).ToList();
 
             return Ok(new PagedResponse<PostDto>
             {
-                Items = items,
-                HasMore = hasMore
+                Items = postDtos,
+                HasMore = posts.HasMore
             });
         }
     }

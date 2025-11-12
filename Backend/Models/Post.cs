@@ -9,6 +9,6 @@ namespace Backend.Models
         public required string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public required string UserId { get; set; }
-        public required AppUser User { get; set; }
+        public AppUser User { get; set; }
     }
 }

@@ -15,9 +15,11 @@ public partial class GoodDeedPost
     [Parameter] public int Likes { get; set; } = 23;
     [Parameter] public int Comments { get; set; } = 4;
 
-    private string GetThumbnailUrl(string userId)
+    [Parameter] public string UserId { get; set; }
+
+    private string GetThumbnailUrl()
     {
         var backendUrl = Configuration["BackendUrl"];
-        return $"{backendUrl}/api/profile/{userId}/thumbnail";
+        return $"{backendUrl}/api/profile/{UserId}/thumbnail";
     }
 }
