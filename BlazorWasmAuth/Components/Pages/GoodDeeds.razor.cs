@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
+using Shared.DTOs.Posts;
 
 namespace Frontend.Components.Pages;
 
 public partial class GoodDeeds
 {
-    private readonly List<GoodDeedDto> _goodDeedPosts = new();
+    private readonly List<PostDto> _goodDeedPosts = new();
     private bool _isLoading;
     private bool _allLoaded;
     private ElementReference _scrollDiv;
@@ -38,8 +39,8 @@ public partial class GoodDeeds
             _isLoading = true;
             StateHasChanged();
 
-            var response = await Http.GetFromJsonAsync<PagedResponse>(
-                $"api/gooddeeds/paged?page={_page}&pageSize={PageSize}");
+            var response = await Http.GetFromJsonAsync<PagedResponse<PostDto>>(
+                $"api/posts/paged?page={_page}&pageSize={PageSize}");
 
             if (response?.Items?.Count > 0)
             {
@@ -64,19 +65,4 @@ public partial class GoodDeeds
     }
 
     [Inject] private IJSRuntime JS { get; set; } = default!;
-
-    private class PagedResponse
-    {
-        public List<GoodDeedDto> Items { get; set; } = new();
-        public bool HasMore { get; set; }
-    }
-
-    public class GoodDeedDto
-    {
-        public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? Username { get; set; }
-        public DateTime CreatedAt { get; set; }
-    }
 }

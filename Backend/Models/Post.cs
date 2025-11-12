@@ -1,0 +1,14 @@
+﻿using Backend.Models.User;
+
+namespace Backend.Models
+{
+    public class Post
+    {
+        public Guid Id { get; set; }
+        public required string Title { get; set; }
+        public required string Description { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public required string UserId { get; set; }
+        public required AppUser User { get; set; }
+    }
+}

@@ -75,6 +75,58 @@ public partial class MainLayout
         OverlayLight = "#1e1e2d80",
     };
 
+
+    //private readonly PaletteLight _lightPalette = new()
+    //{
+    //    Primary = "#FFB547",             // Warmes Sonnen-Orange (Hauptfarbe)
+    //    Secondary = "#00A3B4",           // Frisches Türkis-Blau (Kontrastfarbe)
+    //    Black = "#0D0C22",               // Tiefer Textkontrast
+    //    AppbarText = "#2D2D2D",
+    //    AppbarBackground = "rgba(255,255,255,0.9)",
+    //    DrawerBackground = "#FFFFFF",
+    //    Surface = "#FFFFFF",
+    //    Background = "#F9FAFB",          // Sanftes Weiß-Grau
+    //    GrayLight = "#E9ECEF",
+    //    GrayLighter = "#F8F9FA",
+    //    Info = "#3A86FF",
+    //    Success = "#3DCB6C",
+    //    Warning = "#FFB545",
+    //    Error = "#FF5A5F",
+    //    LinesDefault = "#E0E0E0",
+    //    TextPrimary = "#222222",
+    //    TextSecondary = "#555555",
+    //};
+
+    //private readonly PaletteDark _darkPalette = new()
+    //{
+    //    Primary = "#FFB547",             // Gleiche Hauptfarbe, strahlt auf Dunkel
+    //    Secondary = "#00A3B4",           // Türkis-Akzent für Buttons/Links
+    //    Surface = "#1E1E28",
+    //    Background = "#14141C",
+    //    BackgroundGray = "#1A1A24",
+    //    AppbarText = "#B8B8C3",
+    //    AppbarBackground = "rgba(20,20,28,0.9)",
+    //    DrawerBackground = "#1A1A24",
+    //    ActionDefault = "#9E9EAD",
+    //    ActionDisabled = "#9999994D",
+    //    ActionDisabledBackground = "#605F6D4D",
+    //    TextPrimary = "#EAEAF2",
+    //    TextSecondary = "#B8B8C3",
+    //    TextDisabled = "#FFFFFF33",
+    //    DrawerIcon = "#B8B8C3",
+    //    DrawerText = "#B8B8C3",
+    //    GrayLight = "#2A2833",
+    //    GrayLighter = "#1E1E28",
+    //    Info = "#4A86FF",
+    //    Success = "#3DCB6C",
+    //    Warning = "#FFB545",
+    //    Error = "#FF3F5F",
+    //    LinesDefault = "#2E2D39",
+    //    TableLines = "#2E2D39",
+    //    Divider = "#292838",
+    //    OverlayLight = "#1E1E2D80",
+    //};
+
     public string DarkLightModeButtonIcon => _isDarkMode switch
     {
         true => Icons.Material.Rounded.AutoMode,

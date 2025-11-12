@@ -1,36 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shared.DTOs.Posts;
 
-namespace Backend.Controller
+namespace Backend.Controller.Posts
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GoodDeedsController : ControllerBase
+    public class PostsController : ControllerBase
     {
-        private readonly ILogger<GoodDeedsController> _logger;
+        private readonly ILogger<PostsController> _logger;
 
-        private static readonly List<GoodDeedDto> _goodDeeds = Enumerable.Repeat(new GoodDeedDto()
+        private static readonly List<PostDto> _posts = Enumerable.Repeat(new PostDto()
         {
             Title = "Good deed",
             Description = "LoremIpsum"
         }, 20).ToList();
 
-        public GoodDeedsController(ILogger<GoodDeedsController> logger)
+        public PostsController(ILogger<PostsController> logger)
         {
             _logger = logger;
         }
 
         /// <summary>
-        /// POST /api/gooddeeds
+        /// POST /api/posts
         /// </summary>
         [HttpPost]
-        public IActionResult CreateGoodDeed([FromBody] GoodDeedCreateRequest request)
+        public IActionResult CreatePost([FromBody] PostCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var deed = new GoodDeedDto
+            var deed = new PostDto
             {
                 Id = Guid.NewGuid(),
                 Title = request.Title,
@@ -38,13 +39,13 @@ namespace Backend.Controller
                 CreatedAt = DateTime.UtcNow
             };
 
-            _goodDeeds.Add(deed);
+            _posts.Add(deed);
 
             return Ok();
         }
 
         [HttpGet("paged")]
-        public ActionResult<PagedResponse<GoodDeedDto>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
+        public ActionResult<PagedResponse<PostDto>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
         {
             if (page < 0 || pageSize <= 0)
             {
@@ -53,15 +54,15 @@ namespace Backend.Controller
 
             var skip = page * pageSize;
 
-            var items = _goodDeeds
+            var items = _posts
                 .OrderByDescending(x => x.CreatedAt)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            var hasMore = skip + pageSize < _goodDeeds.Count;
+            var hasMore = skip + pageSize < _posts.Count;
 
-            return Ok(new PagedResponse<GoodDeedDto>
+            return Ok(new PagedResponse<PostDto>
             {
                 Items = items,
                 HasMore = hasMore

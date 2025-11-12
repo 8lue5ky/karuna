@@ -1,4 +1,4 @@
-﻿namespace Backend.Controller;
+﻿namespace Shared.DTOs.Posts;
 
 public class PagedResponse<T>
 {

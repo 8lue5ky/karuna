@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Controller;
+namespace Backend.Controller.Posts;
 
-public class GoodDeedCreateRequest
+public class PostCreateRequest
 {
     [Required(ErrorMessage = "A title is required.")]
     public string? Title { get; set; }

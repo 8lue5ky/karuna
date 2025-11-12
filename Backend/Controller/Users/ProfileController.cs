@@ -3,12 +3,9 @@ using Backend.Persistence.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Shared.DTOs.User;
-using System;
-using System.Security.Claims;
 
-namespace Backend.Controller.User
+namespace Backend.Controller.Users
 {
     [ApiController]
     [Route("api/[controller]")]

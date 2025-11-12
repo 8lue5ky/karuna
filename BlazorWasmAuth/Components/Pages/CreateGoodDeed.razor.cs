@@ -28,7 +28,7 @@ public partial class CreateGoodDeed
         {
             _isSubmitting = true;
 
-            var response = await Http.PostAsJsonAsync("api/gooddeeds", _model);
+            var response = await Http.PostAsJsonAsync("api/posts", _model);
 
             if (response.IsSuccessStatusCode)
             {
