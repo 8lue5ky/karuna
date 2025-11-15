@@ -1,4 +1,4 @@
-using Backend.Models;
+using Backend.Models.Posts;
 using Backend.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDb
 {
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
     public DbSet<Post> Posts => Set<Post>();
-
+    public DbSet<PostLike> PostLikes => Set<PostLike>();
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -21,6 +21,21 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDb
             .HasOne(p => p.User)
             .WithMany()
             .HasForeignKey(p => p.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<PostLike>()
+            .HasKey(pl => new { pl.PostId, pl.UserId }); // Composite Key
+
+        builder.Entity<PostLike>()
+            .HasOne(pl => pl.Post)
+            .WithMany(p => p.Likes)
+            .HasForeignKey(pl => pl.PostId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<PostLike>()
+            .HasOne(pl => pl.User)
+            .WithMany()
+            .HasForeignKey(pl => pl.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

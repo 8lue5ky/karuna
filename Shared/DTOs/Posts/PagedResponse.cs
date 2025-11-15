@@ -2,6 +2,6 @@
 
 public class PagedResponse<T>
 {
-    public List<T> Items { get; set; } = new();
+    public IReadOnlyList<T> Items { get; set; } = new List<T>();
     public bool HasMore { get; set; }
 }

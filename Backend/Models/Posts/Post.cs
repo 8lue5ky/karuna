@@ -1,6 +1,6 @@
 ﻿using Backend.Models.User;
 
-namespace Backend.Models
+namespace Backend.Models.Posts
 {
     public class Post
     {
@@ -10,5 +10,7 @@ namespace Backend.Models
         public DateTime CreatedAt { get; set; }
         public required string UserId { get; set; }
         public AppUser User { get; set; }
+
+        public ICollection<PostLike> Likes { get; set; } = new List<PostLike>();
     }
 }

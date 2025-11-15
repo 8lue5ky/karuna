@@ -1,6 +1,7 @@
-﻿using Backend.Models;
+﻿using Backend.Models.Posts;
 using Backend.Models.User;
 using Backend.Persistence.Posts;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Shared.DTOs.Posts;
 
 namespace Backend.Controller.Posts
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PostsController : ControllerBase
@@ -23,10 +25,6 @@ namespace Backend.Controller.Posts
             _userManager = userManager;
         }
 
-        /// <summary>
-        /// POST /api/posts
-        /// </summary>
-        [Authorize]
         [HttpPost]
         public IActionResult CreatePost([FromBody] PostCreateRequest request)
         {
@@ -51,6 +49,7 @@ namespace Backend.Controller.Posts
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("paged")]
         public async Task<ActionResult<PagedResponse<PostDto>>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10)
         {
@@ -59,25 +58,59 @@ namespace Backend.Controller.Posts
                 return BadRequest("Invalid parameters.");
             }
 
+            var userId = await GetUserIdIfLoggedIn();
+
             var skip = page * pageSize;
 
-            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip);
+            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip, userId);
 
-            List<PostDto> postDtos = posts.Posts.Select(x => new PostDto()
-            {
-                CreatedAt = x.CreatedAt,
-                Description = x.Description,
-                Id = x.Id,
-                Title = x.Title,
-                UserId = x.UserId,
-                Username = x.User.DisplayName
-            }).ToList();
 
             return Ok(new PagedResponse<PostDto>
             {
-                Items = postDtos,
+                Items = posts.Posts,
                 HasMore = posts.HasMore
             });
+        }
+
+        [HttpPost("{postId}/like")]
+        public async Task<IActionResult> LikePost(Guid postId)
+        {
+            string? userId = _userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            await _postsRepository.LikePostAsync(postId, userId);
+
+            return Ok();
+        }
+
+        [HttpDelete("{postId}/like")]
+        public async Task<IActionResult> UnlikePost(Guid postId)
+        {
+            string? userId = _userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            await _postsRepository.UnlikePostAsync(postId, userId);
+
+            return Ok();
+        }
+
+        private async Task<string?> GetUserIdIfLoggedIn()
+        {
+            var auth = await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);
+
+            string? userId = auth.Succeeded
+                ? _userManager.GetUserId(auth.Principal)
+                : null;
+
+            return userId;
         }
     }
 }

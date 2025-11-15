@@ -1,4 +1,5 @@
 using Frontend.Components;
+using Frontend.Components.Pages;
 using Frontend.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -20,6 +21,7 @@ builder.Services.AddMudServices();
 
 // register the custom state provider
 builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStateProvider>();
+builder.Services.AddScoped<PostsServiceClient>();
 
 // register the account management interface
 builder.Services.AddScoped(

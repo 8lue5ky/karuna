@@ -39,8 +39,7 @@ public partial class GoodDeeds
             _isLoading = true;
             StateHasChanged();
 
-            var response = await Http.GetFromJsonAsync<PagedResponse<PostDto>>(
-                $"api/posts/paged?page={_page}&pageSize={PageSize}");
+            var response = await ServiceClient.GetPagedPosts(_page, PageSize);
 
             if (response?.Items?.Count > 0)
             {
