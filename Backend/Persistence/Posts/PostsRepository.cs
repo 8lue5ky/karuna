@@ -33,8 +33,8 @@ namespace Backend.Persistence.Posts
                     Description = x.Description,
                     CreatedAt = x.CreatedAt,
                     Username = x.User.UserName,
-
                     LikeCount = _context.PostLikes.Count(l => l.PostId == x.Id),
+                    CommentCount = _context.Comments.Count(c => c.PostId == x.Id),
                     HasLiked = userId == null
                         ? null
                         : _context.PostLikes.Any(l => l.PostId == x.Id && l.UserId == userId)

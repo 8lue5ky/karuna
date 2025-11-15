@@ -3,11 +3,14 @@ using Backend.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+namespace Backend;
+
 internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser>(options)
 {
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
     public DbSet<Post> Posts => Set<Post>();
     public DbSet<PostLike> PostLikes => Set<PostLike>();
+    public DbSet<Comment> Comments => Set<Comment>();
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

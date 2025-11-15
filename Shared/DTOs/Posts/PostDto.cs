@@ -9,5 +9,6 @@ public class PostDto
     public string? UserId { get; set; }
     public DateTime CreatedAt { get; set; }
     public int LikeCount { get; set; }
+    public int CommentCount { get; set; }
     public bool? HasLiked { get; set; }
 }

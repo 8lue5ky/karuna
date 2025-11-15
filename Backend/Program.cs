@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend;
 using Backend.Models.User;
+using Backend.Persistence.Comments;
 using Backend.Persistence.Posts;
 using Backend.Persistence.User;
 
@@ -65,6 +66,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostsRepository, PostsRepository>();
+builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
 
 var app = builder.Build();
 
