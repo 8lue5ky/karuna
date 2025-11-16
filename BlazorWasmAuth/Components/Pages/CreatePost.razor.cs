@@ -11,20 +11,12 @@ public partial class CreatePost
     private MudForm? _form;
     private bool _isSubmitting = false;
     private PostModel _model = new();
-    private HttpClient _httpClient;
 
     [Inject]
-    private IHttpClientFactory _httpClientFactory { get; set; }
+    private PostsServiceClient _serviceClient { get; set; }
 
     [Inject]
     private NavigationManager _navigationManager { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        _httpClient = _httpClientFactory.CreateClient("Auth");
-
-        await base.OnInitializedAsync();
-    }
 
     private async Task SubmitAsync()
     {
@@ -45,7 +37,7 @@ public partial class CreatePost
         {
             _isSubmitting = true;
 
-            var response = await _httpClient.PostAsJsonAsync("api/posts", _model);
+            var response = await _serviceClient.CreatePostAsync(_model);
 
             if (response.IsSuccessStatusCode)
             {

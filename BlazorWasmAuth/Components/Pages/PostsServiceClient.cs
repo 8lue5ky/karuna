@@ -19,5 +19,10 @@ namespace Frontend.Components.Pages
             return await _httpClient.GetFromJsonAsync<PagedResponse<PostDto>>(
                 $"api/posts/paged?page={page}&pageSize={pageSize}");
         }
+
+        public async Task<HttpResponseMessage> CreatePostAsync(CreatePost.PostModel post)
+        {
+            return await _httpClient.PostAsJsonAsync("api/posts", post);
+        }
     }
 }
