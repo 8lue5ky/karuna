@@ -2,7 +2,7 @@
 
 namespace Frontend.Components.Pages;
 
-public partial class GoodDeedPost
+public partial class Post
 {
     [Parameter] public string Username { get; set; } = "GoodDeedHero";
     [Parameter] public string TimeAgo { get; set; } = "5 minutes ago";

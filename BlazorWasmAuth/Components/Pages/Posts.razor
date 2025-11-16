@@ -1,4 +1,4 @@
-﻿@page "/gooddeeds"
+﻿@page "/posts"
 @inject PostsServiceClient ServiceClient
 @inject ISnackbar Snackbar
 
@@ -10,9 +10,9 @@
          class="no-scrollbar"
          @ref="_scrollDiv">
 
-        @foreach (var deed in _goodDeedPosts)
+        @foreach (var post in posts)
         {
-            <GoodDeedPost Title="@deed.Title"  Content="@deed.Description" Username="@deed.Username" UserId="@deed.UserId"/>
+            <Post Title="@post.Title"  Content="@post.Description" Username="@post.Username" UserId="@post.UserId"/>
         }
 
         @if (_isLoading)

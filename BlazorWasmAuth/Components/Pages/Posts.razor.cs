@@ -6,9 +6,9 @@ using Shared.DTOs.Posts;
 
 namespace Frontend.Components.Pages;
 
-public partial class GoodDeeds
+public partial class Posts
 {
-    private readonly List<PostDto> _goodDeedPosts = new();
+    private readonly List<PostDto> posts = new();
     private bool _isLoading;
     private bool _allLoaded;
     private ElementReference _scrollDiv;
@@ -43,7 +43,7 @@ public partial class GoodDeeds
 
             if (response?.Items?.Count > 0)
             {
-                _goodDeedPosts.AddRange(response.Items);
+                posts.AddRange(response.Items);
                 _page++;
             }
 

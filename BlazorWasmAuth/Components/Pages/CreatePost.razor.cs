@@ -6,11 +6,11 @@ using System.Net.Http.Json;
 
 namespace Frontend.Components.Pages;
 
-public partial class CreateGoodDeed
+public partial class CreatePost
 {
     private MudForm? _form;
     private bool _isSubmitting = false;
-    private GoodDeedModel _model = new();
+    private PostModel _model = new();
     private HttpClient _httpClient;
 
     [Inject]
@@ -51,7 +51,7 @@ public partial class CreateGoodDeed
             {
                 Snackbar.Add("Thank you for your good deed 💖", Severity.Success);
                 ResetForm();
-                _navigationManager.NavigateTo("gooddeeds");
+                _navigationManager.NavigateTo("posts");
             }
             else
             {
@@ -70,11 +70,11 @@ public partial class CreateGoodDeed
 
     private void ResetForm()
     {
-        _model = new GoodDeedModel();
+        _model = new PostModel();
         _form?.ResetValidation();
     }
 
-    public class GoodDeedModel
+    public class PostModel
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
