@@ -1,0 +1,50 @@
+﻿@using Shared.DTOs.Comments
+@inject CommentServiceClient Comments
+
+
+<AuthorizeView>
+	
+	<Authorized>
+		<MudStack Row="false" Spacing="2">
+			<MudTextField @bind-Value="_content"
+						  Label="Kommentar"
+						  Variant="Variant.Outlined"
+						  Lines="3"
+						  FullWidth="true" />
+
+			<MudButton Disabled="@string.IsNullOrWhiteSpace(_content)"
+					   Variant="Variant.Filled"
+					   Color="Color.Primary"
+					   OnClick="Submit">
+				Abschicken
+			</MudButton>
+		</MudStack>
+	</Authorized>
+	<NotAuthorized>
+		<MudText Color="Color.Secondary">Bitte einloggen, um zu kommentieren.</MudText>
+	</NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+	[Parameter] public Guid PostId { get; set; }
+	[Parameter] public EventCallback OnCreated { get; set; }
+
+	private string? _content;
+
+	private async Task Submit()
+	{
+		var dto = new CreateCommentDto
+		{
+			PostId = PostId,
+			Content = _content!
+		};
+
+		var id = await Comments.CreateAsync(dto);
+		if (id != null)
+		{
+			_content = "";
+			await OnCreated.InvokeAsync();
+		}
+	}
+}

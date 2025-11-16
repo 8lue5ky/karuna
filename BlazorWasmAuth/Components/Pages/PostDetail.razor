@@ -1,0 +1,76 @@
+﻿@page "/post/{PostId:guid}"
+@using Frontend.Components.Pages.Comments
+@using Shared.DTOs.Posts
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<MudPaper Class="pa-4 my-4 rounded-lg" Outlined="true">
+    @if (_loading)
+    {
+        <MudProgressCircular Indeterminate="true" />
+    }
+    else if (_post == null)
+    {
+        <MudText Typo="Typo.h6" Color="Color.Error">Post nicht gefunden.</MudText>
+    }
+    else
+    {
+        <MudStack Spacing="2">
+
+            <!-- HEADER -->
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                <MudAvatar Color="Color.Primary" Variant="Variant.Outlined">
+                    <MudImage Src="@GetThumbnailUrl()" Height="64" Width="64" />
+                </MudAvatar>
+
+                <MudStack>
+                    <MudText Typo="Typo.subtitle2">@_post.Username</MudText>
+                    <MudText Typo="Typo.caption">@_post.CreatedAt.ToLocalTime()</MudText>
+                </MudStack>
+            </MudStack>
+
+            <!-- TEXT -->
+            <MudText Typo="Typo.h5">@_post.Title</MudText>
+            <MudText Typo="Typo.body1">@_post.Description</MudText>
+
+            <MudDivider Class="my-2" />
+
+            <!-- LIKE & COMMENT COUNTS -->
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3">
+                <MudText>@_post.LikeCount Likes</MudText>
+                <MudText>@_post.CommentCount Kommentare</MudText>
+            </MudStack>
+
+            <MudDivider Class="my-2" />
+
+            <!-- COMMENT EDITOR -->
+            <CommentEditor PostId="@_post.Id" OnCreated="ReloadComments" />
+
+            <!-- COMMENT LIST -->
+            <CommentList PostId="@_post.Id" @ref="_commentList" />
+        </MudStack>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid PostId { get; set; }
+
+    private PostDto? _post;
+    private bool _loading = true;
+    private CommentList? _commentList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _post = await Http.GetFromJsonAsync<PostDto>($"api/posts/{PostId}");
+        _loading = false;
+    }
+
+    private string GetThumbnailUrl() =>
+        $"https://api.dicebear.com/7.x/thumbs/png?seed={_post?.Username}";
+
+    private async Task ReloadComments()
+    {
+        if (_commentList != null)
+            await _commentList.SetParametersAsync(ParameterView.Empty);
+    }
+}

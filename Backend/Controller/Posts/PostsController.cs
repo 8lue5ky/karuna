@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shared.DTOs.Posts;
 
 namespace Backend.Controller.Posts
@@ -47,6 +48,17 @@ namespace Backend.Controller.Posts
             _postsRepository.CreatePostAsync(post);
 
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PostDto>> GetPost(Guid id)
+        {
+            PostDto? post = await _postsRepository.GetPostAsync(id);
+
+            if (post == null) return NotFound();
+
+            return post;
         }
 
         [AllowAnonymous]

@@ -1,7 +1,8 @@
 ﻿@using MudBlazor
 @inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
 
-<MudPaper Class="pa-4 my-3 rounded-lg" Outlined="true" Elevation="1">
+<MudPaper Class="pa-4 my-3 rounded-lg" Outlined="true" Elevation="1" @onclick="GoToDetails">
 	<MudStack Spacing="2">
 		<!-- Header -->
 		<MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">

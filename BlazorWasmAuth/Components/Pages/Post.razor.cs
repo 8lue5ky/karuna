@@ -2,8 +2,11 @@
 
 namespace Frontend.Components.Pages;
 
+
 public partial class Post
 {
+    [Parameter] public Guid PostId { get; set; }
+
     [Parameter] public string Username { get; set; } = "GoodDeedHero";
     [Parameter] public string TimeAgo { get; set; } = "5 minutes ago";
     [Parameter] public string Title { get; set; } = "🌟 A good deed!";
@@ -21,5 +24,10 @@ public partial class Post
     {
         var backendUrl = Configuration["BackendUrl"];
         return $"{backendUrl}/api/profile/{UserId}/thumbnail";
+    }
+
+    private void GoToDetails()
+    {
+        NavigationManager.NavigateTo($"/post/{PostId}");
     }
 }

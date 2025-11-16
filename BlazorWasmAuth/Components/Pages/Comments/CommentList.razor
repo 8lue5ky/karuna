@@ -1,0 +1,73 @@
+﻿@using Frontend.Identity
+@using Shared.DTOs.Comments
+@inject CommentServiceClient Comments
+@inject AuthenticationStateProvider AuthState
+
+@if (_loading)
+{
+	<MudProgressCircular Indeterminate="true" />
+}
+else if (_comments is null || _comments.Count == 0)
+{
+	<MudText Color="Color.Secondary">Keine Kommentare.</MudText>
+}
+else
+{
+	<MudList T="CommentDto" Dense=" true">
+		@foreach (var c in _comments)
+		{
+			<MudListItem T="CommentDto">
+				<MudPaper Class="pa-2" Elevation="0" Style="width: 100%;">
+					<MudText Typo="Typo.subtitle2">@c.UserName</MudText>
+					<MudText Typo="Typo.body2">@c.Content</MudText>
+					<MudText Typo="Typo.caption">@c.CreatedAt.ToLocalTime()</MudText>
+
+					@if (_currentUserName == c.UserName)
+					{
+						<MudButton 
+							Variant="Variant.Text" 
+							Color="Color.Error" 
+							OnClick="@(() => Delete(c.Id))"
+							StartIcon="@Icons.Material.Filled.Delete">
+							Löschen
+						</MudButton>
+					}
+				</MudPaper>
+			</MudListItem>
+		}
+	</MudList>
+}
+
+
+@code {
+	[Parameter] public Guid PostId { get; set; }
+
+	private List<CommentDto>? _comments;
+	private string? _currentUserName;
+	private bool _loading;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		_loading = true;
+
+		var state = await AuthState.GetAuthenticationStateAsync();
+
+		// TODO: Not working Username instead of display name
+		_currentUserName = state.User.Identity?.IsAuthenticated == true
+			? state.User.Identity!.Name
+			: null;
+
+		_comments = await Comments.GetCommentsAsync(PostId);
+
+		_loading = false;
+	}
+
+	private async Task Delete(Guid id)
+	{
+		if (await Comments.DeleteAsync(id))
+		{
+			_comments!.RemoveAll(c => c.Id == id);
+			StateHasChanged();
+		}
+	}
+}

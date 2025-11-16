@@ -1,10 +1,12 @@
 using Frontend.Components;
 using Frontend.Components.Pages;
+using Frontend.Components.Pages.Comments;
 using Frontend.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
+using System.Net.Http;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -22,6 +24,7 @@ builder.Services.AddMudServices();
 // register the custom state provider
 builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStateProvider>();
 builder.Services.AddScoped<PostsServiceClient>();
+builder.Services.AddScoped<CommentServiceClient>();
 
 // register the account management interface
 builder.Services.AddScoped(

@@ -73,5 +73,22 @@ namespace Backend.Persistence.Posts
             _context.PostLikes.Remove(like);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<PostDto?> GetPostAsync(Guid id)
+        {
+            return await _context.Posts
+                .Where(p => p.Id == id)
+                .Select(p => new PostDto
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Description = p.Description,
+                    CreatedAt = p.CreatedAt,
+                    Username = p.User.UserName,
+                    LikeCount = _context.PostLikes.Count(l => l.PostId == p.Id),
+                    CommentCount = _context.Comments.Count(c => c.PostId == p.Id)
+                })
+                .FirstOrDefaultAsync();
+        }
     }
 }
