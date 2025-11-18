@@ -3,27 +3,35 @@
 
 
 <AuthorizeView>
-	
 	<Authorized>
-		<MudStack Row="false" Spacing="2">
+		<MudStack Spacing="2">
 			<MudTextField @bind-Value="_content"
-						  Label="Kommentar"
-						  Variant="Variant.Outlined"
-						  Lines="3"
-						  FullWidth="true" />
+				Label="Schreibe einen Kommentar..."
+				Variant="Variant.Outlined"
+				Lines="3"
+				FullWidth="true"
+				Adornment="Adornment.Start"
+				AdornmentIcon="@Icons.Material.Filled.Comment"
+			/>
 
-			<MudButton Disabled="@string.IsNullOrWhiteSpace(_content)"
-					   Variant="Variant.Filled"
-					   Color="Color.Primary"
-					   OnClick="Submit">
+			<MudButton 
+				Variant="Variant.Filled"
+				Color="Color.Primary"
+					   Disabled="@string.IsNullOrWhiteSpace(_content)"
+					   OnClick="Submit"
+				StartIcon="@Icons.Material.Filled.Send">
 				Abschicken
 			</MudButton>
 		</MudStack>
 	</Authorized>
+
 	<NotAuthorized>
-		<MudText Color="Color.Secondary">Bitte einloggen, um zu kommentieren.</MudText>
+		<MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true">
+			Bitte logge dich ein, um einen Kommentar zu schreiben.
+		</MudAlert>
 	</NotAuthorized>
 </AuthorizeView>
+
 
 
 @code {

@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -133,4 +133,15 @@ code {
     width: 0px;
     height: 0px;
     display: none;
+}
+
+.layout-wrapper {
+    padding-top: 64px; /* Platz für AppBar */
+}
+
+/* Appbar-Inhalt auch zentriert */
+.appbar-centered {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
 }

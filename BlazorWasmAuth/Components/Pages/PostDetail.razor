@@ -14,41 +14,60 @@
         <MudText Typo="Typo.h6" Color="Color.Error">Post nicht gefunden.</MudText>
     }
     else
-    {
-        <MudStack Spacing="2">
+    { <MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
+	    <MudPaper Class="pa-6 rounded-lg" Outlined="true" Elevation="1">
+	        <MudStack Spacing="3">
 
-            <!-- HEADER -->
-            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                <MudAvatar Color="Color.Primary" Variant="Variant.Outlined">
-                    <MudImage Src="@GetThumbnailUrl()" Height="64" Width="64" />
-                </MudAvatar>
+	            <!-- HEADER -->
+	            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+	                <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+	                    <MudAvatar Size="Size.Large">
+	                        <MudImage Src="@GetThumbnailUrl()" Height="64" Width="64" />
+	                    </MudAvatar>
 
-                <MudStack>
-                    <MudText Typo="Typo.subtitle2">@_post.Username</MudText>
-                    <MudText Typo="Typo.caption">@_post.CreatedAt.ToLocalTime()</MudText>
-                </MudStack>
-            </MudStack>
+	                    <MudStack>
+	                        <MudText Typo="Typo.subtitle1" Class="font-semibold">@_post.Username</MudText>
+	                                <MudText Typo="Typo.caption" Color="Color.Secondary">@_post.CreatedAt</MudText>
+	                    </MudStack>
+	                </MudStack>
 
-            <!-- TEXT -->
-            <MudText Typo="Typo.h5">@_post.Title</MudText>
-            <MudText Typo="Typo.body1">@_post.Description</MudText>
+	                <MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
+	                    <MudMenuItem>Bearbeiten</MudMenuItem>
+	                    <MudMenuItem Color="Color.Error">Löschen</MudMenuItem>
+	                </MudMenu>
+	            </MudStack>
 
-            <MudDivider Class="my-2" />
+	            <!-- CONTENT -->
+	                    <MudText Typo="Typo.h5">@_post.Title</MudText>
+	                    <MudText Typo="Typo.body1">@_post.Description</MudText>
 
-            <!-- LIKE & COMMENT COUNTS -->
-            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3">
-                <MudText>@_post.LikeCount Likes</MudText>
-                <MudText>@_post.CommentCount Kommentare</MudText>
-            </MudStack>
+	            <MudDivider Class="my-4" />
 
-            <MudDivider Class="my-2" />
+	            <!-- FOOTER -->
+	            <MudStack Row="true" Spacing="3">
+						<MudChip T="string"  Color="Color.Primary" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Favorite">
+	                    @_post.LikeCount Likes
+	                </MudChip>
 
-            <!-- COMMENT EDITOR -->
-            <CommentEditor PostId="@_post.Id" OnCreated="ReloadComments" />
+	                <MudChip T="string" Color="Color.Secondary" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Comment">
+	                    @_post.CommentCount Comments
+	                </MudChip>
+	            </MudStack>
+	        </MudStack>
+	    </MudPaper>
 
-            <!-- COMMENT LIST -->
-            <CommentList PostId="@_post.Id" @ref="_commentList" />
-        </MudStack>
+	    <!-- COMMENTS -->
+	    <MudPaper Class="pa-5 mt-5 rounded-lg" Outlined="true">
+	        <MudText Typo="Typo.h6" Class="mb-4">Kommentare</MudText>
+
+				<CommentEditor PostId="@_post.Id" OnCreated="ReloadComments" />
+
+	        <MudDivider Class="my-4" />
+
+				<CommentList PostId="@_post.Id" @ref="_commentList" />
+	    </MudPaper>
+	</MudContainer>
+
     }
 </MudPaper>
 

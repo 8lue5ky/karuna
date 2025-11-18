@@ -6,43 +6,109 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">Good deeds</MudText>
-        <MudSpacer />
+	<MudAppBar Elevation="0" Class="appbar-centered" Fixed="true">
 
-        <AuthorizeView>
-	        <Authorized>
-                <MudButton StartIcon="@Icons.Material.Filled.Logout" Href="logout">Logout</MudButton>
-	        </Authorized>
-	        <NotAuthorized>
-		        <MudButton StartIcon="@Icons.Material.Filled.Login" Href="login">Login</MudButton>
-	        </NotAuthorized>
-        </AuthorizeView>
+		<MudContainer MaxWidth="MaxWidth.Large" Class="d-flex align-center">
 
-        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle" />
+			<MudHidden Breakpoint="Breakpoint.MdAndUp">
+				<MudIconButton Icon="@Icons.Material.Filled.Menu"
+				               Color="Color.Inherit"
+				               Edge="Edge.Start"
+				               OnClick="DrawerToggle" />
+			</MudHidden>
+			<MudText Typo="Typo.h5" Class="ml-3">Good deeds</MudText>
+			<MudSpacer />
 
-    </MudAppBar>
-    <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-	    <NavMenu />
-    </MudDrawer>
+			<AuthorizeView>
+				<Authorized>
+					<MudButton StartIcon="@Icons.Material.Filled.Logout" Href="logout">Logout</MudButton>
+				</Authorized>
+				<NotAuthorized>
+					<MudButton StartIcon="@Icons.Material.Filled.Login" Href="login">Login</MudButton>
+				</NotAuthorized>
+			</AuthorizeView>
 
-    <MudDrawer @bind-Open="@_settingsOpen" Anchor="Anchor.Right" Elevation="2" ClipMode="DrawerClipMode.Always">
-	    <MudDrawerHeader>
-		    <MudText Typo="Typo.h6">Settings</MudText>
-	    </MudDrawerHeader>
-	    <SettingsMenu></SettingsMenu>
-    </MudDrawer>
+			<MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
 
-    <MudMainContent Class="pt-16 pa-4">
-	    @Body
-    </MudMainContent>
+			<MudHidden Breakpoint="Breakpoint.MdAndUp">
+				<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle" />
+			</MudHidden>
+
+			<MudHidden Breakpoint="Breakpoint.SmAndDown">
+				<MudMenu Icon="@Icons.Material.Filled.MoreVert" >
+					<AuthorizeView>
+						<NotAuthorized>
+							<MudMenuItem Href="login" Icon="@Icons.Material.Filled.Login">Login</MudMenuItem>
+							<MudMenuItem Href="register" Icon="@Icons.Material.Filled.AccountBox">Register</MudMenuItem>
+						</NotAuthorized>
+						<Authorized>
+							<MudMenuItem Href="edit" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudMenuItem>
+						</Authorized>
+					</AuthorizeView>
+				</MudMenu>
+			</MudHidden>
+		</MudContainer>
+
+	</MudAppBar>
+	
+	<MudMainContent>
+		<MudContainer>
+			<MudGrid Justify="Justify.Center" Class="pt-6">
+
+				<MudHidden Breakpoint="Breakpoint.SmAndDown">
+
+					<MudItem xs="0" md="2">
+						<MudPaper Elevation="0">
+							<NavMenu/>
+						</MudPaper>
+					</MudItem>
+
+				</MudHidden>
+
+				<MudItem xs="12" md="8">
+
+					<MudContainer>
+						@Body
+					</MudContainer>
+
+				</MudItem>
+
+				<MudHidden Breakpoint="Breakpoint.SmAndDown">
+					<MudItem xs="0" md="2">
+						<MudPaper></MudPaper>
+					</MudItem>
+				</MudHidden>
+
+			</MudGrid>
+		</MudContainer>
+	</MudMainContent>
+
+	<MudDrawer @bind-Open="_drawerOpen"
+			   Variant="DrawerVariant.Temporary"
+			   Breakpoint="Breakpoint.Md"
+			   ClipMode="DrawerClipMode.Always"
+			   Anchor="Anchor.Left"
+			   Overlay="false">
+		<NavMenu />
+	</MudDrawer>
+
+	<MudDrawer @bind-Open="@_settingsOpen" 
+	           Anchor="Anchor.Right" 
+	           Variant="DrawerVariant.Temporary"
+	           ClipMode="DrawerClipMode.Always"
+	           Breakpoint="Breakpoint.Md"
+			   Overlay="false">
+		<MudDrawerHeader>
+			<MudText Typo="Typo.h6">Settings</MudText>
+		</MudDrawerHeader>
+		<SettingsMenu></SettingsMenu>
+	</MudDrawer>
+
 </MudLayout>
 
 
 <div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
+	An unhandled error has occurred.
+	<a href="." class="reload">Reload</a>
+	<span class="dismiss">🗙</span>
 </div>

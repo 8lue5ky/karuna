@@ -4,7 +4,7 @@ namespace Frontend.Components.Layout;
 
 public partial class MainLayout
 {
-    private bool _drawerOpen = true;
+    private bool _drawerOpen = false;
     private bool _settingsOpen = false;
     private bool _isDarkMode = false;
     private MudTheme? _theme = null;
@@ -75,7 +75,6 @@ public partial class MainLayout
         OverlayLight = "#1e1e2d80",
     };
 
-
     //private readonly PaletteLight _lightPalette = new()
     //{
     //    Primary = "#FFB547",             // Warmes Sonnen-Orange (Hauptfarbe)
@@ -132,4 +131,5 @@ public partial class MainLayout
         true => Icons.Material.Rounded.AutoMode,
         false => Icons.Material.Outlined.DarkMode,
     };
+
 }
