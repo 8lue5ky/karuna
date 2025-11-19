@@ -12,7 +12,7 @@
 
         @foreach (var post in posts)
         {
-            <Post PostId="@post.Id" Title="@post.Title"  Content="@post.Description" Username="@post.Username" UserId="@post.UserId"/>
+            <Post PostModel="@post"/>
         }
 
         @if (_isLoading)

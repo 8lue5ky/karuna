@@ -1,11 +1,9 @@
 ﻿using Shared.DTOs.Posts;
-using System.Net.Http;
 using System.Net.Http.Json;
-using static System.Net.WebRequestMethods;
 
 namespace Frontend.Components.Pages
 {
-    internal class PostsServiceClient
+    public class PostsServiceClient
     {
         private readonly HttpClient _httpClient;
 
@@ -23,6 +21,16 @@ namespace Frontend.Components.Pages
         public async Task<HttpResponseMessage> CreatePostAsync(CreatePost.PostModel post)
         {
             return await _httpClient.PostAsJsonAsync("api/posts", post);
+        }
+
+        public async Task LikePostAsync(Guid postId)
+        {
+            await _httpClient.PostAsync($"api/posts/{postId}/like", null);
+        }
+
+        public async Task UnLikePostAsync(Guid postId)
+        {
+            await _httpClient.DeleteAsync($"api/posts/{postId}/like");
         }
     }
 }

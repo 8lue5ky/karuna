@@ -1,33 +1,63 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
+using Shared.DTOs.Posts;
+using static System.Net.WebRequestMethods;
 
 namespace Frontend.Components.Pages;
 
 
 public partial class Post
 {
-    [Parameter] public Guid PostId { get; set; }
+    [Parameter] 
+    public required PostDto PostModel { get; set; }
 
-    [Parameter] public string Username { get; set; } = "GoodDeedHero";
-    [Parameter] public string TimeAgo { get; set; } = "5 minutes ago";
-    [Parameter] public string Title { get; set; } = "🌟 A good deed!";
+    [Inject]
+    public required PostsServiceClient PostsServiceClient { get; set; }
 
-    [Parameter]
-    public string Content { get; set; } =
-        "Today I helped an elderly lady carry her shopping home.";
-
-    [Parameter] public int Likes { get; set; } = 23;
-    [Parameter] public int Comments { get; set; } = 4;
-
-    [Parameter] public string UserId { get; set; }
+    public string TimeAgo => PostModel.CreatedAt.ToTimeAgo();
 
     private string GetThumbnailUrl()
     {
         var backendUrl = Configuration["BackendUrl"];
-        return $"{backendUrl}/api/profile/{UserId}/thumbnail";
+        return $"{backendUrl}/api/profile/{PostModel.UserId}/thumbnail";
     }
 
     private void GoToDetails()
     {
-        NavigationManager.NavigateTo($"/post/{PostId}");
+        NavigationManager.NavigateTo($"/post/{PostModel.Id}");
+    }
+
+    private string GetLikeIcon()
+    {
+        return PostModel.HasLiked == true
+            ? Icons.Material.Filled.Favorite
+            : Icons.Material.Outlined.FavoriteBorder;
+    }
+
+    private Color GetLikeColor()
+    {
+        return PostModel.HasLiked == true 
+            ? Color.Error 
+            : Color.Default;
+    }
+
+    private async Task ToggleLike()
+    {
+        if (PostModel.HasLiked == true)
+        {
+            await PostsServiceClient.UnLikePostAsync(PostModel.Id);
+
+            PostModel.HasLiked = false;
+            PostModel.LikeCount--;
+        }
+        else
+        {
+            await PostsServiceClient.LikePostAsync(PostModel.Id);
+
+            PostModel.HasLiked = true;
+            PostModel.LikeCount++;
+        }
+
+        StateHasChanged();
     }
 }
