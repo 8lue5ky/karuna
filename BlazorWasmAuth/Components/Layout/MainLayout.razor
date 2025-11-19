@@ -6,6 +6,7 @@
 <MudSnackbarProvider />
 
 <MudLayout>
+	@* AppBar *@
 	<MudAppBar Elevation="0" Class="appbar-centered" Fixed="true">
 
 		<MudContainer MaxWidth="MaxWidth.Large" Class="d-flex align-center">
@@ -14,47 +15,64 @@
 				<MudIconButton Icon="@Icons.Material.Filled.Menu"
 				               Color="Color.Inherit"
 				               Edge="Edge.Start"
-				               OnClick="DrawerToggle" />
+				               OnClick="DrawerToggle"/>
 			</MudHidden>
 			<MudText Typo="Typo.h5" Class="ml-3">Good deeds</MudText>
-			<MudSpacer />
+			<MudSpacer/>
 
 			<AuthorizeView>
 				<Authorized>
-					<MudButton StartIcon="@Icons.Material.Filled.Logout" Href="logout">Logout</MudButton>
+					<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">New post</MudButton>
 				</Authorized>
 				<NotAuthorized>
-					<MudButton StartIcon="@Icons.Material.Filled.Login" Href="login">Login</MudButton>
+					<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">New post</MudButton>
 				</NotAuthorized>
 			</AuthorizeView>
 
-			<MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-
 			<MudHidden Breakpoint="Breakpoint.MdAndUp">
-				<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle" />
+				<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle"/>
 			</MudHidden>
-
+			
+			@* Settings menu desktop *@
 			<MudHidden Breakpoint="Breakpoint.SmAndDown">
-				<MudMenu Icon="@Icons.Material.Filled.MoreVert" >
+				<MudMenu Icon="@Icons.Material.Filled.MoreVert">
 					<AuthorizeView>
 						<NotAuthorized>
+							<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
+								<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
+								<MudText>Dark mode</MudText>
+								<MudSwitch T="bool" @bind-Value="_isDarkMode"
+								           Color="Color.Primary"
+								           Ripple="true"
+								           Class="ms-auto"/>
+							</MudStack>
 							<MudMenuItem Href="login" Icon="@Icons.Material.Filled.Login">Login</MudMenuItem>
 							<MudMenuItem Href="register" Icon="@Icons.Material.Filled.AccountBox">Register</MudMenuItem>
 						</NotAuthorized>
 						<Authorized>
-							<MudMenuItem Href="edit" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudMenuItem>
+							<MudMenuItem Href="edit" Icon="@Icons.Material.Filled.Edit">My Profile</MudMenuItem>
+							<MudDivider></MudDivider>
+							<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
+								<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
+								<MudText>Dark mode</MudText>
+								<MudSwitch T="bool" @bind-Value="_isDarkMode"
+								           Color="Color.Primary"
+								           Ripple="true"
+								           Class="ms-auto"/>
+							</MudStack>
+							<MudMenuItem Href="logout" Icon="@Icons.Material.Filled.Logout">Logout</MudMenuItem>
 						</Authorized>
 					</AuthorizeView>
 				</MudMenu>
 			</MudHidden>
 		</MudContainer>
-
 	</MudAppBar>
-	
+
 	<MudMainContent>
 		<MudContainer>
 			<MudGrid Justify="Justify.Center" Class="pt-6">
-
+				
+				@* Left area (navigation)*@
 				<MudHidden Breakpoint="Breakpoint.SmAndDown">
 
 					<MudItem xs="0" md="2">
@@ -64,7 +82,8 @@
 					</MudItem>
 
 				</MudHidden>
-
+				
+				@* Main content *@
 				<MudItem xs="12" md="8">
 
 					<MudContainer>
@@ -72,7 +91,8 @@
 					</MudContainer>
 
 				</MudItem>
-
+				
+				@* Right area (empty) *@
 				<MudHidden Breakpoint="Breakpoint.SmAndDown">
 					<MudItem xs="0" md="2">
 						<MudPaper></MudPaper>
@@ -82,26 +102,56 @@
 			</MudGrid>
 		</MudContainer>
 	</MudMainContent>
-
+	
+	@* Drawer nav menu mobile *@
 	<MudDrawer @bind-Open="_drawerOpen"
-			   Variant="DrawerVariant.Temporary"
-			   Breakpoint="Breakpoint.Md"
-			   ClipMode="DrawerClipMode.Always"
-			   Anchor="Anchor.Left"
-			   Overlay="false">
-		<NavMenu />
+	           Variant="DrawerVariant.Temporary"
+	           Breakpoint="Breakpoint.Md"
+	           ClipMode="DrawerClipMode.Always"
+	           Anchor="Anchor.Left"
+	           Overlay="false">
+		<NavMenu/>
 	</MudDrawer>
-
-	<MudDrawer @bind-Open="@_settingsOpen" 
-	           Anchor="Anchor.Right" 
+	
+	@* Drawer settings menu mobile *@
+	<MudDrawer @bind-Open="@_settingsOpen"
+	           Anchor="Anchor.Right"
 	           Variant="DrawerVariant.Temporary"
 	           ClipMode="DrawerClipMode.Always"
 	           Breakpoint="Breakpoint.Md"
-			   Overlay="false">
+	           Overlay="false">
 		<MudDrawerHeader>
 			<MudText Typo="Typo.h6">Settings</MudText>
 		</MudDrawerHeader>
-		<SettingsMenu></SettingsMenu>
+		<MudNavMenu>
+			<AuthorizeView>
+				<NotAuthorized>
+					<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
+						<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
+						<MudText>Dark mode</MudText>
+						<MudSwitch T="bool" @bind-Value="_isDarkMode"
+						           Color="Color.Primary"
+						           Ripple="true"
+						           Class="ms-auto"/>
+					</MudStack>
+					<MudNavLink Href="login" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
+					<MudNavLink Href="register" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountBox">Register</MudNavLink>
+				</NotAuthorized>
+				<Authorized>
+					<MudNavLink Href="edit" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudNavLink>
+					<MudDivider></MudDivider>
+					<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
+						<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
+						<MudText>Dark mode</MudText>
+						<MudSwitch T="bool" @bind-Value="_isDarkMode"
+						           Color="Color.Primary"
+						           Ripple="true"
+						           Class="ms-auto"/>
+					</MudStack>
+					<MudNavLink Href="logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
+				</Authorized>
+			</AuthorizeView>
+		</MudNavMenu>
 	</MudDrawer>
 
 </MudLayout>
