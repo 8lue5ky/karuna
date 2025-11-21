@@ -3,14 +3,29 @@
 @inject ISnackbar Snackbar
 
 <MudContainer Class="mt-6">
-    <MudText Typo="Typo.h5" Class="mb-4 font-semibold">Good deeds from the community</MudText>
+	@*  <MudText Typo="Typo.h5" Class="mb-4 font-semibold">Good deeds from the community</MudText>
+	 *@
 
     <div @onscroll="OnScroll"
          style="height:75vh; overflow-y:auto;"
          class="no-scrollbar"
          @ref="_scrollDiv">
+		 
+	  @*   <MudDivider Class="mb-3" />
+	    <!-- Sorting Chips -->
+	    <div class="d-flex align-center mb-3">
+		    <MudChipSet T="String"
+		                SelectedColor="Color.Primary">
 
-        @foreach (var post in posts)
+			    <MudChip Value="@("Newest")">Newest</MudChip>
+			    <MudChip Value="@("Trending")">Trending</MudChip>
+
+		    </MudChipSet>
+	    </div>
+
+	    <MudDivider Class="mb-3" /> *@
+
+	    @foreach (var post in posts)
         {
             <Post PostModel="@post"/>
         }

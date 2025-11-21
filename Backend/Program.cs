@@ -67,6 +67,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
+builder.Services.AddScoped<UserManager<AppUser>, AppUserManager>();
 
 var app = builder.Build();
 

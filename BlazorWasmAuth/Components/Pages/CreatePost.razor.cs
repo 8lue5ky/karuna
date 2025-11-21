@@ -43,7 +43,7 @@ public partial class CreatePost
             {
                 Snackbar.Add("Thank you for your good deed 💖", Severity.Success);
                 ResetForm();
-                _navigationManager.NavigateTo("posts");
+                _navigationManager.NavigateTo("/");
             }
             else
             {

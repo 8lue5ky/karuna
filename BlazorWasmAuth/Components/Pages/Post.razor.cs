@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Shared.DTOs.Posts;
-using static System.Net.WebRequestMethods;
 
 namespace Frontend.Components.Pages;
 

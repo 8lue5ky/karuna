@@ -59,4 +59,10 @@ internal class UserRepository : IUserRepository
         await _userManager.UpdateAsync(profile.User);
         await _context.SaveChangesAsync();
     }
+
+    public async Task CreateUserProfileAsync(UserProfile userProfile)
+    {
+        await _context.UserProfiles.AddAsync(userProfile);
+        await _context.SaveChangesAsync();
+    }
 }
