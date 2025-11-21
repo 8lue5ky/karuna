@@ -3,6 +3,7 @@ using Backend.Persistence.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Shared.DTOs.User;
 
 namespace Backend.Controller.Users
@@ -38,7 +39,7 @@ namespace Backend.Controller.Users
                 {
                     return Ok(new UserProfileDto()
                     {
-                        DisplayName = userProfile.User.DisplayName,
+                        DisplayName = userProfile.User.UserName!,
                         Bio = userProfile.Bio,
                         Email = userProfile.User.Email,
                         Id = userProfile.Id,
@@ -82,7 +83,26 @@ namespace Backend.Controller.Users
                     Location = dto.Location
                 };
 
-                await _userRepository.UpdateProfileAsync(userId, action);
+                var result = await _userRepository.UpdateProfileAsync(userId, action);
+
+
+                if (!result.Succeeded)
+                {
+                    var modelState = new ModelStateDictionary();
+
+                    foreach (var error in result.Errors)
+                    {
+                        modelState.AddModelError(error.Code, error.Description);
+                    }
+
+                    var details = new ValidationProblemDetails(modelState)
+                    {
+                        Title = "Registration failed.",
+                        Status = StatusCodes.Status400BadRequest
+                    };
+
+                    return BadRequest(details);
+                }
 
                 return Ok();
             }

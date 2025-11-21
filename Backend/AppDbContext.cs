@@ -40,5 +40,9 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDb
             .WithMany()
             .HasForeignKey(pl => pl.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<AppUser>()
+            .HasIndex(u => u.NormalizedEmail)
+            .IsUnique();
     }
 }

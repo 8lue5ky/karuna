@@ -29,7 +29,7 @@ namespace Backend.Persistence.Comments
                     Content = c.Content,
                     CreatedAt = c.CreatedAt,
                     PostId = c.PostId,
-                    UserName = c.User.DisplayName
+                    UserName = c.User.UserName!
                 })
                 .ToListAsync();
         }

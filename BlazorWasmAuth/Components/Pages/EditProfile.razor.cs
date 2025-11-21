@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
-using MudBlazor;
-using System.Net.Http.Json;
+﻿using Frontend.Identity.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using MudBlazor;
 using Shared.DTOs.User;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Frontend.Components.Pages;
 
@@ -12,6 +14,7 @@ public partial class EditProfile
     private MudFileUpload<IBrowserFile>? _fileUpload;
     private IBrowserFile? _selectedImage;
     private string? _profilePicturePreview = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    private FormResult _formResult = new();
 
     [Inject]
     private IHttpClientFactory _httpClientFactory { get; set; }
@@ -119,8 +122,39 @@ public partial class EditProfile
             var resp = await _httpClient.PostAsync("api/profile/update", content);
             if (resp.IsSuccessStatusCode)
             {
+                _formResult = new FormResult{ Succeeded = true};
                 Snackbar.Add("Profile successfully updated!", Severity.Success);
+                return;
             }
+
+            // body should contain details about why it failed
+            var details = await resp.Content.ReadAsStringAsync();
+            var problemDetails = JsonDocument.Parse(details);
+            var errors = new List<string>();
+            var errorList = problemDetails.RootElement.GetProperty("errors");
+
+            foreach (var errorEntry in errorList.EnumerateObject())
+            {
+                if (errorEntry.Value.ValueKind == JsonValueKind.String)
+                {
+                    errors.Add(errorEntry.Value.GetString()!);
+                }
+                else if (errorEntry.Value.ValueKind == JsonValueKind.Array)
+                {
+                    errors.AddRange(
+                        errorEntry.Value.EnumerateArray().Select(
+                                e => e.GetString() ?? string.Empty)
+                            .Where(e => !string.IsNullOrEmpty(e)));
+                }
+            }
+
+            // return the error list
+            _formResult= new FormResult
+            {
+                Succeeded = false,
+                ErrorList = problemDetails == null ? ["An error occured."] : [.. errors]
+            };
+
         }
         catch (Exception ex)
         {

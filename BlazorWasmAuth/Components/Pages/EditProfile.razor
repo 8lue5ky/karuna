@@ -10,6 +10,14 @@
     <MudStack Spacing="3">
 
         <MudText Typo="Typo.h5" Class="font-semibold mb-2">👤 Edit profile</MudText>
+		
+        @if (_formResult.ErrorList.Any())
+        {
+	        @foreach (var error in _formResult.ErrorList)
+	        {
+		        <MudAlert Severity="Severity.Error" Dense="true" Class="mb-2">@error</MudAlert>
+	        }
+        }
 
         <MudForm @ref="_form" Model="_profile">
             <MudStack Spacing="2">

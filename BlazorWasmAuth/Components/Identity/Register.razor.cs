@@ -13,7 +13,7 @@ public partial class Register
 
     public async Task RegisterUserAsync()
     {
-        _formResult = await Acct.RegisterAsync(Input.Email, Input.Password);
+        _formResult = await Acct.RegisterAsync(Input.Email, Input.Password, Input.Username);
 
         if (_formResult.Succeeded)
         {
@@ -42,5 +42,9 @@ public partial class Register
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; } = string.Empty;
+
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; } = string.Empty;
     }
 }

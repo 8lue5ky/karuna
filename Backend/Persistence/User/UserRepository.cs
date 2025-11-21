@@ -30,7 +30,7 @@ internal class UserRepository : IUserRepository
             .FirstOrDefaultAsync();
     }
 
-    public async Task UpdateProfileAsync(string userId, UpdateProfileAction action)
+    public async Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileAction action)
     {
         UserProfile? profile = await _context.UserProfiles
             .Include(x => x.User)
@@ -39,25 +39,32 @@ internal class UserRepository : IUserRepository
         if (profile == null)
         {
             // TODO: Create new profile
-            return;
+            return IdentityResult.Failed();
         }
 
         profile.Bio = action.Bio;
         profile.Location = action.Location;
-        profile.User.DisplayName = action.DisplayName;
         profile.User.Email = action.Email;
-        profile.User.UserName = action.Email;
+        profile.User.UserName = action.DisplayName;
 
-        profile.User.NormalizedEmail = _userManager.NormalizeEmail(action.Email);
-        profile.User.NormalizedUserName = _userManager.NormalizeName(action.Email);
+        //profile.User.NormalizedEmail = _userManager.NormalizeEmail(action.Email);
+        //profile.User.NormalizedUserName = _userManager.NormalizeName(action.DisplayName);
 
         if (action.ProfilePicture != null)
         {
             profile.ProfileImageThumbnail = action.ProfilePicture;
         }
 
-        await _userManager.UpdateAsync(profile.User);
+        var identityResult = await _userManager.UpdateAsync(profile.User);
+
+        if (!identityResult.Succeeded)
+        {
+            return identityResult;
+        }
+
         await _context.SaveChangesAsync();
+
+        return IdentityResult.Success;
     }
 
     public async Task CreateUserProfileAsync(UserProfile userProfile)

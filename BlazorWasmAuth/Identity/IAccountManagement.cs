@@ -10,10 +10,10 @@ namespace Frontend.Identity
         /// <summary>
         /// Login service.
         /// </summary>
-        /// <param name="email">User's email.</param>
+        /// <param name="emailOrUsername">User's emailOrUsername.</param>
         /// <param name="password">User's password.</param>
         /// <returns>The result of the request serialized to <see cref="FormResult"/>.</returns>
-        public Task<FormResult> LoginAsync(string email, string password);
+        public Task<FormResult> LoginAsync(string emailOrUsername, string password);
 
         /// <summary>
         /// Log out the logged in user.
@@ -26,8 +26,9 @@ namespace Frontend.Identity
         /// </summary>
         /// <param name="email">User's email.</param>
         /// <param name="password">User's password.</param>
+        /// <param name="username">User's username.</param>
         /// <returns>The result of the request serialized to <see cref="FormResult"/>.</returns>
-        public Task<FormResult> RegisterAsync(string email, string password);
+        public Task<FormResult> RegisterAsync(string email, string password, string username);
 
         public Task<bool> CheckAuthenticatedAsync();
     }

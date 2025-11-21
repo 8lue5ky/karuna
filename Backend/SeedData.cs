@@ -17,19 +17,17 @@ public class SeedData
         {
             Email = "leela@contoso.com", 
             NormalizedEmail = "LEELA@CONTOSO.COM", 
-            NormalizedUserName = "LEELA@CONTOSO.COM", 
+            NormalizedUserName = "LEELA", 
             RoleList = [ "Administrator", "Manager" ], 
-            UserName = "leela@contoso.com",
-            DisplayName = "Leela"
+            UserName = "Leela",
         },
         new SeedUser()
         {
             Email = "harry@contoso.com",
             NormalizedEmail = "HARRY@CONTOSO.COM",
-            NormalizedUserName = "HARRY@CONTOSO.COM",
+            NormalizedUserName = "HARRY",
             RoleList = [ "User" ],
-            UserName = "harry@contoso.com",
-            DisplayName = "Harry"
+            UserName = "Harry"
         },
     ];
 

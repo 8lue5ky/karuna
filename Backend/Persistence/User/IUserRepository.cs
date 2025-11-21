@@ -1,4 +1,5 @@
 ﻿using Backend.Models.User;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Persistence.User
 {
@@ -6,7 +7,7 @@ namespace Backend.Persistence.User
     {
         Task<UserProfile?> GetUserProfileAsync(string userId);
         Task<byte[]?> GetProfileImageThumbnailAsync(string userId);
-        Task UpdateProfileAsync(string userId, UpdateProfileAction action);
+        Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileAction action);
         Task CreateUserProfileAsync(UserProfile userProfile);
     }
 }

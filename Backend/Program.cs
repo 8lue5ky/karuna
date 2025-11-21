@@ -41,7 +41,10 @@ builder.Services.AddDbContext<AppDbContext>(
     });
 
 // add identity and opt-in to endpoints
-builder.Services.AddIdentityCore<AppUser>()
+builder.Services.AddIdentityCore<AppUser>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+    })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();

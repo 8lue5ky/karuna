@@ -25,6 +25,7 @@ namespace Backend
             _dbContext = dbContext;
         }
 
+        // TODO: Move to controller?
         public override async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
             var result = await base.CreateAsync(user, password);

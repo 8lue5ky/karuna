@@ -74,6 +74,16 @@
                                       Adornment="Adornment.Start"
                                       AdornmentIcon="@Icons.Material.Filled.Lock"
                                       Margin="Margin.Dense" />
+						
+                        <MudTextField @bind-Value="Input.Username"
+                                      Label="Username"
+                                      For="() => Input.Username"
+                                      Required="true"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.AccountBox"
+                                      Margin="Margin.Dense" />
 
                         <MudButton ButtonType="ButtonType.Submit"
                                    Variant="Variant.Filled"

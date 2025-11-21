@@ -47,9 +47,10 @@ namespace Frontend.Identity
         /// </summary>
         /// <param name="email">The user's email address.</param>
         /// <param name="password">The user's password.</param>
+        /// <param name="username">The user's username</param>
         /// <returns>The result serialized to a <see cref="FormResult"/>.
         /// </returns>
-        public async Task<FormResult> RegisterAsync(string email, string password)
+        public async Task<FormResult> RegisterAsync(string email, string password, string username)
         {
             string[] defaultDetail = [ "An unknown error prevented registration from succeeding." ];
 
@@ -57,10 +58,11 @@ namespace Frontend.Identity
             {
                 // make the request
                 var result = await httpClient.PostAsJsonAsync(
-                    "register", new
+                    "api/users/register", new
                     {
                         email,
-                        password
+                        password,
+                        username
                     });
 
                 // successful?
@@ -113,18 +115,18 @@ namespace Frontend.Identity
         /// <summary>
         /// User login.
         /// </summary>
-        /// <param name="email">The user's email address.</param>
+        /// <param name="emailOrUsername">The user's email or username.</param>
         /// <param name="password">The user's password.</param>
         /// <returns>The result of the login request serialized to a <see cref="FormResult"/>.</returns>
-        public async Task<FormResult> LoginAsync(string email, string password)
+        public async Task<FormResult> LoginAsync(string emailOrUsername, string password)
         {
             try
             {
                 // login with cookies
                 var result = await httpClient.PostAsJsonAsync(
-                    "login?useCookies=true", new
+                    "api/Users/login/?useCookies=true", new
                     {
-                        email,
+                        emailOrUsername,
                         password
                     });
 
@@ -147,7 +149,7 @@ namespace Frontend.Identity
             return new FormResult
             {
                 Succeeded = false,
-                ErrorList = [ "Invalid email and/or password." ]
+                ErrorList = [ "Invalid emailOrUsername and/or password." ]
             };
         }
 
