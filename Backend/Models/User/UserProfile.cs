@@ -4,8 +4,6 @@
     {
         public Guid Id { get; set; }
 
-        public byte[]? ProfileImageThumbnail { get; set; }
-
         public string? Bio { get; set; }
 
         public string UserId { get; set; } = string.Empty;

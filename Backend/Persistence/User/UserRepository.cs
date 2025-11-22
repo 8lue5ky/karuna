@@ -22,14 +22,6 @@ internal class UserRepository : IUserRepository
             .FirstOrDefaultAsync(x => x.UserId == userId);
     }
 
-    public async Task<byte[]?> GetProfileImageThumbnailAsync(string userId)
-    {
-        return await _context.UserProfiles
-            .Where(x => x.UserId == userId)
-            .Select(x => x.ProfileImageThumbnail)
-            .FirstOrDefaultAsync();
-    }
-
     public async Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileAction action)
     {
         UserProfile? profile = await _context.UserProfiles
@@ -46,14 +38,6 @@ internal class UserRepository : IUserRepository
         profile.Location = action.Location;
         profile.User.Email = action.Email;
         profile.User.UserName = action.DisplayName;
-
-        //profile.User.NormalizedEmail = _userManager.NormalizeEmail(action.Email);
-        //profile.User.NormalizedUserName = _userManager.NormalizeName(action.DisplayName);
-
-        if (action.ProfilePicture != null)
-        {
-            profile.ProfileImageThumbnail = action.ProfilePicture;
-        }
 
         var identityResult = await _userManager.UpdateAsync(profile.User);
 

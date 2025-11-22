@@ -31,12 +31,13 @@ namespace Backend
             var result = await base.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                byte[] avatar = _avatarGenerator.GenerateAvatarAsync(user.UserName);
+                byte[] avatar = _avatarGenerator.GenerateAvatar(user.UserName);
+
+                await SaveUserImageAsync(user.Id, avatar);
 
                 UserProfile profile = new UserProfile()
                 {
                     Id = Guid.NewGuid(),
-                    ProfileImageThumbnail = avatar,
                     UserId = user.Id
                 };
 
@@ -44,6 +45,20 @@ namespace Backend
                 await _dbContext.SaveChangesAsync();
             }
             return result;
+        }
+
+        public async Task SaveUserImageAsync(string userId, byte[] imageData, string fileName = "profile.png")
+        {
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "users", userId);
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            var filePath = Path.Combine(folderPath, fileName);
+
+            await File.WriteAllBytesAsync(filePath, imageData);
         }
     }
 }

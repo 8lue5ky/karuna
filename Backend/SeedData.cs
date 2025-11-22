@@ -71,13 +71,16 @@ public class SeedData
                 {
                     await userManager.AddToRolesAsync(appUser, user.RoleList);
 
+                     var avatar = AvatarGenerator.GenerateAvatar(appUser.UserName);
+
+                     await SaveUserImageAsync(appUser.Id, avatar);
+
                     UserProfile userProfile = new UserProfile()
                     {
                         Bio = "sdgsdg",
                         Id = Guid.NewGuid(),
                         UserId = user.Id,
-                        Location = "Tenesee",
-                        ProfileImageThumbnail = AvatarGenerator.GenerateAvatarAsync(appUser.UserName)
+                        Location = "Tenesee"
                     };
 
                     context.UserProfiles.Add(userProfile);
@@ -133,39 +136,22 @@ public class SeedData
         await context.SaveChangesAsync();
     }
 
+    public static async Task SaveUserImageAsync(string userId, byte[] imageData, string fileName = "profile.png")
+    {
+        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "users", userId);
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        var filePath = Path.Combine(folderPath, fileName);
+
+        await File.WriteAllBytesAsync(filePath, imageData);
+    }
+
     private class SeedUser : AppUser
     {
         public string[]? RoleList { get; set; }
-    }
-
-    public static async Task<byte[]> GenerateAvatarAsync(string initials, int size = 128)
-    {
-        using var bitmap = new SKBitmap(size, size);
-        using var canvas = new SKCanvas(bitmap);
-
-        // Hintergrundfarbe
-        var paint = new SKPaint
-        {
-            Color = SKColor.Parse("#3F51B5"),
-            IsAntialias = true
-        };
-        canvas.DrawCircle(size / 2, size / 2, size / 2, paint);
-
-        // Text
-        var textPaint = new SKPaint
-        {
-            Color = SKColors.White,
-            TextAlign = SKTextAlign.Center,
-            TextSize = size * 0.5f,
-            IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial")
-        };
-
-        canvas.DrawText(initials, size / 2, (size / 2) + (textPaint.TextSize / 3), textPaint);
-
-        using var image = SKImage.FromBitmap(bitmap);
-        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-
-        return data.ToArray();
     }
 }

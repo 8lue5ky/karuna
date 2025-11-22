@@ -18,7 +18,7 @@ public partial class Post
     private string GetThumbnailUrl()
     {
         var backendUrl = Configuration["BackendUrl"];
-        return $"{backendUrl}/api/profile/{PostModel.UserId}/thumbnail";
+        return $"{backendUrl}/uploads/users/{PostModel.UserId}/profile.png";
     }
 
     private void GoToDetails()

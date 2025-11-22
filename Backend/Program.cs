@@ -1,13 +1,14 @@
-using System.Data;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Backend;
 using Backend.Models.User;
 using Backend.Persistence.Comments;
 using Backend.Persistence.Posts;
 using Backend.Persistence.User;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using System.Data;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,7 +92,12 @@ app.MapIdentityApi<AppUser>();
 
 // activate the CORS policy
 app.UseCors("wasm");
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot", "uploads")),
+    RequestPath = "/uploads"
+});
 app.UseRouting();
 
 // Enable authentication and authorization after CORS Middleware
