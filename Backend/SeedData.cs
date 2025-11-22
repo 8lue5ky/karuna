@@ -9,7 +9,7 @@ namespace Backend;
 
 public class SeedData
 {
-    private static readonly AvatarGenerator AvatarGenerator = new AvatarGenerator();
+    private static readonly AvatarService AvatarGenerator = new AvatarService();
 
     private static readonly IEnumerable<SeedUser> seedUsers =
     [
@@ -71,9 +71,7 @@ public class SeedData
                 {
                     await userManager.AddToRolesAsync(appUser, user.RoleList);
 
-                     var avatar = AvatarGenerator.GenerateAvatar(appUser.UserName);
-
-                     await SaveUserImageAsync(appUser.Id, avatar);
+                    await AvatarGenerator.CreateAvatar(appUser.UserName, appUser.Id);
 
                     UserProfile userProfile = new UserProfile()
                     {
@@ -134,20 +132,6 @@ public class SeedData
         }
 
         await context.SaveChangesAsync();
-    }
-
-    public static async Task SaveUserImageAsync(string userId, byte[] imageData, string fileName = "profile.png")
-    {
-        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "users", userId);
-
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-
-        var filePath = Path.Combine(folderPath, fileName);
-
-        await File.WriteAllBytesAsync(filePath, imageData);
     }
 
     private class SeedUser : AppUser
