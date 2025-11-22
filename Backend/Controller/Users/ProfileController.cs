@@ -18,13 +18,15 @@ namespace Backend.Controller.Users
         private readonly ILogger<ProfileController> _logger;
         private readonly UserManager<AppUser> _userManager;
         private readonly IUserRepository _userRepository;
+        private readonly IAvatarService _avatarService;
 
-        public ProfileController(IWebHostEnvironment env, ILogger<ProfileController> logger, UserManager<AppUser> userManager, IUserRepository userRepository)
+        public ProfileController(IWebHostEnvironment env, ILogger<ProfileController> logger, UserManager<AppUser> userManager, IUserRepository userRepository, IAvatarService avatarService)
         {
             _env = env;
             _logger = logger;
             _userManager = userManager;
             _userRepository = userRepository;
+            _avatarService = avatarService;
         }
 
         [Authorize]
@@ -101,7 +103,7 @@ namespace Backend.Controller.Users
 
                 if (dto.ProfileImage is not null && dto.ProfileImage.Length > 0)
                 {
-                    await SaveImage(dto, userId);
+                    await _avatarService.SaveAvatar(dto.ProfileImage, userId);
                 }
 
                 return Ok();
@@ -113,19 +115,6 @@ namespace Backend.Controller.Users
             }
         }
 
-        private static async Task SaveImage(ProfileUpdateDto dto, string? userId)
-        {
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "users", userId);
 
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            var filePath = Path.Combine(folderPath, "profile.png");
-
-            using var stream = new FileStream(filePath, FileMode.Create);
-            await dto.ProfileImage.CopyToAsync(stream);
-        }
     }
 }

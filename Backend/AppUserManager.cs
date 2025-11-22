@@ -8,6 +8,7 @@ namespace Backend
     internal class AppUserManager : UserManager<AppUser>
     {
         private readonly AppDbContext _dbContext;
+        private readonly IAvatarService _avatarService;
         private readonly AvatarGenerator _avatarGenerator = new AvatarGenerator();
 
         public AppUserManager(IUserStore<AppUser> store, 
@@ -19,10 +20,12 @@ namespace Backend
             IdentityErrorDescriber errors, 
             IServiceProvider services, 
             ILogger<UserManager<AppUser>> logger,
-            AppDbContext dbContext) : 
+            AppDbContext dbContext,
+            IAvatarService avatarService) : 
             base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
             _dbContext = dbContext;
+            _avatarService = avatarService;
         }
 
         // TODO: Move to controller?
@@ -31,9 +34,7 @@ namespace Backend
             var result = await base.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                byte[] avatar = _avatarGenerator.GenerateAvatar(user.UserName);
-
-                await SaveUserImageAsync(user.Id, avatar);
+                await _avatarService.CreateAvatar(user.UserName, user.Id);
 
                 UserProfile profile = new UserProfile()
                 {
@@ -47,18 +48,5 @@ namespace Backend
             return result;
         }
 
-        public async Task SaveUserImageAsync(string userId, byte[] imageData, string fileName = "profile.png")
-        {
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "users", userId);
-
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            var filePath = Path.Combine(folderPath, fileName);
-
-            await File.WriteAllBytesAsync(filePath, imageData);
-        }
     }
 }
