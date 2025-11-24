@@ -17,7 +17,7 @@
 				               Edge="Edge.Start"
 				               OnClick="DrawerToggle"/>
 			</MudHidden>
-			<MudImage Src="images/logo.png" Height="40" Width="40"></MudImage>
+			<MudImage Src="images/logo.png" Height="32" Width="32"></MudImage>
 			<MudText Typo="Typo.h5" Class="ml-3">ActioReact.io</MudText>
 			<MudSpacer/>
 
@@ -35,10 +35,10 @@
 			<MudHidden Breakpoint="Breakpoint.MdAndUp">
 				<AuthorizeView>
 					<Authorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="post/new"></MudButton>
+						<MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="post/new"></MudIconButton>
 					</Authorized>
 					<NotAuthorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="login"></MudButton>
+						<MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="login"></MudIconButton>
 					</NotAuthorized>
 				</AuthorizeView>
 			</MudHidden>

@@ -416,3 +416,5 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+/Backend/wwwroot/uploads/users

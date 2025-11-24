@@ -5,6 +5,7 @@ using Backend.Persistence.Posts;
 using Backend.Persistence.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.Data;
@@ -31,6 +32,26 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 // configure authorization
 builder.Services.AddAuthorizationBuilder();
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.MimeTypes = new[]
+    {
+        "application/octet-stream",
+        "application/wasm",
+        "application/javascript",
+        "text/css",
+        "application/json",
+        "image/svg+xml"
+    };
+});
+
+// Optional: bessere Brotli-Kompression
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = System.IO.Compression.CompressionLevel.Fastest;
+});
 
 // add the database (in memory for the sample)
 builder.Services.AddDbContext<AppDbContext>(
@@ -96,6 +117,10 @@ app.MapIdentityApi<AppUser>();
 
 // activate the CORS policy
 app.UseCors("wasm");
+
+
+app.UseResponseCompression();
+
 app.UseBlazorFrameworkFiles();
 
 app.MapFallbackToFile("index.html");
