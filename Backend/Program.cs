@@ -76,11 +76,14 @@ builder.Services.AddScoped<UserManager<AppUser>, AppUserManager>();
 
 var app = builder.Build();
 
+await using var scope = app.Services.CreateAsyncScope();
+await SeedData.InitializeAsync(scope.ServiceProvider);
+
 if (builder.Environment.IsDevelopment())
 {
     // seed the database
-    await using var scope = app.Services.CreateAsyncScope();
-    await SeedData.InitializeAsync(scope.ServiceProvider);
+    //await using var scope = app.Services.CreateAsyncScope();
+    //await SeedData.InitializeAsync(scope.ServiceProvider);
 
     // resolve OpenAPI document
     app.MapOpenApi();

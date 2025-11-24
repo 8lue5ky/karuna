@@ -21,14 +21,27 @@
 			<MudText Typo="Typo.h5" Class="ml-3">ActioReact.io</MudText>
 			<MudSpacer/>
 
-			<AuthorizeView>
-				<Authorized>
-					<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">New post</MudButton>
-				</Authorized>
-				<NotAuthorized>
-					<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">New post</MudButton>
-				</NotAuthorized>
-			</AuthorizeView>
+			<MudHidden Breakpoint="Breakpoint.SmAndDown">
+				<AuthorizeView>
+					<Authorized>
+						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">New post</MudButton>
+					</Authorized>
+					<NotAuthorized>
+						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">New post</MudButton>
+					</NotAuthorized>
+				</AuthorizeView>
+			</MudHidden>
+
+			<MudHidden Breakpoint="Breakpoint.MdAndUp">
+				<AuthorizeView>
+					<Authorized>
+						<MudButton StartIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="post/new"></MudButton>
+					</Authorized>
+					<NotAuthorized>
+						<MudButton StartIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="login"></MudButton>
+					</NotAuthorized>
+				</AuthorizeView>
+			</MudHidden>
 
 			<MudHidden Breakpoint="Breakpoint.MdAndUp">
 				<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" OnClick="@OpenSettingsToggle"/>
@@ -70,38 +83,52 @@
 	</MudAppBar>
 
 	<MudMainContent>
-		<MudContainer>
-			<MudGrid Justify="Justify.Center" Class="pt-6">
-				
-				@* Left area (navigation)*@
-				<MudHidden Breakpoint="Breakpoint.SmAndDown">
 
-					<MudItem xs="0" md="2">
-						<MudPaper Elevation="0">
-							<NavMenu/>
-						</MudPaper>
-					</MudItem>
-
-				</MudHidden>
-				
-				@* Main content *@
-				<MudItem xs="12" md="8">
-
-					<MudContainer>
-						@Body
-					</MudContainer>
-
+		<MudHidden Breakpoint="Breakpoint.MdAndUp">
+			<!-- MOBILE: ohne Container -> volle Breite -->
+			<MudGrid Justify="Justify.Center">
+				<MudItem xs="12">
+					@Body
 				</MudItem>
-				
-				@* Right area (empty) *@
-				<MudHidden Breakpoint="Breakpoint.SmAndDown">
-					<MudItem xs="0" md="2">
-						<MudPaper></MudPaper>
-					</MudItem>
-				</MudHidden>
-
 			</MudGrid>
-		</MudContainer>
+		</MudHidden>
+
+		<MudHidden Breakpoint="Breakpoint.SmAndDown">
+			<MudContainer>
+				<MudGrid Justify="Justify.Center" Class="pt-6">
+
+					@* Left area (navigation)*@
+					<MudHidden Breakpoint="Breakpoint.SmAndDown">
+
+						<MudItem xs="0" md="2">
+							<MudPaper Elevation="0">
+								<NavMenu />
+							</MudPaper>
+						</MudItem>
+
+					</MudHidden>
+
+					@* Main content *@
+					<MudItem xs="12" md="8">
+
+						<MudContainer>
+							@Body
+						</MudContainer>
+
+					</MudItem>
+
+					@* Right area (empty) *@
+					<MudHidden Breakpoint="Breakpoint.SmAndDown">
+						<MudItem xs="0" md="2">
+							<MudPaper></MudPaper>
+						</MudItem>
+					</MudHidden>
+
+				</MudGrid>
+			</MudContainer>
+		</MudHidden>
+
+
 	</MudMainContent>
 	
 	@* Drawer nav menu mobile *@
@@ -110,7 +137,7 @@
 	           Breakpoint="Breakpoint.Md"
 	           ClipMode="DrawerClipMode.Always"
 	           Anchor="Anchor.Left"
-	           Overlay="false">
+	           Overlay="true">
 		<NavMenu/>
 	</MudDrawer>
 	
@@ -120,7 +147,7 @@
 	           Variant="DrawerVariant.Temporary"
 	           ClipMode="DrawerClipMode.Always"
 	           Breakpoint="Breakpoint.Md"
-	           Overlay="false">
+	           Overlay="true">
 		<MudDrawerHeader>
 			<MudText Typo="Typo.h6">Settings</MudText>
 		</MudDrawerHeader>
