@@ -118,13 +118,10 @@ app.MapIdentityApi<AppUser>();
 // activate the CORS policy
 app.UseCors("wasm");
 
-
 app.UseResponseCompression();
 
-app.UseBlazorFrameworkFiles();
-
 app.MapFallbackToFile("index.html");
-
+app.MapStaticAssets();
 app.UseStaticFiles();
 
 var uploadsPath = Path.Combine(builder.Environment.ContentRootPath, "uploads");
