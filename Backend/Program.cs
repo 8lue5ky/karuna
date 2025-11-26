@@ -121,8 +121,6 @@ app.UseCors("wasm");
 
 app.UseResponseCompression();
 
-app.UseBlazorFrameworkFiles();
-
 app.MapFallbackToFile("index.html");
 
 app.UseStaticFiles();
