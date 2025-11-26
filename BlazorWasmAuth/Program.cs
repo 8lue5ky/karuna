@@ -1,12 +1,11 @@
-using Frontend.Components;
-using Frontend.Components.Pages;
-using Frontend.Components.Pages.Comments;
-using Frontend.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Frontend;
+using Frontend.Components.Pages;
+using Frontend.Components.Pages.Comments;
+using Frontend.Identity;
 using MudBlazor.Services;
-using System.Net.Http;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -39,12 +38,13 @@ builder.Services.AddScoped(sp =>
 
 // configure client for auth interactions
 builder.Services.AddHttpClient(
-    "Auth",
-    opt => opt.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001"))
+        "Auth",
+        opt => opt.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001"))
     .AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddHttpClient(
-        "Weather",
-        opt => opt.BaseAddress = new Uri(builder.Configuration["FrontendUrl"] ?? "https://localhost:5002"));
+    "Weather",
+    opt => opt.BaseAddress = new Uri(builder.Configuration["FrontendUrl"] ?? "https://localhost:5002"));
 
 await builder.Build().RunAsync();
+
