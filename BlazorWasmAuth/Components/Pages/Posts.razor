@@ -2,12 +2,12 @@
 @inject PostsServiceClient ServiceClient
 @inject ISnackbar Snackbar
 
-<MudContainer Class="mt-6 px-0">
+<MudContainer Class="mt-2 px-0">
 	@*  <MudText Typo="Typo.h5" Class="mb-4 font-semibold">Good deeds from the community</MudText>
 	 *@
 
     <div @onscroll="OnScroll"
-         style="height:75vh; overflow-y:auto;"
+         style="height:90vh; overflow-y:auto;"
          class="no-scrollbar"
          @ref="_scrollDiv">
 		 

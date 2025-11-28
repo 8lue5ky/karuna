@@ -3,14 +3,36 @@
 <PageTitle>Home</PageTitle>
 
 <MudTabs Rounded="true" Centered="true" Elevation="0">
-	<MudTabPanel Text="Top" Icon="@Icons.Material.Filled.TrendingUp">
-		<MudContainer MaxWidth="MaxWidth.Medium">
-			<Posts/>
-		</MudContainer>
+	<MudTabPanel>
+		<TabContent>
+			<MudStack Spacing="1">
+				<MudStack Row="true" Class="mt-1">
+					<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" ></MudIcon>
+					<MudText>Actio</MudText>
+				</MudStack>
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">Gutes Getan</MudText>
+			</MudStack>
+		</TabContent>
+		<ChildContent>
+			<MudContainer MaxWidth="MaxWidth.Medium">
+				<Posts />
+			</MudContainer>
+		</ChildContent>
 	</MudTabPanel>
-	<MudTabPanel Text="Latest" Icon="@Icons.Material.Filled.NewLabel">
-		<MudContainer MaxWidth="MaxWidth.Medium">
-			<Posts />
-		</MudContainer>
+	<MudTabPanel>
+		<TabContent>
+			<MudStack Spacing="1">
+				<MudStack Row="true" Class="mt-1">
+					<MudIcon Icon="@Icons.Material.Filled.AutoAwesome"></MudIcon>
+					<MudText>Reactio</MudText>
+				</MudStack>
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">Gutes Erlebt</MudText>
+			</MudStack>
+		</TabContent>
+		<ChildContent>
+			<MudContainer MaxWidth="MaxWidth.Medium"> 
+				<Posts />
+			</MudContainer>
+		</ChildContent>
 	</MudTabPanel>
 </MudTabs>

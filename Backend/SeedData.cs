@@ -89,37 +89,36 @@ public class SeedData
                         {
                             Id = new Guid(),
                             CreatedAt = DateTime.Now,
-                            Title = "Lorem ipsum",
+                            Title = "Einkauf für meine ältere Nachbarin erledigt",
                             UserId = appUser.Id,
                             Description =
-                                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"
+                                "Meine ältere Nachbarin hat seit ein paar Tagen eine starke Erkältung und wollte eigentlich jemanden bitten, ihr Medikamente zu holen. Als ich sie zufällig im Treppenhaus traf, sah sie wirklich erschöpft aus. Ich habe ihr angeboten, nicht nur Medikamente, sondern gleich den kompletten Wocheneinkauf zu erledigen. Sie gab mir eine kleine Liste, und als ich zurückkam, konnte man ihr richtig ansehen, wie erleichtert sie war. Sie meinte, solche Gesten geben ihr das Gefühl, dass sie noch Teil einer Gemeinschaft ist. Ein schöner Moment."
                         },
                         new Post()
                         {
                             Id = new Guid(),
                             CreatedAt = DateTime.Now,
-                            Title = "Lorem ipsum",
+                            Title = "Nachhilfe für einen überforderten Schüler",
                             UserId = appUser.Id,
-                            Description =
-                                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"
+                            Description = "Ein Nachbarsjunge hatte große Mühe in Mathe und war völlig frustriert. Ich habe mich eine Stunde hingesetzt und mit ihm die Grundlagen wiederholt. Am Ende hat er wirklich verstanden, wie die Aufgabe funktioniert. Seine Augen haben geleuchtet – und er sagte, das sei das erste Mal, dass Mathe ihm nicht Angst macht. Das war ein schönes Gefühl."
                         },
                         new Post()
                         {
                             Id = new Guid(),
                             CreatedAt = DateTime.Now,
-                            Title = "Lorem ipsum",
+                            Title = "Kleines Café-Experiment: Kaffee für die Person hinter mir",
                             UserId = appUser.Id,
                             Description =
-                                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"
+                                "Ich habe spontan beschlossen, im Café den Kaffee für die Person hinter mir mitzubezahlen. Ich sagte dem Barista, er solle einfach sagen, „heute ist jemand nett gewesen“. Als ich später aus dem Fenster sah, konnte ich beobachten, wie sich die Frau riesig gefreut hat. Einfach schön zu sehen, wie kleine Gesten wirken."
                         },
                         new Post()
                         {
                             Id = new Guid(),
                             CreatedAt = DateTime.Now,
-                            Title = "Lorem ipsum",
+                            Title = "Im Park Müll gesammelt",
                             UserId = appUser.Id,
                             Description =
-                                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"
+                                "Ich war auf einem kurzen Spaziergang und habe gemerkt, wie viel Müll auf den Wiesen liegt. Ich nahm mir zehn Minuten Zeit, sammelte ein paar Flaschen und Verpackungen auf und war überrascht, wie groß der Unterschied danach schon war. Ein Paar auf einer Bank hat mir sogar zugelächelt und „Danke“ gesagt. Hat sich gut angefühlt."
                         },
                     };
 
