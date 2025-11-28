@@ -145,3 +145,8 @@ code {
     padding-right: 0;
     border-bottom: 1px solid rgba(0,0,0,0.08);
 }
+
+.nav-sticky {
+    position: sticky;
+    top: 90px; /* Höhe deiner AppBar */
+}

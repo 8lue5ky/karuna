@@ -123,6 +123,21 @@ public class SeedData
                     };
 
                     context.Posts.AddRange(posts);
+
+                    foreach (int i in Enumerable.Range(0, 100))
+                    {
+                        var post = new Post()
+                        {
+                            Id = new Guid(),
+                            CreatedAt = DateTime.Now,
+                            Title = "Im Park Müll gesammelt",
+                            UserId = appUser.Id,
+                            Description =
+                                "Ich war auf einem kurzen Spaziergang und habe gemerkt, wie viel Müll auf den Wiesen liegt. Ich nahm mir zehn Minuten Zeit, sammelte ein paar Flaschen und Verpackungen auf und war überrascht, wie groß der Unterschied danach schon war. Ein Paar auf einer Bank hat mir sogar zugelächelt und „Danke“ gesagt. Hat sich gut angefühlt."
+                        };
+
+                        context.Posts.Add(post);
+                    }
                 }
             }
 

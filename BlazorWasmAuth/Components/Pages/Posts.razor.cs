@@ -11,26 +11,34 @@ public partial class Posts
     private readonly List<PostDto> posts = new();
     private bool _isLoading;
     private bool _allLoaded;
-    private ElementReference _scrollDiv;
     private int _page;
     private const int PageSize = 10;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadMoreAsync();
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync(
+                "registerScrollHandler",
+                DotNetObjectReference.Create(this));
+
+            await LoadMoreAsync();
+        }
     }
 
-    private async Task OnScroll(EventArgs e)
+    [JSInvokable]
+    public async Task OnWindowScroll()
     {
-        var scrollPos = await JS.InvokeAsync<double>("getScrollPosition", _scrollDiv);
-        var scrollHeight = await JS.InvokeAsync<double>("getScrollHeight", _scrollDiv);
-        var clientHeight = await JS.InvokeAsync<double>("getClientHeight", _scrollDiv);
+        var info = await JS.InvokeAsync<ScrollInfo>("getScrollInfo");
 
-        if (!_isLoading && !_allLoaded && scrollPos + clientHeight >= scrollHeight - 200)
+        if (!_isLoading && !_allLoaded &&
+            info.scrollTop + info.windowHeight >= info.scrollHeight - 200)
         {
             await LoadMoreAsync();
         }
     }
+
+    public record ScrollInfo(double scrollTop, double windowHeight, double scrollHeight);
 
     private async Task LoadMoreAsync()
     {
