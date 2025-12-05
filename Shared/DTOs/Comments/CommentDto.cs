@@ -11,9 +11,7 @@ namespace Shared.DTOs.Comments
         public Guid Id { get; set; }
         public string Content { get; set; } = default!;
         public DateTime CreatedAt { get; set; }
-
         public Guid PostId { get; set; }
-
         public string UserName { get; set; } = default!;
     }
 

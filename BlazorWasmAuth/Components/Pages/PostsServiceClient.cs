@@ -1,5 +1,6 @@
 ﻿using Shared.DTOs.Posts;
 using System.Net.Http.Json;
+using static System.Net.WebRequestMethods;
 
 namespace Frontend.Components.Pages
 {
@@ -31,6 +32,11 @@ namespace Frontend.Components.Pages
         public async Task UnLikePostAsync(Guid postId)
         {
             await _httpClient.DeleteAsync($"api/posts/{postId}/like");
+        }
+
+        public async Task<PostDto?> GetPost(Guid postId)
+        {
+            return await _httpClient.GetFromJsonAsync<PostDto>($"api/posts/{postId}");
         }
     }
 }

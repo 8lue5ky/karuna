@@ -1,10 +1,10 @@
 ﻿@page "/post/{PostId:guid}"
 @using Frontend.Components.Pages.Comments
 @using Shared.DTOs.Posts
-@inject HttpClient Http
+@inject PostsServiceClient _serviceClient;
 @inject NavigationManager Nav
 
-<MudPaper Class="pa-4 my-4 rounded-lg" Outlined="true">
+<MudContainer>
     @if (_loading)
     {
         <MudProgressCircular Indeterminate="true" />
@@ -14,47 +14,8 @@
         <MudText Typo="Typo.h6" Color="Color.Error">Post nicht gefunden.</MudText>
     }
     else
-    { <MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
-	    <MudPaper Class="pa-6 rounded-lg" Outlined="true" Elevation="1">
-	        <MudStack Spacing="3">
-
-	            <!-- HEADER -->
-	            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
-	                <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
-	                    <MudAvatar Size="Size.Large">
-	                        <MudImage Src="@GetThumbnailUrl()" Height="64" Width="64" />
-	                    </MudAvatar>
-
-	                    <MudStack>
-	                        <MudText Typo="Typo.subtitle1" Class="font-semibold">@_post.Username</MudText>
-	                                <MudText Typo="Typo.caption" Color="Color.Secondary">@_post.CreatedAt</MudText>
-	                    </MudStack>
-	                </MudStack>
-
-	                <MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
-	                    <MudMenuItem>Bearbeiten</MudMenuItem>
-	                    <MudMenuItem Color="Color.Error">Löschen</MudMenuItem>
-	                </MudMenu>
-	            </MudStack>
-
-	            <!-- CONTENT -->
-	                    <MudText Typo="Typo.h5">@_post.Title</MudText>
-	                    <MudText Typo="Typo.body1">@_post.Description</MudText>
-
-	            <MudDivider Class="my-4" />
-
-	            <!-- FOOTER -->
-	            <MudStack Row="true" Spacing="3">
-						<MudChip T="string"  Color="Color.Primary" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Favorite">
-	                    @_post.LikeCount Likes
-	                </MudChip>
-
-	                <MudChip T="string" Color="Color.Secondary" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Comment">
-	                    @_post.CommentCount Comments
-	                </MudChip>
-	            </MudStack>
-	        </MudStack>
-	    </MudPaper>
+    { 
+	    <Post PostModel="@_post"></Post>
 
 	    <!-- COMMENTS -->
 	    <MudPaper Class="pa-5 mt-5 rounded-lg" Outlined="true">
@@ -66,10 +27,9 @@
 
 				<CommentList PostId="@_post.Id" @ref="_commentList" />
 	    </MudPaper>
-	</MudContainer>
 
     }
-</MudPaper>
+</MudContainer>
 
 @code {
     [Parameter] public Guid PostId { get; set; }
@@ -80,12 +40,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _post = await Http.GetFromJsonAsync<PostDto>($"api/posts/{PostId}");
+        _post = await _serviceClient.GetPost(PostId);
         _loading = false;
     }
-
-    private string GetThumbnailUrl() =>
-        $"https://api.dicebear.com/7.x/thumbs/png?seed={_post?.Username}";
 
     private async Task ReloadComments()
     {

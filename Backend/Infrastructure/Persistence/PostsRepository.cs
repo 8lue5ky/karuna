@@ -88,6 +88,7 @@ namespace Backend.Infrastructure.Persistence
                     Description = p.Description,
                     CreatedAt = p.CreatedAt,
                     Username = p.User.UserName,
+                    UserId = p.UserId,
                     LikeCount = _context.PostLikes.Count(l => l.PostId == p.Id),
                     CommentCount = _context.Comments.Count(c => c.PostId == p.Id)
                 })
