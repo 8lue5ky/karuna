@@ -1,9 +1,10 @@
-﻿using Backend.Models.User;
-using Backend.Persistence.User;
+﻿using Backend.Application.Avatars;
+using Backend.Domain.Models.User;
+using Backend.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Backend
+namespace Backend.Application
 {
     internal class AppUserManager : UserManager<AppUser>
     {

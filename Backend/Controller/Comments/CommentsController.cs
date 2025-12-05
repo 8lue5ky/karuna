@@ -1,11 +1,11 @@
-﻿using Backend.Persistence.Comments;
+﻿using Backend.Domain.Models.Posts;
 using Microsoft.AspNetCore.Authorization;
 using Shared.DTOs.Comments;
 
 namespace Backend.Controller.Comments
 {
-    using Backend.Models.Posts;
-    using Backend.Models.User;
+    using Backend.Application.Interfaces.Repositories;
+    using Backend.Domain.Models.User;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 

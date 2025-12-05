@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace Backend
+namespace Backend.Application.Avatars
 {
     public class AvatarGenerator
     {

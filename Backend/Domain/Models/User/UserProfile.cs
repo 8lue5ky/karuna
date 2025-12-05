@@ -1,4 +1,4 @@
-﻿namespace Backend.Models.User
+﻿namespace Backend.Domain.Models.User
 {
     public class UserProfile
     {

@@ -1,8 +1,9 @@
 using Backend;
-using Backend.Models.User;
-using Backend.Persistence.Comments;
-using Backend.Persistence.Posts;
-using Backend.Persistence.User;
+using Backend.Application;
+using Backend.Application.Avatars;
+using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.User;
+using Backend.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;

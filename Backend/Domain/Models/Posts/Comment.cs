@@ -1,6 +1,6 @@
-﻿using Backend.Models.User;
+﻿using Backend.Domain.Models.User;
 
-namespace Backend.Models.Posts
+namespace Backend.Domain.Models.Posts
 {
     public class Comment
     {

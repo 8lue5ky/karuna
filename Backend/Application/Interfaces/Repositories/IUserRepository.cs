@@ -1,7 +1,7 @@
-﻿using Backend.Models.User;
+﻿using Backend.Domain.Models.User;
 using Microsoft.AspNetCore.Identity;
 
-namespace Backend.Persistence.User
+namespace Backend.Application.Interfaces.Repositories
 {
     public interface IUserRepository
     {

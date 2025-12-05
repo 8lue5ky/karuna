@@ -1,4 +1,4 @@
-﻿namespace Backend.Persistence.User;
+﻿namespace Backend.Application.Interfaces.Repositories;
 
 public class UpdateProfileAction
 {

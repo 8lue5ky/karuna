@@ -1,5 +1,7 @@
-using Backend.Models.Posts;
-using Backend.Models.User;
+using Backend.Application.Avatars;
+using Backend.Domain.Models.Posts;
+using Backend.Domain.Models.User;
+using Backend.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

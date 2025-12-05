@@ -1,6 +1,6 @@
 ﻿using Backend.Controller.Users;
 
-namespace Backend
+namespace Backend.Application.Avatars
 {
     public class AvatarService : IAvatarService
     {

@@ -1,8 +1,9 @@
-﻿using Backend.Models.Posts;
+﻿using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.Posts;
 using Microsoft.EntityFrameworkCore;
 using Shared.DTOs.Posts;
 
-namespace Backend.Persistence.Posts
+namespace Backend.Infrastructure.Persistence
 {
     internal class PostsRepository : IPostsRepository
     {

@@ -3,8 +3,7 @@ using Shared.DTOs.User;
 
 namespace Backend.Controller.Users
 {
-    using Backend.Models.User;
-    using Microsoft.AspNetCore.Identity.Data;
+    using Backend.Domain.Models.User;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 

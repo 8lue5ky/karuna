@@ -1,9 +1,9 @@
-using Backend.Models.Posts;
-using Backend.Models.User;
+using Backend.Domain.Models.Posts;
+using Backend.Domain.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend;
+namespace Backend.Infrastructure.Persistence;
 
 internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser>(options)
 {

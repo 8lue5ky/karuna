@@ -1,7 +1,7 @@
-﻿using Backend.Models.Posts;
+﻿using Backend.Domain.Models.Posts;
 using Shared.DTOs.Posts;
 
-namespace Backend.Persistence.Posts;
+namespace Backend.Application.Interfaces.Repositories;
 
 public interface IPostsRepository
 {

@@ -1,4 +1,4 @@
-﻿namespace Backend.Models.Posts
+﻿namespace Backend.Domain.Models.Posts
 {
     public enum PostType
     {

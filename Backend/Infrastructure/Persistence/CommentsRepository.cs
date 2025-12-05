@@ -1,8 +1,9 @@
-﻿using Backend.Models.Posts;
+﻿using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.Posts;
 using Microsoft.EntityFrameworkCore;
 using Shared.DTOs.Comments;
 
-namespace Backend.Persistence.Comments
+namespace Backend.Infrastructure.Persistence
 {
     internal class CommentsRepository : ICommentsRepository
     {

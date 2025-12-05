@@ -1,4 +1,4 @@
-﻿namespace Backend;
+﻿namespace Backend.Application.Avatars;
 
 public interface IAvatarService
 {

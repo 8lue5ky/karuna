@@ -1,7 +1,7 @@
-﻿using Backend.Models.Posts;
+﻿using Backend.Domain.Models.Posts;
 using Shared.DTOs.Comments;
 
-namespace Backend.Persistence.Comments;
+namespace Backend.Application.Interfaces.Repositories;
 
 public interface ICommentsRepository
 {

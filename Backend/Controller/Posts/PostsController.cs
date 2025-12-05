@@ -1,6 +1,6 @@
-﻿using Backend.Models.Posts;
-using Backend.Models.User;
-using Backend.Persistence.Posts;
+﻿using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.Posts;
+using Backend.Domain.Models.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

@@ -1,5 +1,7 @@
-﻿using Backend.Models.User;
-using Backend.Persistence.User;
+﻿using Backend.Application.Avatars;
+using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -70,7 +72,6 @@ namespace Backend.Controller.Users
                 string? userId = _userManager.GetUserId(User);
 
                 byte[]? imageData = null;
-
 
                 var action = new UpdateProfileAction()
                 {

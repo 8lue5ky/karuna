@@ -1,8 +1,9 @@
-﻿using Backend.Models.User;
+﻿using Backend.Application.Interfaces.Repositories;
+using Backend.Domain.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Persistence.User;
+namespace Backend.Infrastructure.Persistence;
 
 internal class UserRepository : IUserRepository
 {
