@@ -32,11 +32,23 @@
 		<MudDivider Class="my-2" />
 		<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
 			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-				<MudIconButton 
-					Icon="@GetLikeIcon()" 
-					Color="@GetLikeColor()"
-					OnClick="ToggleLike"
-					Size="Size.Small" />
+				
+				<AuthorizeView>
+					<Authorized>
+						<MudIconButton
+							Icon="@GetLikeIcon()"
+							Color="@GetLikeColor()"
+							OnClick="ToggleLike"
+							Size="Size.Small"/>
+					</Authorized>
+					<NotAuthorized>
+						<MudIconButton Icon="@Icons.Material.Outlined.FavoriteBorder"
+									   Color="Color.Default"
+									   Href="login"
+									   Size="Size.Small"/>
+					</NotAuthorized>
+				</AuthorizeView>
+
 				<MudText Typo="Typo.body2">@PostModel.LikeCount</MudText>
 			</MudStack>
 
