@@ -14,6 +14,9 @@ public partial class Posts
     private int _page;
     private const int PageSize = 10;
 
+    [Parameter]
+    public PostType PostType { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -27,10 +30,8 @@ public partial class Posts
     }
 
     [JSInvokable]
-    public async Task OnWindowScroll()
+    public async Task OnWindowScroll(ScrollInfo info)
     {
-        var info = await JS.InvokeAsync<ScrollInfo>("getScrollInfo");
-
         if (!_isLoading && !_allLoaded &&
             info.scrollTop + info.windowHeight >= info.scrollHeight - 200)
         {
@@ -47,7 +48,7 @@ public partial class Posts
             _isLoading = true;
             StateHasChanged();
 
-            var response = await ServiceClient.GetPagedPosts(_page, PageSize);
+            var response = await ServiceClient.GetPagedPosts(_page, PageSize, PostType);
 
             if (response?.Items?.Count > 0)
             {

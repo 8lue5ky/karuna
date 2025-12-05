@@ -19,10 +19,11 @@ namespace Backend.Persistence.Posts
             await _context.SaveChangesAsync();
         }
 
-        public async Task<GetPostsResult> GetPostsAsyncOrderedByCreated(int pageSize, int skip, string? userId)
+        public async Task<GetPostsResult> GetPostsAsyncOrderedByCreated(int pageSize, int skip, PostType type, string? userId)
         {
             var items = await _context.Posts
                 .Include(x => x.User)
+                .Where(x => x.Type == type)
                 .OrderByDescending(x => x.CreatedAt)
                 .Skip(skip)
                 .Take(pageSize)
@@ -42,7 +43,7 @@ namespace Backend.Persistence.Posts
                 })
                 .ToListAsync();
 
-            bool hasMore = skip + pageSize < _context.Posts.Count();
+            bool hasMore = skip + pageSize < _context.Posts.Where(x => x.Type == type).Count();
 
             return new GetPostsResult()
             {

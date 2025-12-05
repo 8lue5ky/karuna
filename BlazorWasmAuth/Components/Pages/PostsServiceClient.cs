@@ -12,10 +12,10 @@ namespace Frontend.Components.Pages
             _httpClient = httpClientFactory.CreateClient("Auth");
         }
 
-        public async Task<PagedResponse<PostDto>?> GetPagedPosts(int page, int pageSize)
+        public async Task<PagedResponse<PostDto>?> GetPagedPosts(int page, int pageSize, PostType postType)
         {
             return await _httpClient.GetFromJsonAsync<PagedResponse<PostDto>>(
-                $"api/posts/paged?page={page}&pageSize={pageSize}");
+                $"api/posts/paged?page={page}&pageSize={pageSize}&type={postType}");
         }
 
         public async Task<HttpResponseMessage> CreatePostAsync(CreatePost.PostModel post)
