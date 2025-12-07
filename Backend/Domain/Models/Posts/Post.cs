@@ -11,7 +11,7 @@ namespace Backend.Domain.Models.Posts
         public string UserId { get; set; } = null!;
         public AppUser User { get; set; }
         public PostType Type { get; set; }
-
+        public string Language { get; set; }
         public ICollection<PostLike> Likes { get; set; } = new List<PostLike>();
     }
 }

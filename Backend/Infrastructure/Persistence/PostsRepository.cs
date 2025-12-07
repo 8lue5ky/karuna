@@ -20,11 +20,12 @@ namespace Backend.Infrastructure.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public async Task<GetPostsResult> GetPostsAsyncOrderedByCreated(int pageSize, int skip, PostType type, string? userId)
+        public async Task<GetPostsResult> GetPostsAsyncOrderedByCreated(int pageSize, int skip, PostType type, string language, string? userId)
         {
             var items = await _context.Posts
                 .Include(x => x.User)
                 .Where(x => x.Type == type)
+                .Where(x => x.Language == language)
                 .OrderByDescending(x => x.CreatedAt)
                 .Skip(skip)
                 .Take(pageSize)

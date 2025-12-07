@@ -36,6 +36,8 @@ namespace Backend.Controller.Posts
                 return BadRequest(ModelState);
             }
 
+            string language = Request.GetBestMatchingUserLanguage();
+
             Post post = new Post()
             {
                 UserId = userId,
@@ -43,6 +45,7 @@ namespace Backend.Controller.Posts
                 Type = PostType.Actio,
                 Id = Guid.NewGuid(),
                 Title = request.Title,
+                Language = language,
                 Description = request.Description
             };
 
@@ -72,10 +75,11 @@ namespace Backend.Controller.Posts
             }
 
             var userId = await GetUserIdIfLoggedIn();
+            string language = Request.GetBestMatchingUserLanguage();
 
             var skip = page * pageSize;
 
-            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip, type, userId);
+            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip, type, language, userId);
 
 
             return Ok(new PagedResponse<PostDto>
