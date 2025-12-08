@@ -21,8 +21,30 @@
 	    </div>
 
 	    <MudDivider Class="mb-3" /> *@
+		
+		 @if (_pullDistance > 0 && !_isRefreshing)
+		 {
+			  <div style="
+						height:@($"{Math.Min(_pullDistance, 70)}px");
+						transition:height .1s;
+						display:flex;
+						align-items:center;
+						justify-content:center;
+						overflow:hidden;">
+				  <MudProgressCircular Indeterminate="false"
+				                       Value="@Math.Min(100, _pullDistance / 70 * 100)" 
+				                       Color="Color.Primary" />
+			  </div>
+		 }
 
-	    @foreach (var post in posts)
+		@if (_isRefreshing)
+		{
+			  <div class="d-flex justify-center my-2">
+				  <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+			  </div>
+		}
+			  
+		@foreach (var post in posts)
         {
             <Post PostModel="@post"/>
         }
@@ -38,5 +60,10 @@
                 🎉 No more entries
             </MudText>
         }
+		
+        <MudScrollToTop>
+	        <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" />
+        </MudScrollToTop>
+
     </div>
 </MudContainer> 

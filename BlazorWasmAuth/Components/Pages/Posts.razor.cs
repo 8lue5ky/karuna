@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using Shared.DTOs.Posts;
@@ -14,6 +13,9 @@ public partial class Posts
     private int _page;
     private const int PageSize = 10;
 
+    private double _pullDistance = 0;
+    private bool _isRefreshing = false;
+
     [Parameter]
     public PostType PostType { get; set; }
 
@@ -21,10 +23,7 @@ public partial class Posts
     {
         if (firstRender)
         {
-            await JS.InvokeVoidAsync(
-                "registerScrollHandler",
-                DotNetObjectReference.Create(this));
-
+            await JS.InvokeVoidAsync("registerScrollHandler", DotNetObjectReference.Create(this));
             await JS.InvokeVoidAsync("registerPullToRefresh", DotNetObjectReference.Create(this));
 
             await LoadMoreAsync();
@@ -34,22 +33,35 @@ public partial class Posts
     [JSInvokable]
     public async Task OnWindowScroll(ScrollInfo info)
     {
-        if (!_isLoading && !_allLoaded &&
-            info.scrollTop + info.windowHeight >= info.scrollHeight - 200)
+        if (!_isLoading && !_allLoaded && info.scrollTop + info.windowHeight >= info.scrollHeight - 200)
         {
             await LoadMoreAsync();
         }
     }
 
     [JSInvokable]
-    public async Task OnPullToRefresh()
+    public Task OnPullProgress(double distance)
     {
-        // Reset state
+        _pullDistance = distance;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    [JSInvokable]
+    public async Task OnPullTriggered()
+    {
+        _isRefreshing = true;
+        _pullDistance = 0;
+        StateHasChanged();
+
         posts.Clear();
         _page = 0;
         _allLoaded = false;
 
         await LoadMoreAsync();
+
+        _isRefreshing = false;
+        StateHasChanged();
     }
 
     public record ScrollInfo(double scrollTop, double windowHeight, double scrollHeight);

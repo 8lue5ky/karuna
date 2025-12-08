@@ -24,8 +24,7 @@ namespace Backend.Infrastructure.Persistence
         {
             var items = await _context.Posts
                 .Include(x => x.User)
-                .Where(x => x.Type == type)
-                .Where(x => x.Language == language)
+                .Where(x => x.Type == type && x.Language == language)
                 .OrderByDescending(x => x.CreatedAt)
                 .Skip(skip)
                 .Take(pageSize)
@@ -45,7 +44,7 @@ namespace Backend.Infrastructure.Persistence
                 })
                 .ToListAsync();
 
-            bool hasMore = skip + pageSize < _context.Posts.Where(x => x.Type == type).Count();
+            bool hasMore = skip + pageSize < _context.Posts.Count(x => x.Type == type && x.Language == language);
 
             return new GetPostsResult()
             {

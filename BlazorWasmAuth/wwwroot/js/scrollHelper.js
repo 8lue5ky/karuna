@@ -9,33 +9,40 @@ window.registerScrollHandler = function (dotnetRef) {
     });
 };
 
-// pull-to-refresh.js
 window.registerPullToRefresh = function (dotnetRef) {
     let startY = 0;
-    let currentY = 0;
-    let isPulling = false;
-    const threshold = 70; // ab welcher Distanz ein Refresh ausgelöst wird
+    let pulling = false;
+    const threshold = 70;
 
     window.addEventListener("touchstart", e => {
-        if (window.pageYOffset === 0) {
+        if (window.scrollY === 0) {
             startY = e.touches[0].clientY;
-            isPulling = true;
+            pulling = true;
         }
     });
 
     window.addEventListener("touchmove", e => {
-        if (!isPulling) return;
+        if (!pulling) {
+            return;
+        }
 
-        currentY = e.touches[0].clientY;
+        let dist = e.touches[0].clientY - startY;
 
-        if (currentY - startY > threshold) {
-            // Pull-to-refresh erkannt
-            dotnetRef.invokeMethodAsync("OnPullToRefresh");
-            isPulling = false;
+        if (dist > 0) {
+
+            dotnetRef.invokeMethodAsync("OnPullProgress", dist);
+
+            if (dist > threshold) {
+                pulling = false;
+                dotnetRef.invokeMethodAsync("OnPullTriggered");
+            }
         }
     });
 
-    window.addEventListener("touchend", () => {
-        isPulling = false;
+    window.addEventListener("touchend", e => {
+        if (pulling) {
+            dotnetRef.invokeMethodAsync("OnPullProgress", 0);
+        }
+        pulling = false;
     });
 };
