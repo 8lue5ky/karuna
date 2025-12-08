@@ -1,4 +1,8 @@
 ﻿@page "/"
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<Resource> Localizer
 
 <PageTitle>Home</PageTitle>
 
@@ -10,7 +14,7 @@
 					<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" ></MudIcon>
 					<MudText>Actio</MudText>
 				</MudStack>
-				<MudText Typo="Typo.caption" Class="mud-text-secondary">Gutes Getan</MudText>
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodDeeds"]</MudText>
 			</MudStack>
 		</TabContent>
 		<ChildContent>
@@ -26,7 +30,7 @@
 					<MudIcon Icon="@Icons.Material.Filled.AutoAwesome"></MudIcon>
 					<MudText>Reactio</MudText>
 				</MudStack>
-				<MudText Typo="Typo.caption" Class="mud-text-secondary">Gutes Erlebt</MudText>
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodExperiences"]</MudText>
 			</MudStack>
 		</TabContent>
 		<ChildContent>

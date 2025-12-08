@@ -25,6 +25,8 @@ public partial class Posts
                 "registerScrollHandler",
                 DotNetObjectReference.Create(this));
 
+            await JS.InvokeVoidAsync("registerPullToRefresh", DotNetObjectReference.Create(this));
+
             await LoadMoreAsync();
         }
     }
@@ -37,6 +39,17 @@ public partial class Posts
         {
             await LoadMoreAsync();
         }
+    }
+
+    [JSInvokable]
+    public async Task OnPullToRefresh()
+    {
+        // Reset state
+        posts.Clear();
+        _page = 0;
+        _allLoaded = false;
+
+        await LoadMoreAsync();
     }
 
     public record ScrollInfo(double scrollTop, double windowHeight, double scrollHeight);

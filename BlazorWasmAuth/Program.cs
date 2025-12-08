@@ -15,6 +15,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // register the cookie handler
 builder.Services.AddTransient<CookieHandler>();
 
+builder.Services.AddLocalization();
+
 // set up authorization
 builder.Services.AddAuthorizationCore();
 
