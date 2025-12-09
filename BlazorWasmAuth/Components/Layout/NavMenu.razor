@@ -1,8 +1,13 @@
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<Resource> Localizer
+
 <MudNavMenu Rounded="true" >
 	<MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
 	<AuthorizeView>
 		<Authorized>
-			<MudNavLink Href="post/new" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PostAdd">New post</MudNavLink>
+			<MudNavLink Href="post/new" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PostAdd">@Localizer["NewPost"]</MudNavLink>
 		</Authorized>
 	</AuthorizeView>
 </MudNavMenu>

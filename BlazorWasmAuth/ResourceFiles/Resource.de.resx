@@ -117,10 +117,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMe" xml:space="preserve">
+    <value>Über mich</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Hast du bereits einen Account? Log in</value>
+  </data>
+  <data name="AlreadyLoggedInAs" xml:space="preserve">
+    <value>Bereits eingeloggt als</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ChangeProfilePicture" xml:space="preserve">
+    <value>Profilbild bearbeiten</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Kommentare</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Passwort wiederholen</value>
+  </data>
+  <data name="CreateComment" xml:space="preserve">
+    <value>Schreibe einen Kommentar...</value>
+  </data>
+  <data name="CreatePostHeader" xml:space="preserve">
+    <value>Neuer Post erstellen</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>{0} Tage her</value>
+  </data>
+  <data name="DeleteComment" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="EditProfileTitle" xml:space="preserve">
+    <value>Profil bearbeiten</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>E-Mail Adresse</value>
+  </data>
+  <data name="EmailAddressRequired" xml:space="preserve">
+    <value>E-Mail Adresse erforderlich</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>{0} Stunden her</value>
+  </data>
+  <data name="LabelUsername" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Standort</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>Du bist eingeloggt als</value>
+  </data>
+  <data name="LoggedOut" xml:space="preserve">
+    <value>Du bist ausgeloggt.</value>
+  </data>
+  <data name="LoggingOut" xml:space="preserve">
+    <value>Ausloggen...</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogInButton" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginHeader" xml:space="preserve">
+    <value>Benutze einen Account zum einloggen</value>
+  </data>
+  <data name="LogInToWriteAComment" xml:space="preserve">
+    <value>Bitte logge dich ein, um einen Kommentar zu schreiben.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Ausloggen</value>
+  </data>
+  <data name="ManyMonthsAgo" xml:space="preserve">
+    <value>vor {0} Monaten</value>
+  </data>
+  <data name="ManyYearsAgo" xml:space="preserve">
+    <value>vor {0} Jahren</value>
+  </data>
+  <data name="MaxCharsAboutMe" xml:space="preserve">
+    <value>Maximal 500 Zeichen</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>{0} Minuten her</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Mein Profil</value>
+  </data>
+  <data name="NewPost" xml:space="preserve">
+    <value>Neuer Post</value>
+  </data>
+  <data name="NoComments" xml:space="preserve">
+    <value>Keine Kommentare.</value>
+  </data>
+  <data name="NoMorePosts" xml:space="preserve">
+    <value>Keine weiteren Posts</value>
+  </data>
+  <data name="OneMonthAgo" xml:space="preserve">
+    <value>vor 1 Monat</value>
+  </data>
+  <data name="OneYearAgo" xml:space="preserve">
+    <value>vor 1 Jahr</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PostDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="PostDescriptionHelpText" xml:space="preserve">
+    <value>Beschreibe welche Gute Tat du vollbracht oder erlebt hast.</value>
+  </data>
+  <data name="PostNotFound" xml:space="preserve">
+    <value>Post nicht gefunden</value>
+  </data>
+  <data name="PostTitle" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="PostType" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="ProfileUpdatedSucessfully" xml:space="preserve">
+    <value>Profil erfolgreich aktualisiert!</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>Als neuen Benutzer registrieren</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Als neuen Benutzer registrieren</value>
+  </data>
+  <data name="ReportPost" xml:space="preserve">
+    <value>Melden</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>{0} Sekunden her</value>
+  </data>
+  <data name="SubmitComment" xml:space="preserve">
+    <value>Abschicken</value>
+  </data>
+  <data name="SuccessfullyRegistered" xml:space="preserve">
+    <value>Erfolgreich registriert.</value>
+  </data>
   <data name="TabGoodDeeds" xml:space="preserve">
     <value>Gutes getan</value>
   </data>
   <data name="TabGoodExperiences" xml:space="preserve">
     <value>Gutes wiederfahren</value>
+  </data>
+  <data name="ThanksForNewPost" xml:space="preserve">
+    <value>Vielen Dank für deinen Post.</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Benutzername erforderlich</value>
   </data>
 </root>

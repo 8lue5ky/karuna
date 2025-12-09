@@ -1,11 +1,11 @@
 ﻿@page "/posts"
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
 @inject PostsServiceClient ServiceClient
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Resource> Localizer
 
 <MudContainer Class="mt-2 px-0">
-	@*  <MudText Typo="Typo.h5" Class="mb-4 font-semibold">Good deeds from the community</MudText>
-	 *@
-
     <div>
 		 
 	  @*   <MudDivider Class="mb-3" />
@@ -57,7 +57,7 @@
         @if (_allLoaded)
         {
             <MudText Typo="Typo.caption" Align="Align.Center" Class="text-gray-500 my-2">
-                🎉 No more entries
+				@Localizer["NoMorePosts"]
             </MudText>
         }
 		

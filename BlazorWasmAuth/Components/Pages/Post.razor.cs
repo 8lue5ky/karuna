@@ -13,7 +13,7 @@ public partial class Post
     [Inject]
     public required PostsServiceClient PostsServiceClient { get; set; }
 
-    public string TimeAgo => PostModel.CreatedAt.ToTimeAgo();
+    public string TimeAgo => PostModel.CreatedAt.ToTimeAgo(Localizer);
 
     private string GetThumbnailUrl()
     {

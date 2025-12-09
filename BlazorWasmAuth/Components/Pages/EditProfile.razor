@@ -1,15 +1,17 @@
 ﻿@page "/edit"
 
-@using Microsoft.AspNetCore.Components.Forms
-@using MudBlazor
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
 @inject ISnackbar Snackbar
 @inject IConfiguration Configuration
+@inject IStringLocalizer<Resource> Localizer
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
 <MudPaper Class="pa-6 max-w-lg mx-auto my-6 rounded-lg" Outlined="true">
     <MudStack Spacing="3">
 
-        <MudText Typo="Typo.h5" Class="font-semibold mb-2">👤 Edit profile</MudText>
+            <MudText Typo="Typo.h5" Class="font-semibold mb-2">@Localizer["EditProfileTitle"]</MudText>
 		
         @if (_formResult.ErrorList.Any())
         {
@@ -29,7 +31,7 @@
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-2">
                             <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Upload" OnClick="@OpenFilePicker">
-                                Change profile picture
+	                            @Localizer["ChangeProfilePicture"]
                             </MudButton>
                             <MudButton Variant="Variant.Text" OnClick="@ClearSelectedImage">Delete</MudButton>
                         </div>
@@ -43,33 +45,33 @@
                     </div>
                 </MudStack>
 
-                <MudTextField Label="Username"
+                    <MudTextField Label="@Localizer["LabelUsername"]"
                               For="@(() => _profile.DisplayName)"
                               @bind-Value="_profile.DisplayName"
                               Required="true"
-                              RequiredError="Username is required" />
+                                  RequiredError="@Localizer["UsernameRequired"]" />
 
-                <MudTextField Label="Email address"
+                    <MudTextField Label="@Localizer["EmailAddress"]"
                               For="@(() => _profile.Email)"
                               @bind-Value="_profile.Email"
                               InputType="InputType.Email"
                               Required="true"
-                              RequiredError="E-Mail is required" />
+                                  RequiredError="@Localizer["EmailAddressRequired"]" />
 
-                <MudTextField Label="About me"
+                    <MudTextField Label="@Localizer["AboutMe"]"
                               For="@(() => _profile.Bio)"
                               @bind-Value="_profile.Bio"
                               Lines="3"
-                              MaxLength="300"
-                              HelperText="Max. 300 characters" />
+                              MaxLength="500"
+                                  HelperText="@Localizer["MaxCharsAboutMe"]" />
 
-                <MudTextField Label="Location"
+                    <MudTextField Label="@Localizer["Location"]"
                               For="@(() => _profile.Location)"
                               @bind-Value="_profile.Location" />
 
                 <MudStack Row="true" Justify="Justify.FlexEnd" Spacing="2" Class="mt-3">
-                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="OnCancelClicked">Cancel</MudButton>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSaveClicked">Save</MudButton>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="OnCancelClicked">@Localizer["Cancel"]</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSaveClicked">@Localizer["Save"]</MudButton>
                 </MudStack>
             </MudStack>
         </MudForm>

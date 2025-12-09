@@ -1,8 +1,12 @@
 ﻿@page "/post/{PostId:guid}"
+
 @using Frontend.Components.Pages.Comments
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
 @using Shared.DTOs.Posts
+
 @inject PostsServiceClient _serviceClient;
-@inject NavigationManager Nav
+@inject IStringLocalizer<Resource> Localizer
 
 <MudContainer>
     @if (_loading)
@@ -11,7 +15,7 @@
     }
     else if (_post == null)
     {
-        <MudText Typo="Typo.h6" Color="Color.Error">Post nicht gefunden.</MudText>
+        <MudText Typo="Typo.h6" Color="Color.Error">@Localizer["PostNotFound"]</MudText>
     }
     else
     { 
@@ -19,15 +23,11 @@
 
 	    <!-- COMMENTS -->
 	    <MudPaper Class="pa-5 mt-5 rounded-lg" Outlined="true">
-	        <MudText Typo="Typo.h6" Class="mb-4">Kommentare</MudText>
-
+            <MudText Typo="Typo.h6" Class="mb-4">@Localizer["Comments"]</MudText>
 				<CommentEditor PostId="@_post.Id" OnCreated="ReloadComments" />
-
 	        <MudDivider Class="my-4" />
-
 				<CommentList PostId="@_post.Id" @ref="_commentList" />
 	    </MudPaper>
-
     }
 </MudContainer>
 

@@ -1,4 +1,8 @@
-﻿@inherits LayoutComponentBase
+﻿@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
+@inherits LayoutComponentBase
+@inject IStringLocalizer<Resource> Localizer
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
 <MudPopoverProvider />
@@ -24,10 +28,10 @@
 			<MudHidden Breakpoint="Breakpoint.SmAndDown">
 				<AuthorizeView>
 					<Authorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">New post</MudButton>
+						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">@Localizer["NewPost"]</MudButton>
 					</Authorized>
 					<NotAuthorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">New post</MudButton>
+						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">@Localizer["NewPost"]</MudButton>
 					</NotAuthorized>
 				</AuthorizeView>
 			</MudHidden>
@@ -60,11 +64,11 @@
 								           Ripple="true"
 								           Class="ms-auto"/>
 							</MudStack>
-							<MudMenuItem Href="login" Icon="@Icons.Material.Filled.Login">Login</MudMenuItem>
-							<MudMenuItem Href="register" Icon="@Icons.Material.Filled.AccountBox">Register</MudMenuItem>
+							<MudMenuItem Href="login" Icon="@Icons.Material.Filled.Login">@Localizer["Login"]</MudMenuItem>
+							<MudMenuItem Href="register" Icon="@Icons.Material.Filled.AccountBox">@Localizer["Register"]</MudMenuItem>
 						</NotAuthorized>
 						<Authorized>
-							<MudMenuItem Href="edit" Icon="@Icons.Material.Filled.Edit">My Profile</MudMenuItem>
+							<MudMenuItem Href="edit" Icon="@Icons.Material.Filled.Edit">@Localizer["MyProfile"]</MudMenuItem>
 							<MudDivider></MudDivider>
 							<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
 								<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
@@ -74,7 +78,7 @@
 								           Ripple="true"
 								           Class="ms-auto"/>
 							</MudStack>
-							<MudMenuItem Href="logout" Icon="@Icons.Material.Filled.Logout">Logout</MudMenuItem>
+							<MudMenuItem Href="logout" Icon="@Icons.Material.Filled.Logout">@Localizer["Logout"]</MudMenuItem>
 						</Authorized>
 					</AuthorizeView>
 				</MudMenu>
@@ -162,11 +166,11 @@
 						           Ripple="true"
 						           Class="ms-auto"/>
 					</MudStack>
-					<MudNavLink Href="login" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
-					<MudNavLink Href="register" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountBox">Register</MudNavLink>
+					<MudNavLink Href="login" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Login">@Localizer["Login"]</MudNavLink>
+					<MudNavLink Href="register" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountBox">@Localizer["Register"]</MudNavLink>
 				</NotAuthorized>
 				<Authorized>
-					<MudNavLink Href="edit" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Edit">Edit Profile</MudNavLink>
+					<MudNavLink Href="edit" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Edit">@Localizer["MyProfile"]</MudNavLink>
 					<MudDivider></MudDivider>
 					<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pl-4 py-2">
 						<MudIcon Icon="@Icons.Material.Filled.DarkMode" Size="Size.Small"/>
@@ -176,7 +180,7 @@
 						           Ripple="true"
 						           Class="ms-auto"/>
 					</MudStack>
-					<MudNavLink Href="logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
+					<MudNavLink Href="logout" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout">@Localizer["Logout"]</MudNavLink>
 				</Authorized>
 			</AuthorizeView>
 		</MudNavMenu>

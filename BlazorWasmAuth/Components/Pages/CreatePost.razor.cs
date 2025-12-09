@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Shared.DTOs.User;
-using System.Net.Http;
-using System.Net.Http.Json;
 
 namespace Frontend.Components.Pages;
 
@@ -40,7 +37,7 @@ public partial class CreatePost
 
             if (response.IsSuccessStatusCode)
             {
-                Snackbar.Add("Thank you for your good deed 💖", Severity.Success);
+                Snackbar.Add(Localizer["ThanksForNewPost"], Severity.Success);
                 ResetForm();
                 _navigationManager.NavigateTo("/");
             }

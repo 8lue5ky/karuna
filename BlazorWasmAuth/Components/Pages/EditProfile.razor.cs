@@ -5,7 +5,6 @@ using MudBlazor;
 using Shared.DTOs.User;
 using System.Net.Http.Json;
 using System.Text.Json;
-using static Frontend.Components.Pages.CreatePost;
 
 namespace Frontend.Components.Pages;
 
@@ -124,7 +123,7 @@ public partial class EditProfile
             if (resp.IsSuccessStatusCode)
             {
                 _formResult = new FormResult{ Succeeded = true};
-                Snackbar.Add("Profile successfully updated!", Severity.Success);
+                Snackbar.Add(@Localizer["ProfileUpdatedSuccessfully"], Severity.Success);
                 return;
             }
 

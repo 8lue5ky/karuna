@@ -1,7 +1,10 @@
-﻿@using Frontend.Identity
+﻿@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
 @using Shared.DTOs.Comments
+
 @inject CommentServiceClient Comments
 @inject AuthenticationStateProvider AuthState
+@inject IStringLocalizer<Resource> Localizer
 
 @if (_loading)
 {
@@ -9,7 +12,7 @@
 }
 else if (_comments is null || _comments.Count == 0)
 {
-	<MudText Color="Color.Secondary">Keine Kommentare.</MudText>
+	<MudText Color="Color.Secondary">@Localizer["NoComments"]</MudText>
 }
 else
 {
@@ -23,7 +26,7 @@ else
 							<MudAvatar Size="Size.Medium">@c.UserName[0]</MudAvatar>
 							<MudStack>
 								<MudText Typo="Typo.subtitle2" Class="font-semibold">@c.UserName</MudText>
-								<MudText Typo="Typo.caption" Class="text-muted">@c.CreatedAt.ToTimeAgo()</MudText>
+								<MudText Typo="Typo.caption" Class="text-muted">@c.CreatedAt.ToTimeAgo(Localizer)</MudText>
 							</MudStack>
 						</MudStack>
 
@@ -38,7 +41,7 @@ else
 									           StartIcon="@Icons.Material.Filled.Delete"
 									           OnClick="() => Delete(c.Id)"
 									           Class="mt-1">
-										Löschen
+										@Localizer["DeleteComment"]
 									</MudButton>
 								}
 							</Authorized>

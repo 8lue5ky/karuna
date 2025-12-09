@@ -1,12 +1,15 @@
-﻿@using Shared.DTOs.Comments
-@inject CommentServiceClient Comments
+﻿@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+@using Shared.DTOs.Comments
 
+@inject CommentServiceClient Comments
+@inject IStringLocalizer<Resource> Localizer
 
 <AuthorizeView>
 	<Authorized>
 		<MudStack Spacing="2">
 			<MudTextField @bind-Value="_content"
-				Label="Schreibe einen Kommentar..."
+				Label="@Localizer["CreateComment"]"
 				Variant="Variant.Outlined"
 				Lines="3"
 				FullWidth="true"
@@ -20,14 +23,14 @@
 					   Disabled="@string.IsNullOrWhiteSpace(_content)"
 					   OnClick="Submit"
 				StartIcon="@Icons.Material.Filled.Send">
-				Abschicken
+				@Localizer["SubmitComment"]
 			</MudButton>
 		</MudStack>
 	</Authorized>
 
 	<NotAuthorized>
 		<MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true">
-			Bitte logge dich ein, um einen Kommentar zu schreiben.
+			@Localizer["LogInToWriteAComment"]
 		</MudAlert>
 	</NotAuthorized>
 </AuthorizeView>

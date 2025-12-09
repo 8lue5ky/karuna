@@ -1,7 +1,11 @@
 @page "/logout"
-@using Frontend.Identity
-@inject IAccountManagement Acct
 
+@using Frontend.Identity
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
+@inject IAccountManagement Acct
+@inject IStringLocalizer<Resource> Localizer
 <PageTitle>Logout</PageTitle>
 
 
@@ -10,13 +14,13 @@
 <AuthorizeView @ref="_authView">
 	<Authorized>
 		<MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Elevation="0" Dense="true" Class="d-flex align-items-center gap-2">
-			Logging you out...
+			@Localizer["LoggingOut"]
 		</MudAlert>
 	</Authorized>
 
 	<NotAuthorized>
 		<MudAlert Severity="Severity.Success" Variant="Variant.Outlined" Elevation="0" Dense="true">
-			You're logged out.
+			@Localizer["LoggedOut"]
 			<MudLink Href="/login" Class="ml-1">Log in.</MudLink>
 		</MudAlert>
 	</NotAuthorized>

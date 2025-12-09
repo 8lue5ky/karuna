@@ -1,31 +1,33 @@
 ﻿@page "/post/new"
+
 @using Frontend.ResourceFiles
 @using Microsoft.Extensions.Localization
+
 @inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> Localizer
 
-<PageTitle>Post a good deed</PageTitle>
+<PageTitle>@Localizer["CreatePostHeader"]</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="my-8">
     <MudPaper Class="pa-6 rounded-lg" Outlined="true">
         <MudStack Spacing="3">
-            <MudText Typo="Typo.h5" GutterBottom="true">✨ Post a good deed</MudText>
+			<MudText Typo="Typo.h5" GutterBottom="true">@Localizer["CreatePostHeader"]</MudText>
 
             <MudForm @ref="_form">
 	            <MudTextField @bind-Value="_model.Title"
-	                          Label="Titel"
+	                          Label="@Localizer["PostTitle"]"
 	                          Variant="Variant.Outlined"
 	                          Required="true"
 	                          For="@(() => _model.Title)"/>
 
 	            <MudTextField @bind-Value="_model.Description"
-	                          Label="Description"
+							  Label="@Localizer["PostDescription"]"
 	                          Variant="Variant.Outlined"
 	                          Lines="5"
 	                          For="@(() => _model.Description)"
-	                          HelperText="Describe what good deeds you have done."
+							  HelperText="@Localizer["PostDescriptionHelpText"]"
 	                          Required="true"/>
-	            <MudSelect @bind-Value="_model.Type" Label="Type" Variant="Variant.Outlined" For="@(() => _model.Type)" Required="true">
+				<MudSelect @bind-Value="_model.Type" Label="@Localizer["PostType"]" Variant="Variant.Outlined" For="@(() => _model.Type)" Required="true">
 		            <MudSelectItem Value="@(PostType.Actio)">
 			            <div class="d-flex align-center">
 				            <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.VolunteerActivism" />

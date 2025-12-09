@@ -117,10 +117,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMe" xml:space="preserve">
+    <value>About me</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account? Log in</value>
+  </data>
+  <data name="AlreadyLoggedInAs" xml:space="preserve">
+    <value>You're already logged in as</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeProfilePicture" xml:space="preserve">
+    <value>Change profile picture</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="CreateComment" xml:space="preserve">
+    <value>Create a comment...</value>
+  </data>
+  <data name="CreatePostHeader" xml:space="preserve">
+    <value>Create new post</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="DeleteComment" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EditProfileTitle" xml:space="preserve">
+    <value>Edit profile</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="EmailAddressRequired" xml:space="preserve">
+    <value>An email address is required</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>{0} hours ago</value>
+  </data>
+  <data name="LabelUsername" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>You're logged in as</value>
+  </data>
+  <data name="LoggedOut" xml:space="preserve">
+    <value>You're logged out.</value>
+  </data>
+  <data name="LoggingOut" xml:space="preserve">
+    <value>Logging you out...</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogInButton" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginHeader" xml:space="preserve">
+    <value>Use a local account to log in</value>
+  </data>
+  <data name="LogInToWriteAComment" xml:space="preserve">
+    <value>Please login to write a comment.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="ManyMonthsAgo" xml:space="preserve">
+    <value>{0} months ago</value>
+  </data>
+  <data name="ManyYearsAgo" xml:space="preserve">
+    <value>{0} years ago</value>
+  </data>
+  <data name="MaxCharsAboutMe" xml:space="preserve">
+    <value>Max. 500 characters</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>{0} minutes ago</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="NewPost" xml:space="preserve">
+    <value>New post</value>
+  </data>
+  <data name="NoComments" xml:space="preserve">
+    <value>No comments.</value>
+  </data>
+  <data name="NoMorePosts" xml:space="preserve">
+    <value>No more posts</value>
+  </data>
+  <data name="OneMonthAgo" xml:space="preserve">
+    <value>1 month ago</value>
+  </data>
+  <data name="OneYearAgo" xml:space="preserve">
+    <value>1 year ago</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PostDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PostDescriptionHelpText" xml:space="preserve">
+    <value>Describe what you have done or experienced.</value>
+  </data>
+  <data name="PostNotFound" xml:space="preserve">
+    <value>Post not found</value>
+  </data>
+  <data name="PostTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="PostType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ProfileUpdatedSucessfully" xml:space="preserve">
+    <value>Profile successfully updated!</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>Register as new user</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Register a new account</value>
+  </data>
+  <data name="ReportPost" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>{0} seconds ago</value>
+  </data>
+  <data name="SubmitComment" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SuccessfullyRegistered" xml:space="preserve">
+    <value>You successfully registered.</value>
+  </data>
   <data name="TabGoodDeeds" xml:space="preserve">
     <value>Good deeds</value>
   </data>
   <data name="TabGoodExperiences" xml:space="preserve">
     <value>Good experiences</value>
+  </data>
+  <data name="ThanksForNewPost" xml:space="preserve">
+    <value>Thank you for your post.</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>A username is required</value>
   </data>
 </root>
