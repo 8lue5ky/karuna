@@ -42,11 +42,11 @@ namespace Backend.Controller.Posts
             {
                 UserId = userId,
                 CreatedAt = DateTime.Now,
-                Type = PostType.Actio,
+                Type = request.Type == PostTypeDto.Actio ? PostType.Actio : PostType.Reactio,
                 Id = Guid.NewGuid(),
                 Title = request.Title,
                 Language = language,
-                Description = request.Description
+                Description = request.Description,
             };
 
             _postsRepository.CreatePostAsync(post);
@@ -67,7 +67,7 @@ namespace Backend.Controller.Posts
 
         [AllowAnonymous]
         [HttpGet("paged")]
-        public async Task<ActionResult<PagedResponse<PostDto>>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10, [FromQuery] PostType type = PostType.Actio)
+        public async Task<ActionResult<PagedResponse<PostDto>>> GetPaged([FromQuery] int page = 0, [FromQuery] int pageSize = 10, [FromQuery] PostTypeDto type = PostTypeDto.Actio)
         {
             if (page < 0 || pageSize <= 0)
             {
@@ -79,7 +79,8 @@ namespace Backend.Controller.Posts
 
             var skip = page * pageSize;
 
-            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip, type, language, userId);
+            var postType = type == PostTypeDto.Actio ? PostType.Actio : PostType.Reactio;
+            var posts = await _postsRepository.GetPostsAsyncOrderedByCreated(pageSize, skip,  postType, language, userId);
 
 
             return Ok(new PagedResponse<PostDto>

@@ -1,5 +1,8 @@
 ﻿@page "/post/new"
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Resource> Localizer
 
 <PageTitle>Post a good deed</PageTitle>
 
@@ -9,34 +12,48 @@
             <MudText Typo="Typo.h5" GutterBottom="true">✨ Post a good deed</MudText>
 
             <MudForm @ref="_form">
-                <MudTextField @bind-Value="_model.Title"
-                              Label="Titel"
-                              Variant="Variant.Outlined"
-                              Required="true"
-                              For="@(() => _model.Title)" />
+	            <MudTextField @bind-Value="_model.Title"
+	                          Label="Titel"
+	                          Variant="Variant.Outlined"
+	                          Required="true"
+	                          For="@(() => _model.Title)"/>
 
-                <MudTextField @bind-Value="_model.Description"
-                              Label="Description"
-                              Variant="Variant.Outlined"
-                              Lines="5"
-                              For="@(() => _model.Description)"
-                              HelperText="Describe what good deeds you have done."
-                              Required="true" />
-                <MudStack Row="true" Spacing="2" Class="pt-4">
-                    <MudButton OnClick="SubmitAsync"
-                               Color="Color.Primary"
-                               Variant="Variant.Filled"
-                               Disabled="@_isSubmitting">
-                        <MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Class="me-2" />
-                        Post
-                    </MudButton>
+	            <MudTextField @bind-Value="_model.Description"
+	                          Label="Description"
+	                          Variant="Variant.Outlined"
+	                          Lines="5"
+	                          For="@(() => _model.Description)"
+	                          HelperText="Describe what good deeds you have done."
+	                          Required="true"/>
+	            <MudSelect @bind-Value="_model.Type" Label="Type" Variant="Variant.Outlined" For="@(() => _model.Type)" Required="true">
+		            <MudSelectItem Value="@(PostType.Actio)">
+			            <div class="d-flex align-center">
+				            <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.VolunteerActivism" />
+				            Actio
+			            </div>
+		            </MudSelectItem>
+		            <MudSelectItem Value="@(PostType.Reactio)">
+			            <div class="d-flex align-center">
+				            <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.AutoAwesome" />
+				            Reactio
+			            </div>
+		            </MudSelectItem>
+	            </MudSelect>
+	            <MudStack Row="true" Spacing="2" Class="pt-4">
+		            <MudButton OnClick="SubmitAsync"
+		                       Color="Color.Primary"
+		                       Variant="Variant.Filled"
+		                       Disabled="@_isSubmitting">
+			            <MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Class="me-2"/>
+			            Post
+		            </MudButton>
 
-                    <MudButton OnClick="ResetForm"
-                               Color="Color.Secondary"
-                               Variant="Variant.Outlined">
-                        Reset
-                    </MudButton>
-                </MudStack>
+		            <MudButton OnClick="ResetForm"
+		                       Color="Color.Secondary"
+		                       Variant="Variant.Outlined">
+			            Reset
+		            </MudButton>
+	            </MudStack>
             </MudForm>
         </MudStack>
     </MudPaper>

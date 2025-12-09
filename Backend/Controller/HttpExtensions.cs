@@ -23,6 +23,13 @@
                 {
                     return language;
                 }
+
+                var neutral = language.Split('-')[0];
+
+                if (supportedLanguages.Contains(neutral))
+                {
+                    return neutral;
+                }
             }
 
             return "en";

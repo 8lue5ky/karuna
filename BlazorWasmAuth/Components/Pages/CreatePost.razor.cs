@@ -29,7 +29,6 @@ public partial class CreatePost
 
         if (!_form.IsValid)
         {
-            Snackbar.Add("Please fill in all required fields.", Severity.Warning);
             return;
         }
 
@@ -44,10 +43,6 @@ public partial class CreatePost
                 Snackbar.Add("Thank you for your good deed 💖", Severity.Success);
                 ResetForm();
                 _navigationManager.NavigateTo("/");
-            }
-            else
-            {
-                Snackbar.Add("Error posting your good deed.", Severity.Error);
             }
         }
         catch (Exception ex)
@@ -70,5 +65,6 @@ public partial class CreatePost
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
+        public PostType Type { get; set; }
     }
 }
