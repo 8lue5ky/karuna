@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
-using System.Data;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,13 +54,10 @@ builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
     options.Level = System.IO.Compression.CompressionLevel.Fastest;
 });
 
-// add the database (in memory for the sample)
 builder.Services.AddDbContext<AppDbContext>(
     options =>
     {
-        options.UseInMemoryDatabase("AppDb");
-        //For debugging only: options.EnableDetailedErrors(true);
-        //For debugging only: options.EnableSensitiveDataLogging(true);
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
     });
 
 // add identity and opt-in to endpoints
@@ -103,10 +100,6 @@ await SeedData.InitializeAsync(scope.ServiceProvider);
 
 if (builder.Environment.IsDevelopment())
 {
-    // seed the database
-    //await using var scope = app.Services.CreateAsyncScope();
-    //await SeedData.InitializeAsync(scope.ServiceProvider);
-
     // resolve OpenAPI document
     app.MapOpenApi();
     app.UseSwagger();

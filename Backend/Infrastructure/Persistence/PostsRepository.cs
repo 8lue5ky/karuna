@@ -34,7 +34,7 @@ namespace Backend.Infrastructure.Persistence
                     Title = x.Title,
                     Description = x.Description,
                     CreatedAt = x.CreatedAt,
-                    Username = x.User.UserName,
+                    Username = x.User != null ? x.User.UserName : null,
                     UserId = x.UserId,
                     LikeCount = _context.PostLikes.Count(l => l.PostId == x.Id),
                     CommentCount = _context.Comments.Count(c => c.PostId == x.Id),
@@ -87,7 +87,7 @@ namespace Backend.Infrastructure.Persistence
                     Title = p.Title,
                     Description = p.Description,
                     CreatedAt = p.CreatedAt,
-                    Username = p.User.UserName,
+                    Username = p.User != null ? p.User.UserName : null,
                     UserId = p.UserId,
                     LikeCount = _context.PostLikes.Count(l => l.PostId == p.Id),
                     CommentCount = _context.Comments.Count(c => c.PostId == p.Id)

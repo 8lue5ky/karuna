@@ -18,7 +18,8 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDb
         builder.Entity<UserProfile>()
             .HasOne(p => p.User)
             .WithOne(u => u.Profile)
-            .HasForeignKey<UserProfile>(p => p.UserId);
+            .HasForeignKey<UserProfile>(p => p.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Entity<Post>()
             .HasOne(p => p.User)
@@ -39,7 +40,19 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDb
             .HasOne(pl => pl.User)
             .WithMany()
             .HasForeignKey(pl => pl.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Comment>()
+            .HasOne(c => c.Post)
+            .WithMany()
+            .HasForeignKey(c => c.PostId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Comment>()
+            .HasOne(c => c.User)
+            .WithMany()
+            .HasForeignKey(c => c.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Entity<AppUser>()
             .HasIndex(u => u.NormalizedEmail)

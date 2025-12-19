@@ -26,15 +26,15 @@ namespace Backend.Controller.Posts
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult CreatePost([FromBody] PostCreateRequest request)
+        public async Task<IActionResult> CreatePost([FromBody] PostCreateRequest request)
         {
-            string? userId = _userManager.GetUserId(User);
-
-            if (!ModelState.IsValid || userId == null)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            var userId = await GetUserIdIfLoggedIn();
 
             string language = Request.GetBestMatchingUserLanguage();
 
@@ -49,7 +49,7 @@ namespace Backend.Controller.Posts
                 Description = request.Description,
             };
 
-            _postsRepository.CreatePostAsync(post);
+            await _postsRepository.CreatePostAsync(post);
 
             return Ok();
         }

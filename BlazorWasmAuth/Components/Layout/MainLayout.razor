@@ -26,25 +26,11 @@
 			<MudSpacer/>
 
 			<MudHidden Breakpoint="Breakpoint.SmAndDown">
-				<AuthorizeView>
-					<Authorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">@Localizer["NewPost"]</MudButton>
-					</Authorized>
-					<NotAuthorized>
-						<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="login">@Localizer["NewPost"]</MudButton>
-					</NotAuthorized>
-				</AuthorizeView>
+				<MudButton StartIcon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" Href="post/new">@Localizer["NewPost"]</MudButton>
 			</MudHidden>
 
 			<MudHidden Breakpoint="Breakpoint.MdAndUp">
-				<AuthorizeView>
-					<Authorized>
-						<MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="post/new"></MudIconButton>
-					</Authorized>
-					<NotAuthorized>
-						<MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="login"></MudIconButton>
-					</NotAuthorized>
-				</AuthorizeView>
+				<MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Href="post/new"></MudIconButton>
 			</MudHidden>
 
 			<MudHidden Breakpoint="Breakpoint.MdAndUp">

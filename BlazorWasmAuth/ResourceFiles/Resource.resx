@@ -120,11 +120,31 @@
   <data name="AboutMe" xml:space="preserve">
     <value>About me</value>
   </data>
+  <data name="About_Intro" xml:space="preserve">
+    <value>Actio Reactio is a place for moments that matter.
+
+Every day, people do good things — often quietly, often unnoticed.
+And every day, good things happen to us — sometimes from complete strangers.
+
+Actio Reactio brings these moments together.</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>About ActioReact.io</value>
+  </data>
+  <data name="Actio_Description" xml:space="preserve">
+    <value>Actio stands for the good you put into the world.
+A helping hand.
+A kind word.
+A small gesture that may mean everything to someone else.</value>
+  </data>
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>Already have an account? Log in</value>
   </data>
   <data name="AlreadyLoggedInAs" xml:space="preserve">
     <value>You're already logged in as</value>
+  </data>
+  <data name="AnonymousUser" xml:space="preserve">
+    <value>Anonymous</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -159,8 +179,41 @@
   <data name="EmailAddressRequired" xml:space="preserve">
     <value>An email address is required</value>
   </data>
+  <data name="Example" xml:space="preserve">
+    <value>Example</value>
+  </data>
+  <data name="Feed_Actio_Description" xml:space="preserve">
+    <value>what you give</value>
+  </data>
+  <data name="Feed_Actio_Label" xml:space="preserve">
+    <value>Acts of Kindness</value>
+  </data>
+  <data name="Feed_Intro" xml:space="preserve">
+    <value>The feed shows two perspectives of the same principle:</value>
+  </data>
+  <data name="Feed_Outro" xml:space="preserve">
+    <value>Together, they tell a bigger story:
+That what we do truly matters.</value>
+  </data>
+  <data name="Feed_Reactio_Description" xml:space="preserve">
+    <value>what comes back to you</value>
+  </data>
+  <data name="Feed_Reactio_Label" xml:space="preserve">
+    <value>Kindness Received</value>
+  </data>
+  <data name="Feed_Title" xml:space="preserve">
+    <value>A shared feed of kindness</value>
+  </data>
   <data name="HoursAgo" xml:space="preserve">
     <value>{0} hours ago</value>
+  </data>
+  <data name="Join_Description" xml:space="preserve">
+    <value>Share a good deed you’ve done.
+Tell a story about a moment you experienced.
+Or simply read along — and be reminded that good things happen every day.</value>
+  </data>
+  <data name="Join_Title" xml:space="preserve">
+    <value>Join the cycle</value>
   </data>
   <data name="LabelUsername" xml:space="preserve">
     <value>User name</value>
@@ -185,6 +238,9 @@
   </data>
   <data name="LoginHeader" xml:space="preserve">
     <value>Use a local account to log in</value>
+  </data>
+  <data name="LoginToShowName" xml:space="preserve">
+    <value>Sign in to post with your name</value>
   </data>
   <data name="LogInToWriteAComment" xml:space="preserve">
     <value>Please login to write a comment.</value>
@@ -228,8 +284,8 @@
   <data name="PostDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="PostDescriptionHelpText" xml:space="preserve">
-    <value>Describe what you have done or experienced.</value>
+  <data name="PostingAnonymously" xml:space="preserve">
+    <value>You are posting anonymously.</value>
   </data>
   <data name="PostNotFound" xml:space="preserve">
     <value>Post not found</value>
@@ -242,6 +298,12 @@
   </data>
   <data name="ProfileUpdatedSucessfully" xml:space="preserve">
     <value>Profile successfully updated!</value>
+  </data>
+  <data name="Reactio_Description" xml:space="preserve">
+    <value>Reactio stands for the good that comes back to you.
+Unexpected kindness.
+Honest help.
+Moments that remind us how much humanity exists.</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
@@ -278,5 +340,14 @@
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>A username is required</value>
+  </data>
+  <data name="Why_Description" xml:space="preserve">
+    <value>Because good actions do not disappear.
+They move.
+They ripple.
+And they return — sometimes directly, sometimes through others.</value>
+  </data>
+  <data name="Why_Title" xml:space="preserve">
+    <value>Why Actio Reactio?</value>
   </data>
 </root>

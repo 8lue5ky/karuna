@@ -12,8 +12,19 @@
     <MudPaper Class="pa-6 rounded-lg" Outlined="true">
         <MudStack Spacing="3">
 			<MudText Typo="Typo.h5" GutterBottom="true">@Localizer["CreatePostHeader"]</MudText>
+			
+			<AuthorizeView>
+				<NotAuthorized>
+					<MudText Typo="Typo.body2" Class="text-muted">
+						@Localizer["PostingAnonymously"]
+						<MudLink Href="login" Typo="Typo.caption">
+							@Localizer["LoginToShowName"]
+						</MudLink>
+					</MudText>
+				</NotAuthorized>
+			</AuthorizeView>
 
-            <MudForm @ref="_form">
+			<MudForm @ref="_form">
 	            <MudTextField @bind-Value="_model.Title"
 	                          Label="@Localizer["PostTitle"]"
 	                          Variant="Variant.Outlined"
@@ -23,30 +34,51 @@
 	            <MudTextField @bind-Value="_model.Description"
 							  Label="@Localizer["PostDescription"]"
 	                          Variant="Variant.Outlined"
-	                          Lines="5"
+	                          Lines="6"
 	                          For="@(() => _model.Description)"
-							  HelperText="@Localizer["PostDescriptionHelpText"]"
 	                          Required="true"/>
-				<MudSelect @bind-Value="_model.Type" Label="@Localizer["PostType"]" Variant="Variant.Outlined" For="@(() => _model.Type)" Required="true">
-		            <MudSelectItem Value="@(PostType.Actio)">
-			            <div class="d-flex align-center">
-				            <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.VolunteerActivism" />
-				            Actio
-			            </div>
-		            </MudSelectItem>
-		            <MudSelectItem Value="@(PostType.Reactio)">
-			            <div class="d-flex align-center">
-				            <MudIcon Class="mr-1" Icon="@Icons.Material.Filled.AutoAwesome" />
-				            Reactio
-			            </div>
-		            </MudSelectItem>
-	            </MudSelect>
-	            <MudStack Row="true" Spacing="2" Class="pt-4">
+
+	            <MudGrid Spacing="2" Class="pt-2">
+		            <MudItem xs="6">
+			            <MudPaper Class="pa-2 cursor-pointer"
+			                      Outlined="true"
+			                      Style="@GetTypeStyle(PostType.Actio)"
+			                      @onclick="@(() => _model.Type = PostType.Actio)">
+
+							<MudStack Spacing="1" AlignItems="AlignItems.Center" Justify="Justify.Center">
+					            <MudStack Row="true">
+									<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Color="@GetColor(PostType.Actio)"></MudIcon>
+						            <MudText>Actio</MudText>
+					            </MudStack>
+					            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodDeeds"]</MudText>
+				            </MudStack>
+
+			            </MudPaper>
+		            </MudItem>
+
+		            <MudItem xs="6">
+			            <MudPaper Class="pa-2 cursor-pointer"
+			                      Outlined="true"
+			                      Style="@GetTypeStyle(PostType.Reactio)"
+			                      @onclick="@(() => _model.Type = PostType.Reactio)">
+
+							<MudStack Spacing="1" AlignItems="AlignItems.Center" Justify="Justify.Center">
+					            <MudStack Row="true">
+									<MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="@GetColor(PostType.Reactio)"></MudIcon>
+						            <MudText>Reactio</MudText>
+					            </MudStack>
+					            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodExperiences"]</MudText>
+				            </MudStack>
+
+			            </MudPaper>
+		            </MudItem>
+	            </MudGrid>
+
+	           <MudStack Row="true" Spacing="2" Class="pt-4">
 		            <MudButton OnClick="SubmitAsync"
 		                       Color="Color.Primary"
 		                       Variant="Variant.Filled"
 		                       Disabled="@_isSubmitting">
-			            <MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" Class="me-2"/>
 			            Post
 		            </MudButton>
 

@@ -15,9 +15,21 @@ public partial class Post
 
     public string TimeAgo => PostModel.CreatedAt.ToTimeAgo(Localizer);
 
+    public bool IsExamplePost => PostModel.Username == "Harry" || PostModel.Username == "Leela";
+
+    public bool IsAnonymous => PostModel.UserId == null;
+
+    public string UserName => PostModel.Username ?? Localizer["AnonymousUser"];
+
     private string GetThumbnailUrl()
     {
         var backendUrl = Configuration["BackendUrl"];
+
+        if (IsAnonymous)
+        {
+            return $"{backendUrl}/images/anonymous_profile.png";
+        }
+
         return $"{backendUrl}/uploads/users/{PostModel.UserId}/profile.png";
     }
 

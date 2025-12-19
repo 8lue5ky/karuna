@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ActioReact.io</title>
+    <meta property="og:title" content="ActioReactio" />
+    <meta property="og:description" content="Share acts of kindness and good moments. Small actions. Real impact." />
+    <meta property="og:url" content="https://actioreact.io" />
+    <meta property="og:type" content="website" />
+    <meta name="description"
+          content="Actio Reactio is a social feed where people share acts of kindness and good moments. What you give comes back." />
+    <title>ActioReact.io – A shared feed for kindness</title>
     <base href="/" />
     <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="css/app.css" />
@@ -18,6 +24,12 @@
             overscroll-behavior-y: none !important;
         }
     </style>
+    <noscript>
+	    <h1>ActioReactio</h1>
+	    <p>
+		    A shared feed for acts of kindness and good moments.
+	    </p>
+    </noscript>
 </head>
 
 <body>
@@ -34,7 +46,7 @@
     </div>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-<script src="js/scrollHelper.js"></script>
+	<script src="js/scrollHelper.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 ﻿@using Frontend.ResourceFiles
 @using Microsoft.Extensions.Localization
+
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<Resource> Localizer
@@ -13,14 +14,32 @@
 					<MudImage Src="@GetThumbnailUrl()" Height="64" Width="64"></MudImage>
 				</MudAvatar>
 				<MudStack Spacing="1" >
-					<MudText Typo="Typo.subtitle2" Class="font-semibold">@PostModel.Username</MudText>
+					<MudText Typo="Typo.subtitle2" Class="font-semibold">@UserName</MudText>
 					<MudText Typo="Typo.caption" Class="text-muted">@TimeAgo</MudText>
 				</MudStack>
 			</MudStack>
+			
+			<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
 
-			<MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
-				<MudMenuItem>@Localizer["ReportPost"]</MudMenuItem>
-			</MudMenu>
+				@if (IsExamplePost)
+				{
+					<MudChip T="string" 
+					         Size="Size.Small"
+					         Color="Color.Info"
+					         Variant="Variant.Outlined"
+					         Label="true"
+					         Ripple="false">
+						@Localizer["Example"]
+					</MudChip>
+				}
+
+				<MudMenu Icon="@Icons.Material.Filled.MoreVert"
+				         AnchorOrigin="Origin.TopRight"
+				         TransformOrigin="Origin.TopRight">
+					<MudMenuItem>@Localizer["ReportPost"]</MudMenuItem>
+				</MudMenu>
+
+			</MudStack>
 		</MudStack>
 
 		<!-- Content -->

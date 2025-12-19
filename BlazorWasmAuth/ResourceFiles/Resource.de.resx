@@ -120,11 +120,31 @@
   <data name="AboutMe" xml:space="preserve">
     <value>Über mich</value>
   </data>
+  <data name="About_Intro" xml:space="preserve">
+    <value>Actio Reactio ist ein Ort für Momente, die zählen.
+
+Jeden Tag tun Menschen Gutes — oft ganz leise, oft unbemerkt.
+Und jeden Tag widerfährt uns Gutes — manchmal von völlig Fremden.
+
+Actio Reactio bringt diese Momente zusammen.</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Über ActioReact.io</value>
+  </data>
+  <data name="Actio_Description" xml:space="preserve">
+    <value>Actio steht für das Gute, das du in die Welt gibst.
+Eine helfende Hand.
+Ein freundliches Wort.
+Eine kleine Geste, die für jemand anderen alles bedeuten kann.</value>
+  </data>
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>Hast du bereits einen Account? Log in</value>
   </data>
   <data name="AlreadyLoggedInAs" xml:space="preserve">
     <value>Bereits eingeloggt als</value>
+  </data>
+  <data name="AnonymousUser" xml:space="preserve">
+    <value>Anonym</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
@@ -159,8 +179,41 @@
   <data name="EmailAddressRequired" xml:space="preserve">
     <value>E-Mail Adresse erforderlich</value>
   </data>
+  <data name="Example" xml:space="preserve">
+    <value>Beispiel</value>
+  </data>
+  <data name="Feed_Actio_Description" xml:space="preserve">
+    <value>was du gibst</value>
+  </data>
+  <data name="Feed_Actio_Label" xml:space="preserve">
+    <value>Gutes getan</value>
+  </data>
+  <data name="Feed_Intro" xml:space="preserve">
+    <value>Der Feed zeigt zwei Perspektiven desselben Prinzips:</value>
+  </data>
+  <data name="Feed_Outro" xml:space="preserve">
+    <value>Zusammen erzählen sie eine größere Geschichte:
+Dass das, was wir tun, Bedeutung hat.</value>
+  </data>
+  <data name="Feed_Reactio_Description" xml:space="preserve">
+    <value>was du empfängst</value>
+  </data>
+  <data name="Feed_Reactio_Label" xml:space="preserve">
+    <value>Gutes widerfahren</value>
+  </data>
+  <data name="Feed_Title" xml:space="preserve">
+    <value>Ein gemeinsamer Feed der Menschlichkeit</value>
+  </data>
   <data name="HoursAgo" xml:space="preserve">
     <value>{0} Stunden her</value>
+  </data>
+  <data name="Join_Description" xml:space="preserve">
+    <value>Teile eine gute Tat, die du getan hast.
+Erzähle von einem Moment, der dich berührt hat.
+Oder lies einfach mit — und erinnere dich daran, dass jeden Tag Gutes geschieht.</value>
+  </data>
+  <data name="Join_Title" xml:space="preserve">
+    <value>Teil des Kreislaufs werden</value>
   </data>
   <data name="LabelUsername" xml:space="preserve">
     <value>Benutzername</value>
@@ -185,6 +238,9 @@
   </data>
   <data name="LoginHeader" xml:space="preserve">
     <value>Benutze einen Account zum einloggen</value>
+  </data>
+  <data name="LoginToShowName" xml:space="preserve">
+    <value>Anmelden, um mit Namen zu posten</value>
   </data>
   <data name="LogInToWriteAComment" xml:space="preserve">
     <value>Bitte logge dich ein, um einen Kommentar zu schreiben.</value>
@@ -228,8 +284,8 @@
   <data name="PostDescription" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
-  <data name="PostDescriptionHelpText" xml:space="preserve">
-    <value>Beschreibe welche Gute Tat du vollbracht oder erlebt hast.</value>
+  <data name="PostingAnonymously" xml:space="preserve">
+    <value>Du erstellst diesen Beitrag anonym.</value>
   </data>
   <data name="PostNotFound" xml:space="preserve">
     <value>Post nicht gefunden</value>
@@ -242,6 +298,12 @@
   </data>
   <data name="ProfileUpdatedSucessfully" xml:space="preserve">
     <value>Profil erfolgreich aktualisiert!</value>
+  </data>
+  <data name="Reactio_Description" xml:space="preserve">
+    <value>Reactio steht für das Gute, das dir begegnet.
+Unerwartete Freundlichkeit.
+Ehrliche Hilfe.
+Momente, die daran erinnern, wie viel Menschlichkeit es gibt.</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Registrieren</value>
@@ -278,5 +340,14 @@
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>Benutzername erforderlich</value>
+  </data>
+  <data name="Why_Description" xml:space="preserve">
+    <value>Weil gute Taten nicht verschwinden.
+Sie bewegen etwas.
+Sie wirken weiter.
+Und sie kommen zurück — manchmal direkt, manchmal über Umwege.</value>
+  </data>
+  <data name="Why_Title" xml:space="preserve">
+    <value>Warum Actio Reactio?</value>
   </data>
 </root>

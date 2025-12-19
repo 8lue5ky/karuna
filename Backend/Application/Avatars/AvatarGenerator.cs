@@ -4,7 +4,7 @@ namespace Backend.Application.Avatars
 {
     public class AvatarGenerator
     {
-        public byte[] GenerateAvatar(string? username, int size = 128)
+        public byte[] GenerateAvatar(string? username, int size = 64)
         {
             string initials = GetInitials(username);
 

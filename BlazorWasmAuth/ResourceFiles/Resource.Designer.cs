@@ -61,11 +61,46 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actio Reactio is a place for moments that matter.
+        ///
+        ///Every day, people do good things — often quietly, often unnoticed.
+        ///And every day, good things happen to us — sometimes from complete strangers.
+        ///
+        ///Actio Reactio brings these moments together..
+        /// </summary>
+        internal static string About_Intro {
+            get {
+                return ResourceManager.GetString("About_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About ActioReact.io.
+        /// </summary>
+        internal static string About_Title {
+            get {
+                return ResourceManager.GetString("About_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About me.
         /// </summary>
         internal static string AboutMe {
             get {
                 return ResourceManager.GetString("AboutMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actio stands for the good you put into the world.
+        ///A helping hand.
+        ///A kind word.
+        ///A small gesture that may mean everything to someone else..
+        /// </summary>
+        internal static string Actio_Description {
+            get {
+                return ResourceManager.GetString("Actio_Description", resourceCulture);
             }
         }
         
@@ -84,6 +119,15 @@ namespace Frontend.ResourceFiles {
         internal static string AlreadyLoggedInAs {
             get {
                 return ResourceManager.GetString("AlreadyLoggedInAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anonymous.
+        /// </summary>
+        internal static string AnonymousUser {
+            get {
+                return ResourceManager.GetString("AnonymousUser", resourceCulture);
             }
         }
         
@@ -187,11 +231,104 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Example.
+        /// </summary>
+        internal static string Example {
+            get {
+                return ResourceManager.GetString("Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to what you give.
+        /// </summary>
+        internal static string Feed_Actio_Description {
+            get {
+                return ResourceManager.GetString("Feed_Actio_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acts of Kindness.
+        /// </summary>
+        internal static string Feed_Actio_Label {
+            get {
+                return ResourceManager.GetString("Feed_Actio_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The feed shows two perspectives of the same principle:.
+        /// </summary>
+        internal static string Feed_Intro {
+            get {
+                return ResourceManager.GetString("Feed_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Together, they tell a bigger story:
+        ///That what we do truly matters..
+        /// </summary>
+        internal static string Feed_Outro {
+            get {
+                return ResourceManager.GetString("Feed_Outro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to what comes back to you.
+        /// </summary>
+        internal static string Feed_Reactio_Description {
+            get {
+                return ResourceManager.GetString("Feed_Reactio_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kindness Received.
+        /// </summary>
+        internal static string Feed_Reactio_Label {
+            get {
+                return ResourceManager.GetString("Feed_Reactio_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A shared feed of kindness.
+        /// </summary>
+        internal static string Feed_Title {
+            get {
+                return ResourceManager.GetString("Feed_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} hours ago.
         /// </summary>
         internal static string HoursAgo {
             get {
                 return ResourceManager.GetString("HoursAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share a good deed you’ve done.
+        ///Tell a story about a moment you experienced.
+        ///Or simply read along — and be reminded that good things happen every day..
+        /// </summary>
+        internal static string Join_Description {
+            get {
+                return ResourceManager.GetString("Join_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join the cycle.
+        /// </summary>
+        internal static string Join_Title {
+            get {
+                return ResourceManager.GetString("Join_Title", resourceCulture);
             }
         }
         
@@ -264,6 +401,15 @@ namespace Frontend.ResourceFiles {
         internal static string LoginHeader {
             get {
                 return ResourceManager.GetString("LoginHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in to post with your name.
+        /// </summary>
+        internal static string LoginToShowName {
+            get {
+                return ResourceManager.GetString("LoginToShowName", resourceCulture);
             }
         }
         
@@ -394,11 +540,11 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Describe what you have done or experienced..
+        ///   Looks up a localized string similar to You are posting anonymously..
         /// </summary>
-        internal static string PostDescriptionHelpText {
+        internal static string PostingAnonymously {
             get {
-                return ResourceManager.GetString("PostDescriptionHelpText", resourceCulture);
+                return ResourceManager.GetString("PostingAnonymously", resourceCulture);
             }
         }
         
@@ -435,6 +581,18 @@ namespace Frontend.ResourceFiles {
         internal static string ProfileUpdatedSucessfully {
             get {
                 return ResourceManager.GetString("ProfileUpdatedSucessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reactio stands for the good that comes back to you.
+        ///Unexpected kindness.
+        ///Honest help.
+        ///Moments that remind us how much humanity exists..
+        /// </summary>
+        internal static string Reactio_Description {
+            get {
+                return ResourceManager.GetString("Reactio_Description", resourceCulture);
             }
         }
         
@@ -543,6 +701,27 @@ namespace Frontend.ResourceFiles {
         internal static string UsernameRequired {
             get {
                 return ResourceManager.GetString("UsernameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Because good actions do not disappear.
+        ///They move.
+        ///They ripple.
+        ///And they return — sometimes directly, sometimes through others..
+        /// </summary>
+        internal static string Why_Description {
+            get {
+                return ResourceManager.GetString("Why_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why Actio Reactio?.
+        /// </summary>
+        internal static string Why_Title {
+            get {
+                return ResourceManager.GetString("Why_Title", resourceCulture);
             }
         }
     }

@@ -15,6 +15,16 @@ public partial class CreatePost
     [Inject]
     private NavigationManager _navigationManager { get; set; }
 
+    string GetTypeStyle(PostType type)
+    {
+        if (_model.Type == type)
+        {
+            return "border: 2px solid var(--mud-palette-primary);";
+        }
+
+        return "border: 1px solid var(--mud-palette-lines-default);";
+    }
+
     private async Task SubmitAsync()
     {
         if (_form is null)
@@ -63,5 +73,15 @@ public partial class CreatePost
         public string? Title { get; set; }
         public string? Description { get; set; }
         public PostType Type { get; set; }
+    }
+
+    private Color GetColor(PostType type)
+    {
+        if (_model.Type == type)
+        {
+            return Color.Primary;
+        }
+
+        return Color.Default;
     }
 }
