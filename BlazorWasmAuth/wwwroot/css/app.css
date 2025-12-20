@@ -212,3 +212,22 @@ code {
     position: sticky;
     top: 90px; /* Höhe deiner AppBar */
 }
+
+.app-footer {
+    flex: 0 0 auto;
+    min-height: 48px;
+    border-top: 1px solid var(--mud-palette-divider);
+    background: var(--mud-palette-background);
+    display: flex;
+    align-items: center;
+}
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+.mud-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
   <data name="AboutMe" xml:space="preserve">
     <value>Über mich</value>
   </data>
@@ -158,6 +161,24 @@ Eine kleine Geste, die für jemand anderen alles bedeuten kann.</value>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Passwort wiederholen</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="ContactUsBugDescription" xml:space="preserve">
+    <value>Ein Problem auf unserer Website gefunden? Gut gesehen! Sag uns, was nicht stimmt, und wir kümmern uns darum.</value>
+  </data>
+  <data name="ContactUsEmailDescription" xml:space="preserve">
+    <value>Schreib uns eine E-Mail und lass uns reden!</value>
+  </data>
+  <data name="ContactUsFeatureDescription" xml:space="preserve">
+    <value>Hast du eine Idee für ein neues Feature, das du gern auf ActioReact.io sehen würdest? Sag uns Bescheid – wir geben unser Bestes, es umzusetzen!</value>
+  </data>
+  <data name="ContactUsText" xml:space="preserve">
+    <value>Wir freuen uns, von dir zu hören! Zögere nicht, uns zu kontaktieren und uns deine Gedanken, Anmerkungen und dein Feedback mitzuteilen.</value>
+  </data>
+  <data name="ContactUsTitle" xml:space="preserve">
+    <value>Kontaktiere uns</value>
+  </data>
   <data name="CreateComment" xml:space="preserve">
     <value>Schreibe einen Kommentar...</value>
   </data>
@@ -168,6 +189,9 @@ Eine kleine Geste, die für jemand anderen alles bedeuten kann.</value>
     <value>{0} Tage her</value>
   </data>
   <data name="DeleteComment" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DeletePost" xml:space="preserve">
     <value>Löschen</value>
   </data>
   <data name="EditProfileTitle" xml:space="preserve">

@@ -38,5 +38,10 @@ namespace Frontend.Components.Pages
         {
             return await _httpClient.GetFromJsonAsync<PostDto>($"api/posts/{postId}");
         }
+
+        public async Task DeletePostAsync(Guid postId)
+        {
+            await _httpClient.DeleteAsync($"api/posts/{postId}");
+        }
     }
 }

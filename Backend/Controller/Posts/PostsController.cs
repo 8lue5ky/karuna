@@ -120,6 +120,15 @@ namespace Backend.Controller.Posts
             return Ok();
         }
 
+        [Authorize(Roles = "Administrator")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePost(Guid id)
+        {
+            await _postsRepository.DeletePost(id);
+
+            return Ok();
+        }
+
         private async Task<string?> GetUserIdIfLoggedIn()
         {
             var auth = await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);

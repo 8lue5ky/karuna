@@ -37,6 +37,11 @@
 				         AnchorOrigin="Origin.TopRight"
 				         TransformOrigin="Origin.TopRight">
 					<MudMenuItem>@Localizer["ReportPost"]</MudMenuItem>
+
+					<AuthorizeView Roles="Administrator">
+						<MudMenuItem OnClick="DeletePost">@Localizer["DeletePost"]</MudMenuItem>
+					</AuthorizeView>
+
 				</MudMenu>
 
 			</MudStack>

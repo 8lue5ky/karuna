@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AboutMe" xml:space="preserve">
     <value>About me</value>
   </data>
@@ -158,6 +161,24 @@ A small gesture that may mean everything to someone else.</value>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ContactUsBugDescription" xml:space="preserve">
+    <value>Found an issue with our site? good catch! Let us know what the issue is and we'll resolve it ASAP.</value>
+  </data>
+  <data name="ContactUsEmailDescription" xml:space="preserve">
+    <value>Shoot us an email and let's talk!</value>
+  </data>
+  <data name="ContactUsFeatureDescription" xml:space="preserve">
+    <value>Got an idea for a new feature you'd like to see on ActioReact.io? Let us know and we'll do our best to launch it!</value>
+  </data>
+  <data name="ContactUsText" xml:space="preserve">
+    <value>We love hearing from you! Please do not hesitate to get in touch and let us hear your thoughts, comments and feedback!</value>
+  </data>
+  <data name="ContactUsTitle" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
   <data name="CreateComment" xml:space="preserve">
     <value>Create a comment...</value>
   </data>
@@ -168,6 +189,9 @@ A small gesture that may mean everything to someone else.</value>
     <value>{0} days ago</value>
   </data>
   <data name="DeleteComment" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeletePost" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="EditProfileTitle" xml:space="preserve">

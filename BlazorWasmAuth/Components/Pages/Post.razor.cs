@@ -71,4 +71,9 @@ public partial class Post
 
         StateHasChanged();
     }
+
+    private async Task DeletePost()
+    {
+        await PostsServiceClient.DeletePostAsync(PostModel.Id);
+    }
 }

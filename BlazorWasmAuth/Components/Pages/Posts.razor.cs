@@ -5,7 +5,7 @@ using Shared.DTOs.Posts;
 
 namespace Frontend.Components.Pages;
 
-public partial class Posts
+public partial class Posts : IDisposable
 {
     private readonly List<PostDto> posts = new();
     private bool _isLoading;
@@ -18,6 +18,16 @@ public partial class Posts
 
     [Parameter]
     public PostType PostType { get; set; }
+
+    protected override void OnInitialized()
+    {
+        FooterService.Hide();
+    }
+
+    public void Dispose()
+    {
+        FooterService.Show();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

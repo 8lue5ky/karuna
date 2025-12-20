@@ -1,0 +1,22 @@
+﻿<MudCard Outlined="true" Style="@($"border-color: {GetColorClass(Color)};")" Class="@Class">
+	<MudCardContent Class="d-flex flex-column ">
+
+		<MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Start">
+			<MudText Typo="Typo.h6">@Title</MudText>
+			<MudIcon Icon="@Icon" Color="@Color" />
+		</MudStack>
+
+		<MudPaper Class="mt-4 mb-2" Elevation="0">
+			<MudText Typo="Typo.body2">
+				@Text
+			</MudText>
+		</MudPaper>
+
+		<MudPaper Class="mt-auto" Elevation="0">
+			<MudLink Color="@Color" Typo="Typo.caption" Href="@Link">
+				@LinkText
+			</MudLink>
+		</MudPaper>
+
+	</MudCardContent>
+</MudCard>

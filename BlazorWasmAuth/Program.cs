@@ -26,6 +26,7 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthenticationStateProvider>();
 builder.Services.AddScoped<PostsServiceClient>();
 builder.Services.AddScoped<CommentServiceClient>();
+builder.Services.AddScoped<FooterService>();
 
 // register the account management interface
 builder.Services.AddScoped(

@@ -61,6 +61,15 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Actio Reactio is a place for moments that matter.
         ///
         ///Every day, people do good things — often quietly, often unnoticed.
@@ -168,6 +177,60 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an issue with our site? good catch! Let us know what the issue is and we&apos;ll resolve it ASAP..
+        /// </summary>
+        internal static string ContactUsBugDescription {
+            get {
+                return ResourceManager.GetString("ContactUsBugDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shoot us an email and let&apos;s talk!.
+        /// </summary>
+        internal static string ContactUsEmailDescription {
+            get {
+                return ResourceManager.GetString("ContactUsEmailDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Got an idea for a new feature you&apos;d like to see on ActioReact.io? Let us know and we&apos;ll do our best to launch it!.
+        /// </summary>
+        internal static string ContactUsFeatureDescription {
+            get {
+                return ResourceManager.GetString("ContactUsFeatureDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We love hearing from you! Please do not hesitate to get in touch and let us hear your thoughts, comments and feedback!.
+        /// </summary>
+        internal static string ContactUsText {
+            get {
+                return ResourceManager.GetString("ContactUsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact us.
+        /// </summary>
+        internal static string ContactUsTitle {
+            get {
+                return ResourceManager.GetString("ContactUsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a comment....
         /// </summary>
         internal static string CreateComment {
@@ -200,6 +263,15 @@ namespace Frontend.ResourceFiles {
         internal static string DeleteComment {
             get {
                 return ResourceManager.GetString("DeleteComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeletePost {
+            get {
+                return ResourceManager.GetString("DeletePost", resourceCulture);
             }
         }
         

@@ -19,6 +19,8 @@ public partial class MainLayout
             PaletteDark = _darkPalette,
             LayoutProperties = new LayoutProperties()
         };
+
+        FooterService.OnChange += StateHasChanged;
     }
 
     private void DrawerToggle()
@@ -131,5 +133,10 @@ public partial class MainLayout
         true => Icons.Material.Rounded.AutoMode,
         false => Icons.Material.Outlined.DarkMode,
     };
+
+    public void Dispose()
+    {
+        FooterService.OnChange -= StateHasChanged;
+    }
 
 }

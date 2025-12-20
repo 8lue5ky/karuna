@@ -1,8 +1,10 @@
-﻿@using Frontend.ResourceFiles
+﻿@using Frontend.Components.Pages
+@using Frontend.ResourceFiles
 @using Microsoft.Extensions.Localization
 
 @inherits LayoutComponentBase
 @inject IStringLocalizer<Resource> Localizer
+@inject FooterService FooterService
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
 <MudPopoverProvider />
@@ -72,7 +74,7 @@
 		</MudContainer>
 	</MudAppBar>
 
-	<MudMainContent>
+	<MudMainContent Class="main-content">
 
 		<MudHidden Breakpoint="Breakpoint.MdAndUp">
 			<!-- MOBILE: ohne Container -> volle Breite -->
@@ -118,8 +120,12 @@
 			</MudContainer>
 		</MudHidden>
 
-
 	</MudMainContent>
+	
+	@if (FooterService.Visible)
+	{
+		<AppFooter />
+	}
 	
 	@* Drawer nav menu mobile *@
 	<MudDrawer @bind-Open="_drawerOpen"

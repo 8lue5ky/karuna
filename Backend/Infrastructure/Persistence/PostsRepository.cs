@@ -94,5 +94,18 @@ namespace Backend.Infrastructure.Persistence
                 })
                 .FirstOrDefaultAsync();
         }
+
+        public async Task DeletePost(Guid id)
+        {
+            Post? post = await _context.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+                return;
+            }
+
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+        }
     }
 }
