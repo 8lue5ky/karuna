@@ -186,7 +186,7 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found an issue with our site? good catch! Let us know what the issue is and we&apos;ll resolve it ASAP..
+        ///   Looks up a localized string similar to Found an issue with our site? good catch! Let us know and we&apos;ll resolve it..
         /// </summary>
         internal static string ContactUsBugDescription {
             get {
@@ -195,7 +195,7 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shoot us an email and let&apos;s talk!.
+        ///   Looks up a localized string similar to Write us an email and let&apos;s talk!.
         /// </summary>
         internal static string ContactUsEmailDescription {
             get {
@@ -204,7 +204,7 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Got an idea for a new feature you&apos;d like to see on ActioReact.io? Let us know and we&apos;ll do our best to launch it!.
+        ///   Looks up a localized string similar to Do you have an idea for a new feature you&apos;d like to see on this site? Let us know and we&apos;ll do our best to launch it!.
         /// </summary>
         internal static string ContactUsFeatureDescription {
             get {

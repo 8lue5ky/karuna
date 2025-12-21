@@ -165,13 +165,13 @@ A small gesture that may mean everything to someone else.</value>
     <value>Contact</value>
   </data>
   <data name="ContactUsBugDescription" xml:space="preserve">
-    <value>Found an issue with our site? good catch! Let us know what the issue is and we'll resolve it ASAP.</value>
+    <value>Found an issue with our site? good catch! Let us know and we'll resolve it.</value>
   </data>
   <data name="ContactUsEmailDescription" xml:space="preserve">
-    <value>Shoot us an email and let's talk!</value>
+    <value>Write us an email and let's talk!</value>
   </data>
   <data name="ContactUsFeatureDescription" xml:space="preserve">
-    <value>Got an idea for a new feature you'd like to see on ActioReact.io? Let us know and we'll do our best to launch it!</value>
+    <value>Do you have an idea for a new feature you'd like to see on this site? Let us know and we'll do our best to launch it!</value>
   </data>
   <data name="ContactUsText" xml:space="preserve">
     <value>We love hearing from you! Please do not hesitate to get in touch and let us hear your thoughts, comments and feedback!</value>
