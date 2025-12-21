@@ -79,7 +79,8 @@ namespace Backend.Controller.Users
                     DisplayName = dto.Username,
                     Email = dto.Email,
                     Bio = dto.Bio,
-                    Location = dto.Location
+                    Location = dto.Location,
+                    IncrementProfileImageVersion = dto.ProfileImage is not null && dto.ProfileImage.Length > 0
                 };
 
                 var result = await _userRepository.UpdateProfileAsync(userId, action);

@@ -320,6 +320,51 @@ Oder lies einfach mit — und erinnere dich daran, dass jeden Tag Gutes geschieh
   <data name="PostType" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Datenschutz</value>
+  </data>
+  <data name="PrivacyAuthText" xml:space="preserve">
+    <value>Für die Benutzerverwaltung und Anmeldung wird Microsoft Identity verwendet. Die Verarbeitung erfolgt gemäss den geltenden Datenschutzbestimmungen.</value>
+  </data>
+  <data name="PrivacyAuthTitle" xml:space="preserve">
+    <value>Authentifizierung &amp; Drittanbieter</value>
+  </data>
+  <data name="PrivacyContactText" xml:space="preserve">
+    <value>Bei Fragen zum Datenschutz oder zur Ausübung deiner Rechte kontaktiere uns bitte per E-Mail.</value>
+  </data>
+  <data name="PrivacyContactTitle" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="PrivacyControllerText" xml:space="preserve">
+    <value>Verantwortlich für die Datenverarbeitung ist der Betreiber dieser Website. Bei Fragen zum Datenschutz kannst du uns jederzeit per E-Mail kontaktieren.</value>
+  </data>
+  <data name="PrivacyControllerTitle" xml:space="preserve">
+    <value>Verantwortliche Stelle</value>
+  </data>
+  <data name="PrivacyDataText" xml:space="preserve">
+    <value>Beim Erstellen eines Benutzerkontos werden Benutzername, E-Mail-Adresse und ein verschlüsseltes Passwort gespeichert. Zusätzlich werden Inhalte wie Beiträge, Kommentare und Likes verarbeitet. Technische Daten wie IP-Adressen können temporär zur Sicherheit verarbeitet werden.</value>
+  </data>
+  <data name="PrivacyDataTitle" xml:space="preserve">
+    <value>Verarbeitete Daten</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>Der Schutz deiner persönlichen Daten ist uns wichtig. Diese Datenschutzerklärung informiert darüber, welche Daten beim Besuch und bei der Nutzung dieser Plattform verarbeitet werden.</value>
+  </data>
+  <data name="PrivacyPurposeText" xml:space="preserve">
+    <value>Die Daten werden ausschließlich zum Betrieb der Plattform, zur Authentifizierung von Nutzern, zur Darstellung von Inhalten sowie zur Gewährleistung der Sicherheit verwendet.</value>
+  </data>
+  <data name="PrivacyPurposeTitle" xml:space="preserve">
+    <value>Zweck der Datenverarbeitung</value>
+  </data>
+  <data name="PrivacyRightsText" xml:space="preserve">
+    <value>Du hast das Recht auf Auskunft, Berichtigung und Löschung deiner personenbezogenen Daten sowie auf Widerruf einer erteilten Einwilligung.</value>
+  </data>
+  <data name="PrivacyRightsTitle" xml:space="preserve">
+    <value>Rechte der Nutzer</value>
+  </data>
+  <data name="PrivacyTitle" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
   <data name="ProfileUpdatedSucessfully" xml:space="preserve">
     <value>Profil erfolgreich aktualisiert!</value>
   </data>

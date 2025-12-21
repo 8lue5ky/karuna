@@ -320,6 +320,51 @@ Or simply read along — and be reminded that good things happen every day.</val
   <data name="PostType" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="PrivacyAuthText" xml:space="preserve">
+    <value>Microsoft Identity is used for user authentication and account management. Data processing complies with applicable data protection regulations.</value>
+  </data>
+  <data name="PrivacyAuthTitle" xml:space="preserve">
+    <value>Authentication &amp; Third Parties</value>
+  </data>
+  <data name="PrivacyContactText" xml:space="preserve">
+    <value>If you have any questions about privacy or wish to exercise your rights, please contact us by email.</value>
+  </data>
+  <data name="PrivacyContactTitle" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="PrivacyControllerText" xml:space="preserve">
+    <value>The operator of this website is responsible for data processing. You can contact us by email if you have any questions regarding privacy.</value>
+  </data>
+  <data name="PrivacyControllerTitle" xml:space="preserve">
+    <value>Data Controller</value>
+  </data>
+  <data name="PrivacyDataText" xml:space="preserve">
+    <value>When creating an account, a username, email address and an encrypted password are stored. Content such as posts, comments and likes are also processed. Technical data such as IP addresses may be processed temporarily for security purposes.</value>
+  </data>
+  <data name="PrivacyDataTitle" xml:space="preserve">
+    <value>Processed Data</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>Protecting your personal data is important to us. This privacy policy explains which data is processed when using this platform.</value>
+  </data>
+  <data name="PrivacyPurposeText" xml:space="preserve">
+    <value>Data is processed solely to operate the platform, authenticate users, display content and ensure security.</value>
+  </data>
+  <data name="PrivacyPurposeTitle" xml:space="preserve">
+    <value>Purpose of Processing</value>
+  </data>
+  <data name="PrivacyRightsText" xml:space="preserve">
+    <value>You have the right to access, correct or delete your personal data and to withdraw consent at any time.</value>
+  </data>
+  <data name="PrivacyRightsTitle" xml:space="preserve">
+    <value>User Rights</value>
+  </data>
+  <data name="PrivacyTitle" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
   <data name="ProfileUpdatedSucessfully" xml:space="preserve">
     <value>Profile successfully updated!</value>
   </data>

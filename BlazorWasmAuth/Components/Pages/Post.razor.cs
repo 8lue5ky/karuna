@@ -30,7 +30,7 @@ public partial class Post
             return $"{backendUrl}/images/anonymous_profile.png";
         }
 
-        return $"{backendUrl}/uploads/users/{PostModel.UserId}/profile.png";
+        return $"{backendUrl}/uploads/users/{PostModel.UserId}/profile.png?v={PostModel.UserProfileImageVersion}";
     }
 
     private void GoToDetails()

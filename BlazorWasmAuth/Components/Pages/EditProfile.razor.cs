@@ -76,6 +76,13 @@ public partial class EditProfile
             return;
         }
 
+        if (file.Size > 2_097_152)
+        {
+            Snackbar.Add("Image bigger than 2 MB", Severity.Error);
+            await _fileUpload!.ClearAsync();
+            return;
+        }
+
         _selectedImage = file;
 
         using var ms = new MemoryStream();

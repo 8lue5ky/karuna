@@ -15,5 +15,7 @@ namespace Backend.Domain.Models.User
 
         [MaxLength(250)]
         public string? Location { get; set; }
+
+        public int ProfileImageVersion { get; set; } = 1;
     }
 }

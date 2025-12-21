@@ -38,6 +38,8 @@ namespace Backend.Infrastructure.Persistence
                     UserId = x.UserId,
                     LikeCount = _context.PostLikes.Count(l => l.PostId == x.Id),
                     CommentCount = _context.Comments.Count(c => c.PostId == x.Id),
+                    UserProfileImageVersion =
+                        x.User != null && x.User.Profile != null ? x.User.Profile.ProfileImageVersion : 1,
                     HasLiked = userId == null
                         ? null
                         : _context.PostLikes.Any(l => l.PostId == x.Id && l.UserId == userId)
@@ -90,7 +92,9 @@ namespace Backend.Infrastructure.Persistence
                     Username = p.User != null ? p.User.UserName : null,
                     UserId = p.UserId,
                     LikeCount = _context.PostLikes.Count(l => l.PostId == p.Id),
-                    CommentCount = _context.Comments.Count(c => c.PostId == p.Id)
+                    CommentCount = _context.Comments.Count(c => c.PostId == p.Id),
+                    UserProfileImageVersion =
+                        p.User != null && p.User.Profile != null ? p.User.Profile.ProfileImageVersion : 1,
                 })
                 .FirstOrDefaultAsync();
         }

@@ -40,6 +40,11 @@ internal class UserRepository : IUserRepository
         profile.User.Email = action.Email;
         profile.User.UserName = action.DisplayName;
 
+        if (action.IncrementProfileImageVersion)
+        {
+            profile.ProfileImageVersion++;
+        }
+
         var identityResult = await _userManager.UpdateAsync(profile.User);
 
         if (!identityResult.Succeeded)

@@ -1,0 +1,66 @@
+﻿@page "/privacy"
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resource> Localizer
+
+<PageTitle>@Localizer["PrivacyTitle"]</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
+	<MudPaper Class="pa-6 rounded-lg" Outlined="true">
+		<MudStack Spacing="4">
+
+			<MudText Typo="Typo.h4">
+				@Localizer["PrivacyTitle"]
+			</MudText>
+
+			<MudText Typo="Typo.body1">
+				@Localizer["PrivacyIntro"]
+			</MudText>
+
+			<MudDivider />
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyControllerTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyControllerText"]
+			</MudText>
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyDataTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyDataText"]
+			</MudText>
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyPurposeTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyPurposeText"]
+			</MudText>
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyAuthTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyAuthText"]
+			</MudText>
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyRightsTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyRightsText"]
+			</MudText>
+
+			<MudText Typo="Typo.h6">
+				@Localizer["PrivacyContactTitle"]
+			</MudText>
+			<MudText Typo="Typo.body2">
+				@Localizer["PrivacyContactText"]
+			</MudText>
+
+		</MudStack>
+	</MudPaper>
+</MudContainer>

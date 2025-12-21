@@ -648,6 +648,141 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Privacy.
+        /// </summary>
+        internal static string Privacy {
+            get {
+                return ResourceManager.GetString("Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Identity is used for user authentication and account management. Data processing complies with applicable data protection regulations..
+        /// </summary>
+        internal static string PrivacyAuthText {
+            get {
+                return ResourceManager.GetString("PrivacyAuthText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication &amp; Third Parties.
+        /// </summary>
+        internal static string PrivacyAuthTitle {
+            get {
+                return ResourceManager.GetString("PrivacyAuthTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you have any questions about privacy or wish to exercise your rights, please contact us by email..
+        /// </summary>
+        internal static string PrivacyContactText {
+            get {
+                return ResourceManager.GetString("PrivacyContactText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string PrivacyContactTitle {
+            get {
+                return ResourceManager.GetString("PrivacyContactTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operator of this website is responsible for data processing. You can contact us by email if you have any questions regarding privacy..
+        /// </summary>
+        internal static string PrivacyControllerText {
+            get {
+                return ResourceManager.GetString("PrivacyControllerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Controller.
+        /// </summary>
+        internal static string PrivacyControllerTitle {
+            get {
+                return ResourceManager.GetString("PrivacyControllerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When creating an account, a username, email address and an encrypted password are stored. Content such as posts, comments and likes are also processed. Technical data such as IP addresses may be processed temporarily for security purposes..
+        /// </summary>
+        internal static string PrivacyDataText {
+            get {
+                return ResourceManager.GetString("PrivacyDataText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed Data.
+        /// </summary>
+        internal static string PrivacyDataTitle {
+            get {
+                return ResourceManager.GetString("PrivacyDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protecting your personal data is important to us. This privacy policy explains which data is processed when using this platform..
+        /// </summary>
+        internal static string PrivacyIntro {
+            get {
+                return ResourceManager.GetString("PrivacyIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data is processed solely to operate the platform, authenticate users, display content and ensure security..
+        /// </summary>
+        internal static string PrivacyPurposeText {
+            get {
+                return ResourceManager.GetString("PrivacyPurposeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purpose of Processing.
+        /// </summary>
+        internal static string PrivacyPurposeTitle {
+            get {
+                return ResourceManager.GetString("PrivacyPurposeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the right to access, correct or delete your personal data and to withdraw consent at any time..
+        /// </summary>
+        internal static string PrivacyRightsText {
+            get {
+                return ResourceManager.GetString("PrivacyRightsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Rights.
+        /// </summary>
+        internal static string PrivacyRightsTitle {
+            get {
+                return ResourceManager.GetString("PrivacyRightsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Policy.
+        /// </summary>
+        internal static string PrivacyTitle {
+            get {
+                return ResourceManager.GetString("PrivacyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile successfully updated!.
         /// </summary>
         internal static string ProfileUpdatedSucessfully {
