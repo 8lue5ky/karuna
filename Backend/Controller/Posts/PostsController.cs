@@ -90,6 +90,15 @@ namespace Backend.Controller.Posts
             });
         }
 
+        [AllowAnonymous]
+        [HttpGet("newestCategory")]
+        public async Task<ActionResult<PostTypeDto>> GetNewestPostCategory()
+        {
+            PostType postType = await _postsRepository.GetNewestPostCategoryAsync();
+
+            return postType == PostType.Actio ? PostTypeDto.Actio : PostTypeDto.Reactio;
+        }
+
         [HttpPost("{postId}/like")]
         public async Task<IActionResult> LikePost(Guid postId)
         {
@@ -126,6 +135,13 @@ namespace Backend.Controller.Posts
         {
             await _postsRepository.DeletePost(id);
 
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("{postId}/report")]
+        public async Task<IActionResult> ReportPost(Guid postId)
+        {
             return Ok();
         }
 

@@ -5,6 +5,7 @@ using MudBlazor;
 using Shared.DTOs.User;
 using System.Net.Http.Json;
 using System.Text.Json;
+using static Frontend.Components.Pages.CreatePost;
 
 namespace Frontend.Components.Pages;
 
@@ -37,7 +38,7 @@ public partial class EditProfile
     private string GetThumbnailUrl()
     {
         var backendUrl = Configuration["BackendUrl"];
-        return $"{backendUrl}/uploads/users/{_profile.UserId}/profile.png";
+        return $"{backendUrl}/uploads/users/{_profile.UserId}/profile.png?v={_profile.ProfilePictureVersion}";
     }
 
     private async Task<UserProfileDto?> GetUserProfile()

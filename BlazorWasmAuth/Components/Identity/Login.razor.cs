@@ -26,10 +26,6 @@ public partial class Login
             else
                 Navigation.NavigateTo("/");
         }
-        else
-        {
-            Snackbar.Add("Login failed", Severity.Error);
-        }
     }
 
     private sealed class InputModel

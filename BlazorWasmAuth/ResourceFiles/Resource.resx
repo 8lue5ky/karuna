@@ -164,6 +164,9 @@ A small gesture that may mean everything to someone else.</value>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="ContactLabel" xml:space="preserve">
+    <value>Contact</value>
+  </data>
   <data name="ContactUsBugDescription" xml:space="preserve">
     <value>Found an issue with our site? good catch! Let us know and we'll resolve it.</value>
   </data>
@@ -231,6 +234,12 @@ That what we do truly matters.</value>
   <data name="HoursAgo" xml:space="preserve">
     <value>{0} hours ago</value>
   </data>
+  <data name="Imprint" xml:space="preserve">
+    <value>Imprint</value>
+  </data>
+  <data name="ImprintHeader" xml:space="preserve">
+    <value>Imprint</value>
+  </data>
   <data name="Join_Description" xml:space="preserve">
     <value>Share a good deed you’ve done.
 Tell a story about a moment you experienced.
@@ -262,6 +271,9 @@ Or simply read along — and be reminded that good things happen every day.</val
   </data>
   <data name="LoginHeader" xml:space="preserve">
     <value>Use a local account to log in</value>
+  </data>
+  <data name="LoginInvalidUsernamePassword" xml:space="preserve">
+    <value>Invalid email or username and/or password.</value>
   </data>
   <data name="LoginToShowName" xml:space="preserve">
     <value>Sign in to post with your name</value>
@@ -301,6 +313,12 @@ Or simply read along — and be reminded that good things happen every day.</val
   </data>
   <data name="OneYearAgo" xml:space="preserve">
     <value>1 year ago</value>
+  </data>
+  <data name="OperatorLabel" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="OperatorName" xml:space="preserve">
+    <value>Simon Büchler, Schweiz</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -406,6 +424,9 @@ Moments that remind us how much humanity exists.</value>
   </data>
   <data name="ThanksForNewPost" xml:space="preserve">
     <value>Thank you for your post.</value>
+  </data>
+  <data name="ThanksForReporting" xml:space="preserve">
+    <value>Thank you for reporting. We will check the post.</value>
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>A username is required</value>

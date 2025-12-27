@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using System.Security.Claims;
+using Backend.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,7 @@ builder.Services.AddIdentityCore<AppUser>(options =>
     {
         options.User.RequireUniqueEmail = true;
     })
+    .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();
@@ -93,6 +95,9 @@ builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
 builder.Services.AddScoped<IAvatarService, AvatarService>();
 builder.Services.AddScoped<UserManager<AppUser>, AppUserManager>();
 
+builder.Services.AddLocalization();
+
+
 var app = builder.Build();
 
 await using var scope = app.Services.CreateAsyncScope();
@@ -105,6 +110,14 @@ if (builder.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var supportedCultures = new[] { "de", "en" };
+
+app.UseRequestLocalization(new RequestLocalizationOptions()
+    .SetDefaultCulture("en")
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures));
+
 
 // create routes for the identity endpoints
 app.MapIdentityApi<AppUser>();

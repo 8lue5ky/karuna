@@ -164,6 +164,9 @@ Eine kleine Geste, die für jemand anderen alles bedeuten kann.</value>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="ContactLabel" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
   <data name="ContactUsBugDescription" xml:space="preserve">
     <value>Ein Problem auf unserer Website gefunden? Gut gesehen! Sag uns, was nicht stimmt, und wir kümmern uns darum.</value>
   </data>
@@ -231,6 +234,12 @@ Dass das, was wir tun, Bedeutung hat.</value>
   <data name="HoursAgo" xml:space="preserve">
     <value>{0} Stunden her</value>
   </data>
+  <data name="Imprint" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+  <data name="ImprintHeader" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
   <data name="Join_Description" xml:space="preserve">
     <value>Teile eine gute Tat, die du getan hast.
 Erzähle von einem Moment, der dich berührt hat.
@@ -262,6 +271,9 @@ Oder lies einfach mit — und erinnere dich daran, dass jeden Tag Gutes geschieh
   </data>
   <data name="LoginHeader" xml:space="preserve">
     <value>Benutze einen Account zum einloggen</value>
+  </data>
+  <data name="LoginInvalidUsernamePassword" xml:space="preserve">
+    <value>Ungültige Email Adresse oder Benutzername und oder falsches Passwort.</value>
   </data>
   <data name="LoginToShowName" xml:space="preserve">
     <value>Anmelden, um mit Namen zu posten</value>
@@ -301,6 +313,12 @@ Oder lies einfach mit — und erinnere dich daran, dass jeden Tag Gutes geschieh
   </data>
   <data name="OneYearAgo" xml:space="preserve">
     <value>vor 1 Jahr</value>
+  </data>
+  <data name="OperatorLabel" xml:space="preserve">
+    <value>Betreiber</value>
+  </data>
+  <data name="OperatorName" xml:space="preserve">
+    <value>Simon Büchler, Switzerland</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Passwort</value>
@@ -406,6 +424,9 @@ Momente, die daran erinnern, wie viel Menschlichkeit es gibt.</value>
   </data>
   <data name="ThanksForNewPost" xml:space="preserve">
     <value>Vielen Dank für deinen Post.</value>
+  </data>
+  <data name="ThanksForReporting" xml:space="preserve">
+    <value>Danke fürs melden. Wir werden den Post prüfen.</value>
   </data>
   <data name="UsernameRequired" xml:space="preserve">
     <value>Benutzername erforderlich</value>

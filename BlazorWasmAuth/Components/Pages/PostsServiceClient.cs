@@ -43,5 +43,15 @@ namespace Frontend.Components.Pages
         {
             await _httpClient.DeleteAsync($"api/posts/{postId}");
         }
+
+        public async Task ReportPostAsync(Guid postId)
+        {
+            await _httpClient.PostAsync($"api/posts/{postId}/report", null);
+        }
+
+        public async Task<PostType> GetNewestPostCategoryAsync()
+        {
+            return await _httpClient.GetFromJsonAsync<PostType>("api/posts/newestCategory");
+        }
     }
 }

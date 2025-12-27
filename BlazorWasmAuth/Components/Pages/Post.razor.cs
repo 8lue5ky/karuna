@@ -76,4 +76,10 @@ public partial class Post
     {
         await PostsServiceClient.DeletePostAsync(PostModel.Id);
     }
+
+    private async Task ReportPost()
+    {
+        await PostsServiceClient.ReportPostAsync(PostModel.Id);
+        Snackbar.Add(Localizer["ThanksForReporting"], Severity.Success);
+    }
 }

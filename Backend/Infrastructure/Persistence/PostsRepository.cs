@@ -111,5 +111,15 @@ namespace Backend.Infrastructure.Persistence
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<PostType> GetNewestPostCategoryAsync()
+        {
+            PostType postType = await _context.Posts
+                .OrderByDescending(x => x.CreatedAt)
+                .Select(x => x.Type)
+                .FirstOrDefaultAsync();
+
+            return postType;
+        }
     }
 }

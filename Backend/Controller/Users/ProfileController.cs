@@ -49,7 +49,8 @@ namespace Backend.Controller.Users
                         Bio = userProfile.Bio,
                         Email = userProfile.User.Email,
                         UserId = userProfile.UserId,
-                        Location = userProfile.Location
+                        Location = userProfile.Location,
+                        ProfilePictureVersion = userProfile.ProfileImageVersion
                     });
                 }
             }

@@ -1,0 +1,32 @@
+﻿@page "/imprint"
+
+@using Frontend.ResourceFiles
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<Resource> Localizer
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
+	<MudText Typo="Typo.h4" Class="font-bold">
+		@Localizer["ImprintHeader"]
+	</MudText>
+
+	<MudStack Spacing="1" Class="mt-4">
+		<MudText Typo="Typo.subtitle1" Class="font-semibold">
+			@Localizer["OperatorLabel"]
+		</MudText>
+		<MudText Typo="Typo.body2">
+			@Localizer["OperatorName"]
+		</MudText>
+	</MudStack>
+
+	<MudStack Spacing="1" Class="mt-3">
+		<MudText Typo="Typo.subtitle1" Class="font-semibold">
+			@Localizer["ContactLabel"]
+		</MudText>
+		<MudText Typo="Typo.body2">
+			<MudLink Href="mailto:contact@actioreact.io" Underline="Underline.Hover">
+				contact@actioreact.io
+			</MudLink>
+		</MudText>
+	</MudStack>
+</MudContainer>

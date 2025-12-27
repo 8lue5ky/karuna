@@ -1,4 +1,5 @@
 ﻿using Backend.Controller.Users;
+using SkiaSharp;
 
 namespace Backend.Application.Avatars
 {
@@ -38,8 +39,15 @@ namespace Backend.Application.Avatars
 
             var filePath = Path.Combine(folderPath, "profile.png");
 
-            using var stream = new FileStream(filePath, FileMode.Create);
-            await formFile.CopyToAsync(stream);
+            using var originalBitmap = SKBitmap.Decode(formFile.OpenReadStream());
+
+            using var resized = originalBitmap.Resize(new SKImageInfo(128, 128), SKFilterQuality.None);
+
+            using var image = SKImage.FromBitmap(resized);
+
+            await using var stream = new FileStream(filePath, FileMode.Create);
+            image.Encode(SKEncodedImageFormat.Png, 0)
+                .SaveTo(stream);
         }
     }
 }

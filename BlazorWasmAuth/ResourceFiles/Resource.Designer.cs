@@ -186,6 +186,15 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string ContactLabel {
+            get {
+                return ResourceManager.GetString("ContactLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found an issue with our site? good catch! Let us know and we&apos;ll resolve it..
         /// </summary>
         internal static string ContactUsBugDescription {
@@ -385,6 +394,24 @@ namespace Frontend.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Imprint.
+        /// </summary>
+        internal static string Imprint {
+            get {
+                return ResourceManager.GetString("Imprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imprint.
+        /// </summary>
+        internal static string ImprintHeader {
+            get {
+                return ResourceManager.GetString("ImprintHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share a good deed you’ve done.
         ///Tell a story about a moment you experienced.
         ///Or simply read along — and be reminded that good things happen every day..
@@ -473,6 +500,15 @@ namespace Frontend.ResourceFiles {
         internal static string LoginHeader {
             get {
                 return ResourceManager.GetString("LoginHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email or username and/or password..
+        /// </summary>
+        internal static string LoginInvalidUsernamePassword {
+            get {
+                return ResourceManager.GetString("LoginInvalidUsernamePassword", resourceCulture);
             }
         }
         
@@ -590,6 +626,24 @@ namespace Frontend.ResourceFiles {
         internal static string OneYearAgo {
             get {
                 return ResourceManager.GetString("OneYearAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operator.
+        /// </summary>
+        internal static string OperatorLabel {
+            get {
+                return ResourceManager.GetString("OperatorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simon Büchler, Schweiz.
+        /// </summary>
+        internal static string OperatorName {
+            get {
+                return ResourceManager.GetString("OperatorName", resourceCulture);
             }
         }
         
@@ -899,6 +953,15 @@ namespace Frontend.ResourceFiles {
         internal static string ThanksForNewPost {
             get {
                 return ResourceManager.GetString("ThanksForNewPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for reporting. We will check the post..
+        /// </summary>
+        internal static string ThanksForReporting {
+            get {
+                return ResourceManager.GetString("ThanksForReporting", resourceCulture);
             }
         }
         

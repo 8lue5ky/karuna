@@ -6,37 +6,45 @@
 
 <PageTitle>Home</PageTitle>
 
-<MudTabs Rounded="true" Centered="true" Elevation="0">
-	<MudTabPanel>
-		<TabContent>
-			<MudStack Spacing="1">
-				<MudStack Row="true" Class="mt-1">
-					<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" ></MudIcon>
-					<MudText>Actio</MudText>
+
+@if (!_loaded)
+{
+	<MudProgressCircular Indeterminate="true" />
+}
+else
+{
+	<MudTabs Rounded="true" Centered="true" Elevation="0" @bind-ActivePanelIndex="_activeTabIndex">
+		<MudTabPanel>
+			<TabContent>
+				<MudStack Spacing="1">
+					<MudStack Row="true" Class="mt-1">
+						<MudIcon Icon="@Icons.Material.Filled.VolunteerActivism" ></MudIcon>
+						<MudText>Actio</MudText>
+					</MudStack>
+					<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodDeeds"]</MudText>
 				</MudStack>
-				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodDeeds"]</MudText>
-			</MudStack>
-		</TabContent>
-		<ChildContent>
-			<MudContainer MaxWidth="MaxWidth.Medium">
-				<Posts PostType="PostType.Actio"/>
-			</MudContainer>
-		</ChildContent>
-	</MudTabPanel>
-	<MudTabPanel>
-		<TabContent>
-			<MudStack Spacing="1">
-				<MudStack Row="true" Class="mt-1">
-					<MudIcon Icon="@Icons.Material.Filled.AutoAwesome"></MudIcon>
-					<MudText>Reactio</MudText>
+			</TabContent>
+			<ChildContent>
+				<MudContainer MaxWidth="MaxWidth.Medium">
+					<Posts PostType="PostType.Actio"/>
+				</MudContainer>
+			</ChildContent>
+		</MudTabPanel>
+		<MudTabPanel>
+			<TabContent>
+				<MudStack Spacing="1">
+					<MudStack Row="true" Class="mt-1">
+						<MudIcon Icon="@Icons.Material.Filled.AutoAwesome"></MudIcon>
+						<MudText>Reactio</MudText>
+					</MudStack>
+					<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodExperiences"]</MudText>
 				</MudStack>
-				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Localizer["TabGoodExperiences"]</MudText>
-			</MudStack>
-		</TabContent>
-		<ChildContent>
-			<MudContainer MaxWidth="MaxWidth.Medium"> 
-				<Posts PostType="PostType.Reactio"/>
-			</MudContainer>
-		</ChildContent>
-	</MudTabPanel>
-</MudTabs>
+			</TabContent>
+			<ChildContent>
+				<MudContainer MaxWidth="MaxWidth.Medium"> 
+					<Posts PostType="PostType.Reactio"/>
+				</MudContainer>
+			</ChildContent>
+		</MudTabPanel>
+	</MudTabs>
+}

@@ -13,5 +13,6 @@ namespace Shared.DTOs.User
         public string? Bio { get; set; }
         public string? Location { get; set; }
         public string? Email { get; set; }
+        public int ProfilePictureVersion { get; set; }
     }
 }

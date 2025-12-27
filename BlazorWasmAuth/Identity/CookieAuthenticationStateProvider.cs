@@ -4,7 +4,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using Frontend.Identity.Models;
+using Frontend.ResourceFiles;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Localization;
 
 namespace Frontend.Identity
 {
@@ -15,9 +17,11 @@ namespace Frontend.Identity
     /// Create a new instance of the auth provider.
     /// </remarks>
     /// <param name="httpClientFactory">Factory to retrieve auth client.</param>
-    public class CookieAuthenticationStateProvider(IHttpClientFactory httpClientFactory, ILogger<CookieAuthenticationStateProvider> logger)
+    internal class CookieAuthenticationStateProvider(IHttpClientFactory httpClientFactory, ILogger<CookieAuthenticationStateProvider> logger, IStringLocalizer<Resource> localizer)
         : AuthenticationStateProvider, IAccountManagement
     {
+        private readonly IStringLocalizer<Resource> _localizer = localizer;
+
         /// <summary>
         /// Map the JavaScript-formatted properties to C#-formatted classes.
         /// </summary>
@@ -145,11 +149,10 @@ namespace Frontend.Identity
                 logger.LogError(ex, "App error");
             }
 
-            // unknown error
             return new FormResult
             {
                 Succeeded = false,
-                ErrorList = [ "Invalid emailOrUsername and/or password." ]
+                ErrorList = [ _localizer["LoginInvalidUsernamePassword"] ]
             };
         }
 

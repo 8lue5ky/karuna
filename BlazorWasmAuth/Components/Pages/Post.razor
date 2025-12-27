@@ -4,6 +4,7 @@
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<Resource> Localizer
+@inject ISnackbar Snackbar
 
 <MudPaper Class="pa-4 my-3 rounded-lg" Outlined="true" Elevation="1" @onclick="GoToDetails">
 	<MudStack Spacing="2">
@@ -36,7 +37,7 @@
 				<MudMenu Icon="@Icons.Material.Filled.MoreVert"
 				         AnchorOrigin="Origin.TopRight"
 				         TransformOrigin="Origin.TopRight">
-					<MudMenuItem>@Localizer["ReportPost"]</MudMenuItem>
+					<MudMenuItem OnClick="ReportPost">@Localizer["ReportPost"]</MudMenuItem>
 
 					<AuthorizeView Roles="Administrator">
 						<MudMenuItem OnClick="DeletePost">@Localizer["DeletePost"]</MudMenuItem>
